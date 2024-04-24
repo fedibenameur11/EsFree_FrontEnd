@@ -13,8 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CovoiturageComponent } from './BackOffice/viewsBack/covoiturage/covoiturage.component';
-import { AddCovoiturageComponent } from './FrontOffice/viewsFront/add-covoiturage/add-covoiturage.component';
-import { ListCovoiturageComponent } from './FrontOffice/viewsFront/list-covoiturage/list-covoiturage.component';
+import { AddCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/add-covoiturage/add-covoiturage.component';
+import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/list-covoiturage/list-covoiturage.component';
 
 //import { MatDialogModule }  from "@angular/material/dialog";
 @NgModule({

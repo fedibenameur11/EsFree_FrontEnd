@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllTemplatesFrontComponent } from './FrontOffice/all-templates-front/all-templates-front.component';
 import { AllTemplatesBackComponent } from './BackOffice/all-templates-back/all-templates-back.component';
 import { CovoiturageComponent } from './BackOffice/viewsBack/covoiturage/covoiturage.component';
-import { AddCovoiturageComponent } from './FrontOffice/viewsFront/add-covoiturage/add-covoiturage.component';
-import { ListCovoiturageComponent } from './FrontOffice/viewsFront/list-covoiturage/list-covoiturage.component';
+import { AddCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/add-covoiturage/add-covoiturage.component';
+import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/list-covoiturage/list-covoiturage.component';
 
 
 
