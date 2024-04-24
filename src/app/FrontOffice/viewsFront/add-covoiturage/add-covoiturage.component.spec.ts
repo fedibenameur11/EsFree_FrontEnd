@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CollocationAddComponent } from './collocation-add.component';
+import { AddCovoiturageComponent } from './add-covoiturage.component';
 
-describe('CollocationAddComponent', () => {
-  let component: CollocationAddComponent;
-  let fixture: ComponentFixture<CollocationAddComponent>;
+describe('AddCovoiturageComponent', () => {
+  let component: AddCovoiturageComponent;
+  let fixture: ComponentFixture<AddCovoiturageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CollocationAddComponent ]
+      declarations: [ AddCovoiturageComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CollocationAddComponent);
+    fixture = TestBed.createComponent(AddCovoiturageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

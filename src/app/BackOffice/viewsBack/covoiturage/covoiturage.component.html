@@ -1,0 +1,38 @@
+
+  <div table-responsive>
+  <div class="covoiturage-container" *ngIf="covoiturages.length > 0; else loading">
+    <table class="table table-striped table-bordered" id="datatable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre Places</th>
+          <th>Lieu de départ</th>
+          <th>Destination</th>
+          <th>Date de départ</th>
+          <th>Description</th>
+          
+          <th>Delete</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr *ngFor="let type of covoiturages">
+          <td>{{ type.id_cov }}</td>
+          <td>{{ type.nombre_placecov }}</td>
+          <td>{{ type.lieu_depart }}</td>
+          <td>{{ type.destination }}</td>
+          <td>{{ type.date_depart }}</td>
+          <td>{{ type.description }}</td>
+         
+          <td>
+            <button class="btn btn-danger">Delete</button> <!-- Button for update action -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  <ng-template #loading>
+    <p>Loading...</p>
+  </ng-template>
+  

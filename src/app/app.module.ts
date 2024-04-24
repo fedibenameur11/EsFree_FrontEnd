@@ -10,9 +10,13 @@ import { HeaderFrontComponent } from './FrontOffice/header-front/header-front.co
 import { NavbarBackComponent } from './BackOffice/navbar-back/navbar-back.component';
 import { SidebarBackComponent } from './BackOffice/sidebar-back/sidebar-back.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { CovoiturageComponent } from './BackOffice/viewsBack/covoiturage/covoiturage.component';
+import { AddCovoiturageComponent } from './FrontOffice/viewsFront/add-covoiturage/add-covoiturage.component';
+import { ListCovoiturageComponent } from './FrontOffice/viewsFront/list-covoiturage/list-covoiturage.component';
 
-
+//import { MatDialogModule }  from "@angular/material/dialog";
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +26,20 @@ import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/co
     HeaderFrontComponent,
     NavbarBackComponent,
     SidebarBackComponent,
+    CovoiturageComponent,
+    AddCovoiturageComponent,
+    ListCovoiturageComponent
     
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    FormsModule,
+    
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
