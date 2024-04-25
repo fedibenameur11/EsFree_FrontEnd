@@ -37,7 +37,7 @@ import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/l
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule
     
    
   ],

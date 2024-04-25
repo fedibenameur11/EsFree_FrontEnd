@@ -25,8 +25,8 @@
           <td>{{ type.description }}</td>
          
           <td>
-            <button class="btn btn-danger">Delete</button> <!-- Button for update action -->
-          </td>
+            <button class="btn btn-danger" (click)="deleteCovoiturage(type.id_cov)">Delete</button>
+        </td>
         </tr>
       </tbody>
     </table>

@@ -1,0 +1,7 @@
+.swal-confirm-button {
+    background-color: #e84545 !important;
+  }
+  
+  .swal-cancel-button {
+    background-color: #6c757d !important; /* Default color */
+  }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Covoiturage } from '../Models/covoiturage';
-import { map } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,5 +13,13 @@ export class CovoiturageService {
   {
     return this.httpClient.get<Covoiturage[]>(this.baseUrl +'/retreiveCovoiturages')
       
+  }
+  addCovoiturage(covoiturage: Covoiturage ): Observable<Covoiturage> {
+    const url = `${this.baseUrl}/AddCovoiturage`;
+    return this.httpClient.post<Covoiturage>(url, covoiturage);
+  }
+  deleteCovoiturage(id_cov: any): Observable<any> {
+    const url = `${this.baseUrl}/removeCovoiturage/${id_cov}`;
+    return this.httpClient.delete(url);
   }
 }
