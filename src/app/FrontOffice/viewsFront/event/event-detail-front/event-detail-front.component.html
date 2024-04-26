@@ -1,0 +1,90 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<br>
+<br>
+<main id="main">
+    <!-- Blog Details Page Title & Breadcrumbs -->
+    <div class="page-title">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>Event Details</h1>
+              <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Event Details</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+    <!-- Blog-details Section - Blog Details Page -->
+    <section id="blog-details" class="blog-details" >
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row g-5" *ngIf="event">
+          <div class="col-lg-8">
+            <article class="article">
+              <div class="post-img">
+                <img src="/assets/FrontOffice/img/blog/blog-1.jpg" alt="" class="img-fluid">
+              </div>
+              <h2 class="title">{{ event.nomEvent }}</h2>
+              <div class="meta-top">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">{{ event.organisateurEvent }}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time>{{ event.dateDebutEvent }}</time> - <time>{{ event.dateFinEvent }}</time></a></li>
+                  <li class="d-flex align-items-center">
+                    <i class="material-icons">monetization_on</i>
+                    <a href="blog-details.html">{{ event.prixEvent }} Dt</a>
+                </li>
+                </ul>
+              </div><!-- End meta top -->
+
+              <div class="content">
+                <div class="location-info d-flex align-items-center">
+                    <div class="mr-1">
+                        <i class="material-icons" style="font-size: 24px;">place</i>
+                    </div>
+                    <div>
+                        <p style="margin-bottom: 0;">{{ event.lieuEvent }}</p>
+                    </div>
+                </div>
+                <blockquote>
+                    <p>{{ event.descriptionEvent }}</p>
+                </blockquote>
+            </div><!-- End post content -->
+            
+            </article><!-- End post article -->
+            
+          </div>
+
+          <div class="col-lg-4">
+            <div class="sidebar" class="row d-flex justify-content-center text-center">
+                <div *ngIf="qrCodeUrl">
+                    <img [src]="qrCodeUrl" alt="QR Code">
+                    <div class="qr-code-info">
+                        <h3>Save the Event</h3>
+                        <p class="qr-code-description">
+                            Don't miss out on this exciting event! Scan the QR code with your smartphone to save it to your calendar and stay updated.
+                        </p>
+                        <p class="qr-code-description">
+                            Want to join? Go ahead and participate!
+                        </p>
+                        <div class="qr-code-cta">
+                            <button class="btn btn-primary">Participate</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End Sidebar -->
+        </div>
+        
+        
+
+        </div>
+      </div>
+    </section><!-- End Blog-details Section -->
+  </main>
