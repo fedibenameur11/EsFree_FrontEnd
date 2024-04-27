@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Covoiturage } from 'src/app/Models/covoiturage';
 import { CovoiturageService } from 'src/app/Services/covoiturage.service';
-//import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-covoiturage',
@@ -12,7 +12,7 @@ export class AddCovoiturageComponent {
   covoiturage: Covoiturage = new Covoiturage();
  
 
-  constructor(private covoiturageService: CovoiturageService) { }
+  constructor(private router:Router,private covoiturageService: CovoiturageService) { }
 
   onSubmit() {
     this.covoiturageService.addCovoiturage(this.covoiturage).subscribe(
@@ -25,6 +25,9 @@ export class AddCovoiturageComponent {
       }
     );
   }
-
+  Listfront()
+  {
+    this.router.navigate(['/listCovoiturage']);
+  }
   
 }

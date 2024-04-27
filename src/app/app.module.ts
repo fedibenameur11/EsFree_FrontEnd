@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { CovoiturageComponent } from './BackOffice/viewsBack/covoiturage/covoiturage.component';
 import { AddCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/add-covoiturage/add-covoiturage.component';
 import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/list-covoiturage/list-covoiturage.component';
+import { AvisComponent } from './BackOffice/viewsBack/avis/avis.component'; 
 
 //import { MatDialogModule }  from "@angular/material/dialog";
 @NgModule({
@@ -28,7 +29,9 @@ import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/l
     SidebarBackComponent,
     CovoiturageComponent,
     AddCovoiturageComponent,
-    ListCovoiturageComponent
+    ListCovoiturageComponent,
+    
+    AvisComponent
     
     
   ],

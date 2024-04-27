@@ -29,7 +29,7 @@
                               </div>
                               <div class="col-md-6 mb-3">
                                 <label>Date de Départ</label>
-                                <input type="text" class="form-control" [(ngModel)]="covoiturage.date_depart" name="date_depart">
+                                <input type="date" class="form-control" [(ngModel)]="covoiturage.date_depart" name="date_depart">
                               </div>
                               <div class="col-md-6 mb-3">
                                 <label>Lieu de départ</label>
@@ -41,7 +41,7 @@
                               </div>
                             </div> 
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit">Ajouter covoiturage</button>
+                                <button  (click)="Listfront()" class="btn btn-primary" type="submit">Ajouter covoiturage</button>
             
                             </div> 
                           </form>

@@ -5,6 +5,7 @@ import { AllTemplatesBackComponent } from './BackOffice/all-templates-back/all-t
 import { CovoiturageComponent } from './BackOffice/viewsBack/covoiturage/covoiturage.component';
 import { AddCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/add-covoiturage/add-covoiturage.component';
 import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/list-covoiturage/list-covoiturage.component';
+import { AvisComponent } from './BackOffice/viewsBack/avis/avis.component'; 
 
 
 
@@ -30,7 +31,8 @@ const routes: Routes = [
     children:[
 
       // hné l components mta3 l backOffice lkol 
-    {path:"covoiturage",component:CovoiturageComponent}
+    {path:"covoiturage",component:CovoiturageComponent},
+    {path:"avisBack",component:AvisComponent}
    
    ]
    }
