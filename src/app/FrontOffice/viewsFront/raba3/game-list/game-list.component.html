@@ -1,0 +1,41 @@
+<br>
+<br>
+<br>
+<br>
+
+<main id="main">
+
+ <!-- Team Section - Home Page -->
+ <section id="team" class="team">
+
+    <!--  Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>GAMES</h2>
+      <p>Select The Game You Want To Play With Your Friends !</p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="row gy-5">
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 member" *ngFor="let jeu of games" data-aos="fade-up" data-aos-delay="100">
+            <div class="member-img">
+              <a [routerLink]="['/sessionAdd']">
+                <img src="assets/FrontOffice/img/chkobba.png" class="img-fluid" alt="">
+              </a>    
+            </div>
+            <div class="member-info text-center">
+              <h4>{{ jeu.nom }}</h4>
+              <span>{{ jeu.typeJeux }}</span>
+            </div>
+          </div><!-- End Team Member -->
+        </div><!-- End Row -->
+      </div>
+
+    </div>
+
+  </section><!-- End Team Section -->
+
+
+</main>

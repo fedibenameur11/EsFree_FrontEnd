@@ -4,6 +4,9 @@ import { AllTemplatesFrontComponent } from './FrontOffice/all-templates-front/al
 import { AllTemplatesBackComponent } from './BackOffice/all-templates-back/all-templates-back.component';
 import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
 import { CollocationAddComponent } from './FrontOffice/viewsFront/colocation/collocation-add/collocation-add.component';
+import { GameListComponent } from './FrontOffice/viewsFront/raba3/game-list/game-list.component';
+import { SessionAddComponent } from './FrontOffice/viewsFront/raba3/session-add/session-add.component';
+import { SessionListComponent } from './FrontOffice/viewsFront/raba3/session-list/session-list.component';
 
 
 const routes: Routes = [
@@ -13,7 +16,11 @@ const routes: Routes = [
     children:[
 
       {path:"collocationList", component:CollocationListComponent},
-      {path:"collocationadd", component:CollocationAddComponent}
+      {path:"collocationadd", component:CollocationAddComponent},
+      {path:"raba3", component:GameListComponent},
+      {path:"sessionAdd", component:SessionAddComponent},
+      {path:"sessionList", component:SessionListComponent},
+
 
       // hné l components mta3 l frontOffice lkol
    

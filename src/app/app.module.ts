@@ -11,7 +11,10 @@ import { NavbarBackComponent } from './BackOffice/navbar-back/navbar-back.compon
 import { SidebarBackComponent } from './BackOffice/sidebar-back/sidebar-back.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
-
+import { SessionAddComponent } from './FrontOffice/viewsFront/raba3/session-add/session-add.component';
+import { GameListComponent } from './FrontOffice/viewsFront/raba3/game-list/game-list.component';
+import { SessionListComponent } from './FrontOffice/viewsFront/raba3/session-list/session-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,13 +25,17 @@ import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/co
     HeaderFrontComponent,
     NavbarBackComponent,
     SidebarBackComponent,
+    SessionAddComponent,
+    GameListComponent,
+    SessionListComponent,
     
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
