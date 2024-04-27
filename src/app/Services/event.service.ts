@@ -30,8 +30,10 @@ getQRCodeUrl(idEvent: number): Observable<string> {
       map((blob: Blob) => URL.createObjectURL(blob))
     );
 }
-getEventsByDate(date: Date): Observable<Event[]> {
-  return this.httpClient.get<Event[]>(`${this.baseUrl}/findByDateDebutEvent/${date}`);
-}
+/*getEventsByDate(date: Date): Observable<Event[]> {
+  // Convertir la date en format ISO pour l'envoyer dans la requête HTTP
+  const isoDate = date.toISOString().split('T')[0]; // Convertir en format 'YYYY-MM-DD'
+  return this.httpClient.get<Event[]>(`${this.baseUrl}/findByDateDebutEvent/${isoDate}`);
+}*/
   
 }

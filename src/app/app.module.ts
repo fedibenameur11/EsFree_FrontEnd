@@ -19,6 +19,7 @@ import { EventDetailFrontComponent } from './FrontOffice/viewsFront/event/event-
 import { ReactiveFormsModule  } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { EventCalendarComponent } from './FrontOffice/viewsFront/event/event-calendar/event-calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { EventCalendarComponent } from './FrontOffice/viewsFront/event/event-cal
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule ,
-    FormsModule
+    FormsModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
