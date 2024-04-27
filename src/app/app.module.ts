@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
 
 
 
@@ -28,7 +29,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     HeaderFrontComponent,
     NavbarBackComponent,
     SidebarBackComponent,
-    PubitemComponent
+    PubitemComponent,
+    CartComponent
     
     
   ],

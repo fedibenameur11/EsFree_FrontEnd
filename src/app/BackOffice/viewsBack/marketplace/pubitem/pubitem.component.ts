@@ -50,26 +50,26 @@ export class PubitemComponent implements OnInit {
   }
 
 
-  addProduct() {
-    const pubItem: PubItem = {
-      name: this.pubItem.name,
-      description: this.pubItem.description,
-      prix: this.pubItem.prix,
-      numTelephone: this.pubItem.numTelephone,
-      image: this.pubItem.image,
-      etat: this.selectedEtat
-    };
+ // addProduct() {
+   // const pubItem: PubItem = {
+    //  name: this.pubItem.name,
+      //description: this.pubItem.description,
+      //prix: this.pubItem.prix,
+      //numTelephone: this.pubItem.numTelephone,
+      //image: this.pubItem.image,
+      //etat: this.selectedEtat
+    //};
 
-    this.pubItemService.addPubitem(pubItem).subscribe(
-      (response) => {
-        console.log('Product added successfully:', response);
-        this.loadPubItems();
-      },
-      (error) => {
-        console.error('Error adding product:', error);
-      }
-    );
-  }
+    //this.pubItemService.addPubitem(pubItem).subscribe(
+      //(response) => {
+        //console.log('Product added successfully:', response);
+        //this.loadPubItems();
+      //},
+      //(error) => {
+        //console.error('Error adding product:', error);
+      //}
+    //);
+  //}
 
   openUpdateModal(pubItem: PubItem) {
     console.log('Selected PubItem:', pubItem);
@@ -109,6 +109,19 @@ export class PubitemComponent implements OnInit {
             this.pubItems = products;
         });
     }
+}
+addPubItemm(): void {
+  this.pubItem.etat = this.selectedEtat;
+  this.pubItemService.addPubItemm(this.pubItem).subscribe(
+    (data: PubItem) => {
+      console.log('PubItem added successfully:', data);
+      this.pubItem = new PubItem();
+      this.loadPubItems();
+    },
+    (error) => {
+      console.error('Error adding PubItem:', error);
+    }
+  );
 }
 
 

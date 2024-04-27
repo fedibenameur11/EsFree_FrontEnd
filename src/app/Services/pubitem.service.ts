@@ -8,6 +8,7 @@ import { PubItem } from '../Models/pubitem';
 })
 export class PubitemService {
   private baseUrl : String ="http://localhost:8082/pubitem/";
+  private staticUserId = 1;
   constructor(private httpClient : HttpClient) { }
 
   getPubitems(): Observable<PubItem[]> 
@@ -34,4 +35,10 @@ export class PubitemService {
       return this.httpClient.get<PubItem[]>(`${this.baseUrl}searchPubItems?keyword=${keyword}`);
     }
 
+
+    addPubItemm(pubItem: PubItem): Observable<PubItem> {
+      return this.httpClient.post<PubItem>(`${this.baseUrl}addPubItemm`, pubItem, {
+        params: { id: this.staticUserId.toString() }
+      });
+    }
 }

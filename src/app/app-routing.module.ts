@@ -5,6 +5,7 @@ import { AllTemplatesBackComponent } from './BackOffice/all-templates-back/all-t
 import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
 import { CollocationAddComponent } from './FrontOffice/viewsFront/colocation/collocation-add/collocation-add.component';
 import { PubitemComponent } from './BackOffice/viewsBack/marketplace/pubitem/pubitem.component';
+import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
     path:"admin",
     component : AllTemplatesBackComponent,
     children:[
-      {path:"Pubitem",component:PubitemComponent}
+      {path:"Pubitem",component:PubitemComponent},
+      {path:"Cart",component:CartComponent}
 
       // hné l components mta3 l backOffice lkol 
 
