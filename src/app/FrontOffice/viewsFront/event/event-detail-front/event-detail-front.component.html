@@ -39,8 +39,9 @@
                   <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time>{{ event.dateDebutEvent }}</time> - <time>{{ event.dateFinEvent }}</time></a></li>
                   <li class="d-flex align-items-center">
                     <i class="material-icons">monetization_on</i>
-                    <a href="blog-details.html">{{ event.prixEvent }} Dt</a>
-                </li>
+                    <ng-container *ngIf="event.prixEvent === 0; else showPrice">{{ 'Gratuit' }}</ng-container>
+                    <ng-template #showPrice><a href="blog-details.html">{{ event.prixEvent }} Dt</a></ng-template>
+                </li>                
                 </ul>
               </div><!-- End meta top -->
 
@@ -75,8 +76,38 @@
                             Want to join? Go ahead and participate!
                         </p>
                         <div class="qr-code-cta">
-                            <button class="btn btn-primary">Participate</button>
+                          <button class="btn btn-primary" (click)="openParticipationModal()">Participate</button>
                         </div>
+                        <div class="modal fade" id="participationModal" tabindex="-1" aria-labelledby="participationModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title" id="participationModalLabel">Participate</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <!-- Your participation form content here -->
+                                      <form (ngSubmit)="submitParticipationForm()">
+                                          <!-- Form fields -->
+                                          <div class="mb-3">
+                                              <label for="numtel" class="form-label">Phone Number</label>
+                                              <input type="number" class="form-control" id="numtel" [(ngModel)]="participation.numtel" name="numtel" required>
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="email" class="form-label">Email address</label>
+                                              <input type="email" class="form-control" id="email" [(ngModel)]="participation.email" name="email" required>
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="nbPlace" class="form-label">Number of Places</label>
+                                              <input type="number" class="form-control" id="nbPlace" [(ngModel)]="participation.nbPlace" name="nbPlace" required>
+                                          </div>
+                                          <!-- Add more fields as needed -->
+                                          <button type="submit" class="btn btn-primary">Submit</button>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                     </div>
                 </div>
             </div><!-- End Sidebar -->
