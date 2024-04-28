@@ -10,7 +10,6 @@ import { HeaderFrontComponent } from './FrontOffice/header-front/header-front.co
 import { NavbarBackComponent } from './BackOffice/navbar-back/navbar-back.component';
 import { SidebarBackComponent } from './BackOffice/sidebar-back/sidebar-back.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
 import { EventListComponent } from './BackOffice/viewsBack/event/event-list/event-list.component';
 import { EventListFrontComponent } from './FrontOffice/viewsFront/event/event-list-front/event-list-front.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +19,9 @@ import { ReactiveFormsModule  } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { EventCalendarComponent } from './FrontOffice/viewsFront/event/event-calendar/event-calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { ParticipationListFrontComponent } from './FrontOffice/viewsFront/event/participation-list-front/participation-list-front.component';
+import { ParticipationListComponent } from './BackOffice/viewsBack/event/participation-list/participation-list.component';
+import { EventListUserComponent } from './FrontOffice/viewsFront/event/event-list-user/event-list-user.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     EventAddFrontComponent,
     EventDetailFrontComponent,
     EventCalendarComponent,
+    ParticipationListFrontComponent,
+    ParticipationListComponent,
+    EventListUserComponent
     
     
   ],

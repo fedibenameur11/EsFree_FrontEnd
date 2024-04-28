@@ -35,5 +35,24 @@ getQRCodeUrl(idEvent: number): Observable<string> {
   const isoDate = date.toISOString().split('T')[0]; // Convertir en format 'YYYY-MM-DD'
   return this.httpClient.get<Event[]>(`${this.baseUrl}/findByDateDebutEvent/${isoDate}`);
 }*/
-  
+getAllEvents(): Observable<Event[]> 
+{
+  return this.httpClient.get<Event[]>(this.baseUrl +'/EventController')
+}
+approveEvent(idEvent: number): Observable<Event> {
+  return this.httpClient.put<Event>(`${this.baseUrl}/approveEvent/${idEvent}`, {});
+}
+rejectEvent(idEvent: number): Observable<Event> {
+  return this.httpClient.put<Event>(`${this.baseUrl}/rejectEvent/${idEvent}`, {});
+}
+
+getEventsByUser(userName: string): Observable<Event[]> {
+  return this.httpClient.get<Event[]>(`${this.baseUrl}/getEventsUser/${userName}`);
+}
+updateEvent(idEvent: number, updatedEvent: Event): Observable<Event> {
+  return this.httpClient.put<Event>(`${this.baseUrl}/updateEvent/${idEvent}`, updatedEvent);
+}
+deleteEvent(idEvent: number): Observable<Event> {
+  return this.httpClient.delete<Event>(`${this.baseUrl}/DeleteById/${idEvent}`, {});
+}
 }
