@@ -8,6 +8,7 @@ import { PubitemComponent } from './BackOffice/viewsBack/marketplace/pubitem/pub
 import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
 
 
+
 const routes: Routes = [
    {
     path:"",
@@ -28,7 +29,8 @@ const routes: Routes = [
     component : AllTemplatesBackComponent,
     children:[
       {path:"Pubitem",component:PubitemComponent},
-      {path:"Cart",component:CartComponent}
+      {path:"Cart",component:CartComponent},
+
 
       // hné l components mta3 l backOffice lkol 
 

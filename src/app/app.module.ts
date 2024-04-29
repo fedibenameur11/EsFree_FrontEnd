@@ -30,7 +30,8 @@ import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.comp
     NavbarBackComponent,
     SidebarBackComponent,
     PubitemComponent,
-    CartComponent
+    CartComponent,
+
     
     
   ],
@@ -42,7 +43,8 @@ import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.comp
     FormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

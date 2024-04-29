@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { PubItem } from 'src/app/Models/pubitem';
 import { Cart } from 'src/app/Models/cart';
 import { CartService } from 'src/app/Services/cart.service';
+import { NgbModal,NgbModalRef  } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { ViewChild, ElementRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-cart',
@@ -12,8 +16,12 @@ export class CartComponent {
   products: PubItem[] = [];
   carts: Cart[] = [];
   filteredCarts: Cart[] = [];
-  searchQuery: string = '';
-  constructor(private cartService: CartService) { }
+  searchQuery: string = ''
+  @ViewChild('myModal') modalElement!: ElementRef;
+  
+
+  
+  constructor( private modalService: NgbModal, private cartService: CartService ,private router : Router) { }
 
   ngOnInit(): void {
     this.fetchCartsWithProducts();
@@ -49,7 +57,6 @@ export class CartComponent {
     }
   }
 
-
   deleteCart(cartId: number): void {
     this.cartService.deleteCart(cartId).subscribe(
       (response: string) => {
@@ -62,7 +69,16 @@ export class CartComponent {
     );
   }
 
+ 
+  openCartDetails(cartId: number) {
+    this.cartService.getProductsInCart(cartId).subscribe(products => {
+      this.products = products;
+      this.modalService.open(this.modalElement, { size: 'lg', backdrop: false });
+    });
+  }
 
 
 
-}
+  }
+  
+

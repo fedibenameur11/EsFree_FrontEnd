@@ -16,6 +16,7 @@
             <th>Id of cart</th>
             <th>the products</th>
             <th>Total</th>
+            <th>More info</th>
             <th>Remove</th>
           </tr>
         </thead>
@@ -33,9 +34,38 @@
                       <i class="ri-delete-bin-5-line text-danger" (click)="deleteCart(cart.id)"></i>
                     </span>
                   </td>
+                  <td>
+                    <a (click)="openCartDetails(cart.id)" data-bs-toggle="modal" data-bs-target="#cartDetailsModal" class="ri-information-line text-warning"></a>
+                  </td>
               </tr>
         </tbody>
     </table>
     </div>
     
 </div>
+
+
+
+>
+  <div  #myModal  class="modal fade"  id="cartDetailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content" >
+        <div class="modal-header">
+          <h5 class="modal-title" id="cartDetailsModal"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body">
+          <h5>Products in Cart</h5>
+          <ul>
+            <li *ngFor="let product of products">{{ product.name }}</li>
+          </ul>
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
