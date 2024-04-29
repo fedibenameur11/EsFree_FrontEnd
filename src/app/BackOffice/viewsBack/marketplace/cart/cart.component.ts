@@ -11,22 +11,42 @@ import { CartService } from 'src/app/Services/cart.service';
 export class CartComponent {
   products: PubItem[] = [];
   carts: Cart[] = [];
+  filteredCarts: Cart[] = [];
+  searchQuery: string = '';
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
     this.fetchCartsWithProducts();
   }
 
-
   fetchCartsWithProducts(): void {
     this.cartService.getAllCartsWithProducts().subscribe(
       (data: Cart[]) => {
         this.carts = data;
+        this.applySearchFilter();
       },
       (error) => {
         console.error('Error fetching carts with products:', error);
       }
     );
+  }
+  performSearch(): void {
+    this.applySearchFilter();
+  }
+
+  applySearchFilter(): void {
+    if (!this.searchQuery) {
+      this.filteredCarts = [...this.carts];
+    } else {
+      this.cartService.searchCarts(undefined, undefined, this.searchQuery).subscribe(
+        (data: Cart[]) => {
+          this.filteredCarts = data;
+        },
+        (error) => {
+          console.error('Error searching carts:', error);
+        }
+      );
+    }
   }
 
 
@@ -41,5 +61,8 @@ export class CartComponent {
       }
     );
   }
+
+
+
 
 }

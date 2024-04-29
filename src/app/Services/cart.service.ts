@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cart } from '../Models/cart';
 import { PubItem } from '../Models/pubitem';
@@ -28,5 +28,13 @@ export class CartService {
   deleteCart(cartId: number): Observable<string> {
     const url = `${this.baseUrl}${cartId}`;
     return this.httpClient.delete<string>(url);
+  }
+
+  searchCarts(cartId?: number, total?: number, itemName?: string): Observable<Cart[]> {
+    let params = new HttpParams();
+    if (cartId) params = params.set('cartId', cartId.toString());
+    if (total) params = params.set('total', total.toString());
+    if (itemName) params = params.set('itemName', itemName);
+    return this.httpClient.get<Cart[]>(`${this.baseUrl}search`, { params });
   }
 }

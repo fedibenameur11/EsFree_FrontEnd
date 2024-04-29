@@ -3,7 +3,7 @@
         <h4 class="card-title">Table of Orders</h4>
     </div>
     <div class="search-bar">
-        <input type="text" class="form-control" placeholder="Search..."  />
+      <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchQuery" (input)="performSearch()">
     </div>
   </div>
 
@@ -20,14 +20,14 @@
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let cart of carts">
+            <tr *ngFor="let cart of filteredCarts">
                 <td>{{ cart.id }}</td>
                 <td>
                     <ul>
                       <li *ngFor="let item of cart.pubItems">{{ item.name }}</li>
                     </ul>
                 </td>
-                <td>{{ cart.total }}</td>
+                <td>{{ cart.total }} Dt</td>
                   <td>
                     <span class="table-remove">
                       <i class="ri-delete-bin-5-line text-danger" (click)="deleteCart(cart.id)"></i>
