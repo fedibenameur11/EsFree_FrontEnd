@@ -41,4 +41,8 @@ export class PubitemService {
         params: { id: this.staticUserId.toString() }
       });
     }
+
+    getPubItemById(id: number): Observable<PubItem> {
+      return this.httpClient.get<PubItem>(`${this.baseUrl}${id}`);
+    }
 }

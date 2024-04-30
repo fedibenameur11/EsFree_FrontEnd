@@ -18,6 +18,8 @@ export class PubitemComponent implements OnInit {
   etatOptions = Object.values(Etat);
   selectedEtat!: Etat;
   pubItem: PubItem = new PubItem();
+  productAddedSuccessfully: boolean = false;
+
 
   
 
@@ -73,7 +75,8 @@ export class PubitemComponent implements OnInit {
 
   openUpdateModal(pubItem: PubItem) {
     console.log('Selected PubItem:', pubItem);
-    this.pubItem = { ...pubItem }; 
+    this.pubItem = new PubItem(); // Create a new instance
+    Object.assign(this.pubItem, pubItem); // Copy properties from selected pubItem
     this.selectedEtat = pubItem.etat;
   }
 
@@ -115,8 +118,13 @@ addPubItemm(): void {
   this.pubItemService.addPubItemm(this.pubItem).subscribe(
     (data: PubItem) => {
       console.log('PubItem added successfully:', data);
+      this.productAddedSuccessfully = true;
       this.pubItem = new PubItem();
       this.loadPubItems();
+      setTimeout(() => {
+        this.productAddedSuccessfully = false;
+      }, 3000);
+      
     },
     (error) => {
       console.error('Error adding PubItem:', error);
