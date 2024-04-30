@@ -37,7 +37,8 @@ const routes: Routes = [
     children:[
 
       // hné l components mta3 l backOffice lkol 
-     { path:"eventlist", component:EventListComponent}
+     { path:"eventlist", component:EventListComponent},
+     { path: "participationlist", component: ParticipationListComponent }
 
    
    ]

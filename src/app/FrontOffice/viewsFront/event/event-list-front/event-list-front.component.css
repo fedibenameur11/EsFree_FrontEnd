@@ -1,0 +1,5 @@
+.disabled-button {
+    background-color: #ccc; /* Couleur de fond gris */
+    color: #fff; /* Couleur du texte blanc */
+    cursor: not-allowed; /* Curseur désactivé */
+  }

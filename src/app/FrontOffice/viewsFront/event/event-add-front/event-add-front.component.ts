@@ -14,7 +14,7 @@ export class EventAddFrontComponent {
   constructor(private eventService: EventService) {} // Injection du service EventService
   submitEvent() {
    
-    this.eventService.addEvent(this.event, 'yasmine').subscribe(
+    this.eventService.addEvent(this.event, 1).subscribe(
       () => {
         Swal.fire({
           position: 'center',

@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'src/app/Services/event.service';
 import { Event } from 'src/app/Models/event/event.model';
 import { ParticipationService } from 'src/app/Services/participation.service';
-
 import Swal from 'sweetalert2';
 import { Participation } from 'src/app/Models/participation/participation.model';
 declare var $: any;
@@ -41,19 +40,39 @@ export class EventDetailFrontComponent implements OnInit {
 
   participation: Participation = {} as Participation;
   submitParticipationForm(): void {
-   // const idEvent = 4;
-    const userName = "mehdi";
-    if (this.idEvent && userName) {
-        this.participationService.addParticipation(this.participation, this.idEvent, userName).subscribe(response => {
-            // Gérer la réponse de la requête
-            console.log('Participation added successfully:', response);
-            // Fermer la modal
-            $('#participationModal').modal('hide');
+    const id = 1; // Assurez-vous d'obtenir le nom d'utilisateur correctement
+    if (this.idEvent && id) {
+      this.participationService.addParticipation(this.participation, this.idEvent, id)
+        .subscribe(response => {
+          // Gérer la réponse de la requête
+          console.log('Participation added successfully:', response);
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Your participation has been added successfully.'
+          });
+          // Fermer la modal
+          $('#participationModal').modal('hide');
         }, error => {
-            // Gérer les erreurs de la requête
-            console.error('Error adding participation:', error);
+          // Gérer les erreurs de la requête
+          console.error('Error adding participation:', error);
+          // Afficher une alerte SweetAlert pour l'erreur
+          if (error.error && error.error.message) {
+            // Si le message d'erreur est disponible, l'afficher
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: error.error.message
+            });
+          } else {
+            // Si le message d'erreur n'est pas disponible, afficher un message générique
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Une erreur inattendue s\'est produite. Veuillez réessayer.'
+            });
+          }
         });
     }
-}
-
+  }
 }

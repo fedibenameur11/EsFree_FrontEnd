@@ -10,7 +10,7 @@ declare var $: any;
   styleUrls: ['./event-list-user.component.css']
 })
 export class EventListUserComponent implements OnInit{
- // userName!: String; // Définir le nom d'utilisateur actuel
+ // id!: number; // Définir le nom d'utilisateur actuel
   userEvents: Event[] = [];
   event: Event = {} as Event;
   selectedEventId!: number;
@@ -27,13 +27,13 @@ export class EventListUserComponent implements OnInit{
 
   ngOnInit(): void {
     // Récupérer les événements de l'utilisateur actuel lors de l'initialisation du composant
-    //this.getEventsByUser(this.userName);
-    this.getEventsByUser('mehdi');
+    //this.getEventsByUser(this.id);
+    this.getEventsByUser(1);
     
   }
 
-  getEventsByUser(userName: string): void {
-    this.eventService.getEventsByUser(userName).subscribe(
+  getEventsByUser(id: number): void {
+    this.eventService.getEventsByUser(id).subscribe(
       (events: Event[]) => {
         this.userEvents = events;
       },

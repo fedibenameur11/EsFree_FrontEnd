@@ -61,7 +61,10 @@
                           <time>{{ event.dateDebutEvent | date: 'mediumDate' }}</time> - <time>{{ event.dateFinEvent | date: 'mediumDate' }}</time>
                       </p>
                   </div>
-                  <button class="btn btn-primary ml-3">Participate</button>
+                  <button  [routerLink]="['/eventdetail', event.idEvent]" class="btn btn-primary ml-3" [disabled]="event.capaciteEvent === 0" [ngClass]="{ 'disabled-button': event.capaciteEvent === 0 }">
+                    {{ event.capaciteEvent === 0 ? 'Event complete' : 'Participate' }}
+                  </button>
+                  
               </div>
               
             </div> 

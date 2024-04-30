@@ -18,8 +18,8 @@ export class EventService {
   }
   
  // Méthode pour envoyer les données du formulaire au serveur
- addEvent(event: Event, userName: string): Observable<any> {
-  return this.httpClient.post<any>(`${this.baseUrl}/addEvent/${userName}`, event);
+ addEvent(event: Event, id:number): Observable<any> {
+  return this.httpClient.post<any>(`${this.baseUrl}/addEvent/${id}`, event);
 }
 getEventById(idEvent: number): Observable<Event> {
   return this.httpClient.get<Event>(`${this.baseUrl}/getById/${idEvent}`);
@@ -30,11 +30,7 @@ getQRCodeUrl(idEvent: number): Observable<string> {
       map((blob: Blob) => URL.createObjectURL(blob))
     );
 }
-/*getEventsByDate(date: Date): Observable<Event[]> {
-  // Convertir la date en format ISO pour l'envoyer dans la requête HTTP
-  const isoDate = date.toISOString().split('T')[0]; // Convertir en format 'YYYY-MM-DD'
-  return this.httpClient.get<Event[]>(`${this.baseUrl}/findByDateDebutEvent/${isoDate}`);
-}*/
+
 getAllEvents(): Observable<Event[]> 
 {
   return this.httpClient.get<Event[]>(this.baseUrl +'/EventController')
@@ -46,8 +42,8 @@ rejectEvent(idEvent: number): Observable<Event> {
   return this.httpClient.put<Event>(`${this.baseUrl}/rejectEvent/${idEvent}`, {});
 }
 
-getEventsByUser(userName: string): Observable<Event[]> {
-  return this.httpClient.get<Event[]>(`${this.baseUrl}/getEventsUser/${userName}`);
+getEventsByUser(id: number): Observable<Event[]> {
+  return this.httpClient.get<Event[]>(`${this.baseUrl}/getEventsUser/${id}`);
 }
 updateEvent(idEvent: number, updatedEvent: Event): Observable<Event> {
   return this.httpClient.put<Event>(`${this.baseUrl}/updateEvent/${idEvent}`, updatedEvent);
