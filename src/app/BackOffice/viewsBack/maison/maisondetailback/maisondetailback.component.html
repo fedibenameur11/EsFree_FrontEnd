@@ -1,0 +1,72 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container" *ngIf="maison">
+  <div class="main-image">
+    <img [src]="maison.images[currentImageIndex]" alt="Image de la maison">
+  </div>
+  <h2>{{ maison.adresse }}</h2>
+  <p>Description: {{ maison.description }}</p>
+  <p>Prix: {{ maison.prix }}</p>
+  <p>Ajouté par : {{ maison.user.userName }}</p>
+  <div class="thumbnails">
+    <div *ngFor="let image of maison.images; let i = index" class="thumbnail" [class.active]="i === currentImageIndex" (click)="showImage(i)">
+      <img [src]="image" alt="Thumbnail de la maison">
+    </div>
+  </div>
+  <div *ngIf="maison.demandeurs === null || maison.demandeurs.length === 0">
+    <h3>Il n'existe aucun demandeur pour le moment.</h3>
+</div>
+
+  
+
+  <!-- Afficher la liste des demandeurs s'il existe -->
+  <!-- <div *ngIf="maison.demandeurs && maison.demandeurs.length > 0">
+    <h3>Liste des demandeurs :</h3>
+    <ul>
+      <li *ngFor="let demandeur of maison.demandeurs">
+        {{ demandeur.userName }}
+        {{ demandeur.userLastName }}
+        {{ demandeur.userFirstName }}
+        <div class="btn-group" role="group" aria-label="Actions">
+          <button type="button" class="btn btn-success">Accepter</button>
+          <button type="button" class="btn btn-danger">Refuser</button>
+      </div>
+      </li>
+    </ul>
+  </div>
+-->
+<div *ngIf="maison.demandeurs && maison.demandeurs.length > 0">
+  <h3>Liste des demandeurs :</h3>
+  <table class="table">
+      <thead>
+          <tr>
+              <th scope="col">Username</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let demandeur of maison.demandeurs">
+              <td>{{ demandeur.userName }}</td>
+              <td>{{ demandeur.userLastName }}</td>
+              <td>{{ demandeur.userFirstName }}</td>
+              <td>
+                  <div class="btn-group" role="group" aria-label="Actions">
+                      <button type="button" class="btn btn-success">Accepter</button>
+                      <button type="button" class="btn btn-danger" (click)="refuserDemandeur(maison.id_maison, demandeur.userName)">Refuser</button>
+                  </div>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+  
+</div>
+
+  

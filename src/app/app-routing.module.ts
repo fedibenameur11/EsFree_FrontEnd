@@ -4,7 +4,10 @@ import { AllTemplatesFrontComponent } from './FrontOffice/all-templates-front/al
 import { AllTemplatesBackComponent } from './BackOffice/all-templates-back/all-templates-back.component';
 import { ContratLocationlistComponent } from './FrontOffice/viewsFront/contratLocation/contrat-locationlist/contrat-locationlist.component';
 import { MaisonlistComponent } from './FrontOffice/viewsFront/maison/maisonlist/maisonlist.component';
-import { AddMaisonComponent } from './FrontOffice/viewsFront/maison/add-maison/add-maison.component';
+import { MaisonlistbackComponent } from './BackOffice/viewsBack/maison/maisonlist/maisonlist.component';
+import { MaisondetailComponent } from './FrontOffice/viewsFront/maison/maisondetail/maisondetail.component';
+import { MaisondetailbackComponent } from './BackOffice/viewsBack/maison/maisondetailback/maisondetailback.component';
+
 //import { ContratLocationAddComponent } from './FrontOffice/viewsFront/colocation/contratLocation/contrat-location-add/contrat-location-add.component';
 //import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
 
@@ -19,7 +22,7 @@ const routes: Routes = [
       //{path:"collocationList", component:CollocationListComponent},
       {path:"maisonlist", component:MaisonlistComponent},
       {path:"contratlocationlist", component:ContratLocationlistComponent},
-      {path:"ajouterMaison", component:AddMaisonComponent},
+      { path: 'afficherMaison/:id', component: MaisondetailComponent }
      
       // hné l components mta3 l frontOffice lkol
    
@@ -31,7 +34,9 @@ const routes: Routes = [
     path:"admin",
     component : AllTemplatesBackComponent,
     children:[
-      {path:"maisonlist", component:MaisonlistComponent},
+      {path:"maisonlist", component:MaisonlistbackComponent},
+      { path: 'afficherMaison/:id', component: MaisondetailbackComponent }
+      
     
 
       // hné l components mta3 l backOffice lkol 

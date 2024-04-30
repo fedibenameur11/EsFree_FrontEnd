@@ -1,3 +1,4 @@
+import { Contratlocation } from "./contratlocation";
 import { User } from "./user";
 
 export class Maison {
@@ -5,6 +6,10 @@ export class Maison {
     adresse!: string;
     prix!: number;
     description!: string;
+    nbrplacedispo!: number;
     images!: string[];
+    contratsLocation!: Contratlocation[];
+    demandeurs!: User[];
     user!: User ; 
+
 }

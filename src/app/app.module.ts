@@ -13,9 +13,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaisonlistComponent } from './FrontOffice/viewsFront/maison/maisonlist/maisonlist.component';
 import { ContratLocationlistComponent } from './FrontOffice/viewsFront/contratLocation/contrat-locationlist/contrat-locationlist.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AddMaisonComponent } from './FrontOffice/viewsFront/maison/add-maison/add-maison.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MaisonlistbackComponent } from './BackOffice/viewsBack/maison/maisonlist/maisonlist.component';
+import { MaisondetailComponent } from './FrontOffice/viewsFront/maison/maisondetail/maisondetail.component';
+import { MaisondetailbackComponent } from './BackOffice/viewsBack/maison/maisondetailback/maisondetailback.component';
 
 
 @NgModule({
@@ -29,11 +32,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SidebarBackComponent,
     MaisonlistComponent,
     ContratLocationlistComponent,
-    AddMaisonComponent,
-    
-    
-    
-    
+    MaisonlistbackComponent,
+    MaisondetailComponent,
+    MaisondetailbackComponent
     
   ],
   imports: [
@@ -43,7 +44,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

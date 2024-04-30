@@ -3,8 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Maison } from 'src/app/Models/maison';
 import { MaisonService } from 'src/app/Services/maison.service';
-import { AddMaisonComponent } from '../add-maison/add-maison.component';
 import { MatDialog } from '@angular/material/dialog';
+import { User } from 'src/app/Models/user';
 
 @Component({
   selector: 'app-maisonlist',
@@ -17,49 +17,64 @@ export class MaisonlistComponent {
   affiche_modif : boolean = false;
   newMaison: Maison = new Maison(); 
   showAddDialog: boolean = false;
-  
+  showUpdateDialog: boolean = false;
+  demandeur!:User;
+
+
   openAddDialog() {
     this.showAddDialog = true;
   }
-
+  openUpdateDialog() {
+    this.showUpdateDialog = true;
+  }
   closeAddDialog() {
     this.showAddDialog = false;
   }
-  constructor(private maisonservice: MaisonService, private router: Router,private dialog :MatDialog) {}
+  closeUpdateDialog() {
+    this.showUpdateDialog = false;
+  }
+
+  constructor(private maisonService: MaisonService, private router: Router,private dialog :MatDialog) {
+    this.newMaison.user = {
+      userName: 'fedi',
+      userFirstName: 'fedi',
+      userLastName: 'fedi',
+      userPassword: 'fedi',
+      roles :[]
+    };
+    this.demandeur ={
+      userName: 'fedi4',
+      userFirstName: 'fedi',
+      userLastName: 'fedi',
+      userPassword: 'fedi',
+      roles :[]
+
+    }
+  }
   ngOnInit(){
     this.listMaisons();
 
   }
   listMaisons(){
-    this.maisonservice.findAllMaisons().subscribe(
+    this.maisonService.findAllMaisons().subscribe(
       maison => {
         this.maison =maison
         console.error('Done:', );
         
       },
       error => {
-        console.error('Error loading users:', error);
+        console.error('Error loading houses:', error);
       }
     );
   }
-  createNewTask(): void {
-    const dialogRef = this.dialog.open(AddMaisonComponent, {
-      width: '500px',
-      panelClass: 'custom-dialog-container' 
-    });
-  
-    dialogRef.afterClosed().subscribe(result   => {
-      if (result) {
-      }
-    });
-  }
+
   onSubmit(): void {
     console.log('Nouvelle maison a été ajouté', this.newMaison);
 
-    this.maisonservice.addMaison(this.newMaison).subscribe(() => {
+    this.maisonService.addMaisonByUser(this.newMaison,this.newMaison.user.userName).subscribe(() => {
       console.log('Nouvelle maison a été ajouté', this.newMaison);
       this.showAddDialog = false;
-      //this.dialogRef.close(true); 
+      
     });
   }
 
@@ -67,4 +82,45 @@ export class MaisonlistComponent {
     //this.dialogRef.close(); 
   }
 
+  onModalUpdateOpen(maisonId: number): void {
+    this.openUpdateDialog();
+    this.maisonService.getMaisonById(maisonId).subscribe((maison: Maison) => {
+      // Affecter les valeurs récupérées aux champs de formulaire
+      this.newMaison = maison;
+      
+      
+    });
+  }
+  onSubmitUpdate(): void {
+    
+
+    this.maisonService.updateMaison(this.newMaison).subscribe(() => {
+      console.log('Nouvelle maison a été ajouté', this.newMaison);
+      this.closeUpdateDialog();
+      //this.dialogRef.close(true); 
+    });
+    console.log('La maison a été modifié', this.newMaison);
+  }
+
+  deleteMaison(idMaison: number): void {
+    this.maisonService.deleteMaison(idMaison).subscribe(() => {
+      console.log("Maison supprimé avec succés");
+    }, (error) => {
+      console.log("Echec dasn la suppression de cette maison ");
+    });
+  }
+
+  reserverMaison(maisonId: number, demandeur: User): void {
+    this.maisonService.ajouterDemandeur(maisonId, demandeur)
+      .subscribe((result) => {
+        // Traitez ici la réponse si nécessaire
+        console.log('Demandeur ajouté avec succès : ', result);
+      }, (error) => {
+        // Gérez ici les erreurs si nécessaire
+        console.error('Erreur lors de l\'ajout du demandeur : ', error);
+      });
+      
+  }
+  
+  
 }

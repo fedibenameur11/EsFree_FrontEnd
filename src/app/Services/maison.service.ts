@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Maison } from '../Models/maison';
+import { User } from '../Models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,30 @@ export class MaisonService {
   addMaison(maison : Maison): Observable<Maison>{
     return this.http.post<Maison>(this.baseUrl + '/addMaison',maison);
   }
-  updateMaison(maison : Maison): Observable<Maison>{
-    return this.http.put<Maison>(this.baseUrl + '/updateMaison',maison);
+  addMaisonByUser(maison: Maison, nom: string): Observable<Maison> {
+    return this.http.post<Maison>(`${this.baseUrl}/addMaisonbyuser?nom=${nom}`, maison);
   }
+  
+  updateMaison(maison : Maison,): Observable<Maison>{
+    return this.http.put<Maison>(`${this.baseUrl}/updateMaison/${maison.id_maison}`, maison);
+
+  }
+
   getMaisonById(maison_id: number): Observable<Maison> {
     return this.http.get<Maison>(`${this.baseUrl}/getMaison/${maison_id}`);
   }
   deleteMaison(maison_id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/deleteMaison/${maison_id}`);
+    return this.http.delete<void>(`${this.baseUrl}/deleteMaison/${maison_id}`);   
+  }
+  getMaisonsByUtilisateur(utilisateurnom: String): Observable<Maison[]> {
+    return this.http.get<Maison[]>(`${this.baseUrl}/utilisateurs/${utilisateurnom}/maisons`);
+  }
+
+  ajouterDemandeur(maisonId: number, demandeur: User): Observable<Maison> {
+    return this.http.post<Maison>(`${this.baseUrl}/${maisonId}/demandeur`, demandeur);
+  }
+  supprimerDemandeur(maisonId: number, nom_demandeur: String): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${maisonId}/demandeurs/${nom_demandeur}`);
   }
 }
 
