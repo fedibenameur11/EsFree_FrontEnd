@@ -10,6 +10,8 @@ import { AvisService } from 'src/app/Services/avis.service';
 export class AvisComponent implements OnInit {
   avis: Avis = new Avis();
   public listavis: Array<Avis> =[];
+  listavisCov: Avis[] = []; 
+  selectedCovoiturageId: any;
   constructor(private AvisService:AvisService){}
 
   ngOnInit(): void {
@@ -23,6 +25,7 @@ export class AvisComponent implements OnInit {
        {
          console.log(type.id_avis);
          console.log(type.description);
+         
         
          this.listavis = d ;
        })
@@ -33,5 +36,19 @@ export class AvisComponent implements OnInit {
        }
      );
     }
- 
+    onSelectCovoiturage(event: Event) {
+      const selectedValue = (event.target as HTMLSelectElement).value;
+      // Use the selectedValue to filter avis by carpooling ID
+  }
+
+  getAvisByCov(id_cov: any) {
+      this.AvisService.getAvisByCov(id_cov).subscribe(
+          (avisList: Avis[]) => {
+              this.listavisCov = avisList;
+          },
+          (error) => {
+              console.error(error);
+          }
+      );
+  }
 }

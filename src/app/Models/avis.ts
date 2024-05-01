@@ -8,5 +8,6 @@ export class Avis {
   date_avis!: string; 
   statut!: number;
   covoiturage!: Covoiturage;
+  id_cov!: number;
   
 }

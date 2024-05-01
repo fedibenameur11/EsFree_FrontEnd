@@ -16,8 +16,9 @@ import { CovoiturageComponent } from './BackOffice/viewsBack/covoiturage/covoitu
 import { AddCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/add-covoiturage/add-covoiturage.component';
 import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/list-covoiturage/list-covoiturage.component';
 import { AvisComponent } from './BackOffice/viewsBack/avis/avis.component'; 
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MapComponent } from './FrontOffice/viewsFront/covoiturage/map/map.component';  
 
-//import { MatDialogModule }  from "@angular/material/dialog";
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { AvisComponent } from './BackOffice/viewsBack/avis/avis.component';
     AddCovoiturageComponent,
     ListCovoiturageComponent,
     
-    AvisComponent
+    AvisComponent,
+          MapComponent
     
     
   ],
@@ -40,7 +42,8 @@ import { AvisComponent } from './BackOffice/viewsBack/avis/avis.component';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
     
    
   ],

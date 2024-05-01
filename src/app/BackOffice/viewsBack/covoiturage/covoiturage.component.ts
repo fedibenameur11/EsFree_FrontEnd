@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Covoiturage } from 'src/app/Models/covoiturage';
+import { AvisService } from 'src/app/Services/avis.service';
 import { CovoiturageService } from 'src/app/Services/covoiturage.service';
 import Swal from 'sweetalert2';
-
-
+import { Avis } from 'src/app/Models/avis';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-covoiturage',
   templateUrl: './covoiturage.component.html',
@@ -11,7 +12,13 @@ import Swal from 'sweetalert2';
 })
 export class CovoiturageComponent implements OnInit {
   covoiturage: Covoiturage = new Covoiturage();
-  constructor(private covoiturageService:CovoiturageService){ }
+  avis : Avis = new Avis();
+  showAddDialog: boolean = false;
+  selectedCovoiturageId!: number;
+
+  listavisCov: { [id_cov: string]: Avis[] } = {};
+  constructor(private covoiturageService:CovoiturageService,public dialog: MatDialog,private avisService:AvisService){ }
+
   public covoiturages: Array<Covoiturage> =[];
   ngOnInit(): void {
     this.getListCovoiturage();
@@ -30,6 +37,8 @@ export class CovoiturageComponent implements OnInit {
          console.log(type.date_depart);
          console.log(type.description);
          this.covoiturages = d ;
+         this.getListAvis(type.id_cov);
+         
        })
      },
      (error) => 
@@ -38,7 +47,21 @@ export class CovoiturageComponent implements OnInit {
        }
      );
     }
-    
+    getListAvis(id_cov:any)
+    { 
+      this.avisService.getAvisByCov(id_cov)
+      .subscribe(
+        (avisList: Avis[]) => {
+          this.listavisCov[id_cov] = avisList;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }
+  
+  
+  
      loadCovoiturages() {
       this.covoiturageService.getListCovoiturage().subscribe(
         data => {
@@ -52,41 +75,26 @@ export class CovoiturageComponent implements OnInit {
     }
   
   deleteCovoiturage(id_cov: number) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this covoiturage!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true,
-      customClass: {
-        confirmButton: 'swal-confirm-button',
-        cancelButton: 'swal-cancel-button'
-      }
     
-    }).then((result) => {
-      if (result.isConfirmed) {
+    
         this.covoiturageService.deleteCovoiturage(id_cov).subscribe(
-          data => {
-            Swal.fire(
-              'Deleted!',
-              'Your covoiturage has been deleted.',
-              'success'
-            );
-            this.loadCovoiturages();
+          response => {
+            console.log('Covoiturage deleted successfully:', response);
+
+          this.loadCovoiturages();
           },
-          error => {
+          (error) => {
             console.error('Error deleting covoiturage:', error);
-            Swal.fire(
-              'Error!',
-              'Failed to delete covoiturage.',
-              'error'
-            );
-            // Handle the error appropriately, e.g., display an error message to the user
+            // Handle error
           }
         );
       }
-    });
-  }
+
+      openDialog(id_cov:number): void {
+        this.showAddDialog = true;
+        this.selectedCovoiturageId = id_cov;
+        
+      }
 }
+  
+

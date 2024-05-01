@@ -11,7 +11,7 @@
           <th>Date de départ</th>
           <th>Description</th>
           
-          <th>Delete</th>
+          <th>Action</th>
         </tr>
       </thead>
       
@@ -25,7 +25,11 @@
           <td>{{ type.description }}</td>
          
           <td>
-            <button class="btn btn-danger" (click)="deleteCovoiturage(type.id_cov)">Delete</button>
+           <div class="user-list-files d-flex float-right">
+<!--            <button><a  (click)="deleteCovoiturage(type.id_cov)" class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" ><i class="ri-delete-bin-line"></i></a>  </button>
+-->
+            <a  data-toggle="modal" data-toggle="modal" data-target="#myModal" data-placement="top" title="" data-original-title="Delete" (click)="openDialog(type.id_cov)" class="iq-bg-primary">  View notices  </a>
+          </div> 
         </td>
         </tr>
       </tbody>
@@ -35,4 +39,47 @@
   <ng-template #loading>
     <p>Loading...</p>
   </ng-template>
-  
+
+  <div class="modal fade" id="myModal" role="dialog" *ngIf="showAddDialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title"> Carpooling {{selectedCovoiturageId}}</h2>
+        </div>
+        <div class="modal-body">
+          <!-- Assuming selectedCovoiturageId is the id_cov of the selected covoiturage -->
+          <ng-container *ngIf="listavisCov[selectedCovoiturageId]">
+            <div *ngFor="let avis of listavisCov[selectedCovoiturageId]">
+              
+              <div class="iq-card-header d-flex justify-content-between">
+                <div class="iq-header-title">
+                   <h4 class="card-title">Notice {{avis.id_avis}}</h4>
+                </div>
+               
+             </div>
+             <div class="iq-card-body">
+              <ul class="suggestions-lists m-0 p-0">
+                 <li class="d-flex mb-4 align-items-center">
+                    <div class="media-support-info ml-3">
+                       
+                       <h3 class="mb-0">{{avis.objet}}</h3>
+                       <h3 class="mb-0">{{avis.description}}</h3>
+                    </div>
+                 </li>
+               
+               
+               
+                
+              
+               
+                
+              </ul>
+           </div>
+            </div>
+       </ng-container> 
+        </div>
+      </div>
+    </div>
+  </div>
