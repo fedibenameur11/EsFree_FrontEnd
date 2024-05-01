@@ -6,6 +6,8 @@ import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/co
 import { CollocationAddComponent } from './FrontOffice/viewsFront/colocation/collocation-add/collocation-add.component';
 import { PubitemComponent } from './BackOffice/viewsBack/marketplace/pubitem/pubitem.component';
 import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
+import { MarketComponent } from './FrontOffice/viewsFront/marketplace/market/market.component';
+import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemdetail/itemdetail.component';
 
 
 
@@ -16,7 +18,10 @@ const routes: Routes = [
     children:[
 
       {path:"collocationList", component:CollocationListComponent},
-      {path:"collocationadd", component:CollocationAddComponent}
+      {path:"collocationadd", component:CollocationAddComponent},
+      {path:"market", component:MarketComponent},
+      {path:"itemdetail", component:ItemdetailComponent}
+
 
       // hné l components mta3 l frontOffice lkol
    

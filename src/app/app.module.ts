@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
+import { MarketComponent } from './FrontOffice/viewsFront/marketplace/market/market.component';
+import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemdetail/itemdetail.component';
 
 
 
@@ -31,6 +33,8 @@ import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.comp
     SidebarBackComponent,
     PubitemComponent,
     CartComponent,
+    MarketComponent,
+    ItemdetailComponent,
 
     
     
