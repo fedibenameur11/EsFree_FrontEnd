@@ -32,4 +32,8 @@ export class ParticipationService {
         map((blob: Blob) => URL.createObjectURL(blob))
       );
   }
+  getParticipationStatistics(): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}/statistics`);
+  }
+  
 }

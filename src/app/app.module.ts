@@ -22,6 +22,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ParticipationListFrontComponent } from './FrontOffice/viewsFront/event/participation-list-front/participation-list-front.component';
 import { ParticipationListComponent } from './BackOffice/viewsBack/event/participation-list/participation-list.component';
 import { EventListUserComponent } from './FrontOffice/viewsFront/event/event-list-user/event-list-user.component';
+import { StatEventComponent } from './BackOffice/viewsBack/event/stat-event/stat-event.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { EventListUserComponent } from './FrontOffice/viewsFront/event/event-lis
     EventCalendarComponent,
     ParticipationListFrontComponent,
     ParticipationListComponent,
-    EventListUserComponent
+    EventListUserComponent,
+    StatEventComponent
     
     
   ],

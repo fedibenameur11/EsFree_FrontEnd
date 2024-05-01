@@ -10,6 +10,7 @@ import { EventCalendarComponent } from './FrontOffice/viewsFront/event/event-cal
 import { ParticipationListComponent } from './BackOffice/viewsBack/event/participation-list/participation-list.component';
 import { EventListUserComponent } from './FrontOffice/viewsFront/event/event-list-user/event-list-user.component';
 import { ParticipationListFrontComponent } from './FrontOffice/viewsFront/event/participation-list-front/participation-list-front.component';
+import { StatEventComponent } from './BackOffice/viewsBack/event/stat-event/stat-event.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
 
       // hné l components mta3 l backOffice lkol 
      { path:"eventlist", component:EventListComponent},
-     { path: "participationlist", component: ParticipationListComponent }
+     { path: "participationlist", component: ParticipationListComponent },
+     { path: "statevents", component: StatEventComponent }
 
    
    ]
