@@ -1,4 +1,4 @@
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <div class="container-fluid">
        <div class="row">
           <div class="col-sm-12">
@@ -14,80 +14,71 @@
                             <div class="col-sm-12 col-md-6">
                                <div id="user_list_datatable_info" class="dataTables_filter">
                                   <form class="mr-3 position-relative">
-                                     <div class="form-group mb-0">
-                                        <input type="search" class="form-control" id="exampleInputSearch" placeholder="Search" aria-controls="user-list-table">
-                                     </div>
                                   </form>
                                </div>
                             </div>
-                            <div class="col-sm-12 col-md-6">
-                               <div class="user-list-files d-flex float-right">
-                                  <a class="iq-bg-primary" href="javascript:void();" >
-                                     Print
-                                   </a>
-                                  <a class="iq-bg-primary" href="javascript:void();">
-                                     Excel
-                                   </a>
-                                   <a class="iq-bg-primary" href="javascript:void();">
-                                     Pdf
-                                   </a>
-                                 </div>
-                            </div>
+                         </div>
+                         <div class="search-container mb-4 d-flex align-items-center">
+                           <input type="text" [(ngModel)]="searchTerm" placeholder="Search by Event planner..." (input)="searchEvents()" class="form-control col-4">
+                           <input type="date" [(ngModel)]="searchDate" (change)="filterEventsByDate()" class="form-control mr-3" placeholder="Enter start date...">
+                           <button class="btn btn-primary" (click)="resetFilters()">All Events</button>
                          </div>
                          <table id="user-list-table" class="table table-striped table-borderless mt-4" role="grid" aria-describedby="user-list-page-info">
                            <thead>
                                <tr>
-                                  <th>Id</th>
                                   <th>Name</th>
                                   <th>Organizer</th>
                                   <th>Place</th>
                                   <th>Start Date</th>
                                   <th>End Date</th>
-                                  <th>Price</th>
+                                  <th>
+                                    Price
+                                    <button class="sort-button" (click)="sortEventsByPrice()">
+                                      <span class="button-content">
+                                        <i class="material-icons">{{ ascendingOrder ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</i>
+                                      </span>
+                                    </button>
+                                  </th>
                                   <th>Capacity</th>
                                   <th>Status</th>
                                   <th>Action</th>
                                </tr>
                            </thead>
                          <tbody>
-    <tr *ngFor="let event of events">
-      <td>{{ event.idEvent }}</td>
-      <td>{{ event.nomEvent }}</td>
-      <td>{{ event.organisateurEvent }}</td>
-      <td>{{ event.lieuEvent }}</td>
-      <td>{{ event.dateDebutEvent }}</td>
-      <td>{{ event.dateFinEvent }}</td>
-      <td>{{ event.prixEvent }}</td>
-      <td>{{ event.capaciteEvent }}</td>
-      <td>
-         <span [ngClass]="{ 
-           'badge': true, 
-           'dark-icon-light': true, 
-           'iq-bg-primary': true, 
-           'badge-pending': event.statut === 'En attente', 
-           'badge-approved': event.statut === 'Approuvé', 
-           'badge-rejected': event.statut === 'Rejeté', 
-           'text-white': event.statut === 'En attente' || event.statut === 'Approuvé' || event.statut === 'Rejeté'
-         }">
-           {{ event.statut === 'En attente' ? 'Pending' : event.statut === 'Approuvé' ? 'Approved' : 'Rejected' }}
-         </span>
-       </td>
-       
-       <td>
-         <div class="flex align-items-center list-user-action">
-           <ng-container *ngIf="event.statut === 'En attente'">
-             <!-- Utilisez la méthode approveEvent créée dans le composant Angular -->
-             <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="Approve" (click)="approveEvent(event)"><i class="ri-check-line"></i></a>
-           </ng-container>
-           <ng-container *ngIf="event.statut === 'En attente'">
-             <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="Reject" (click)="rejectEvent(event)"><i class="ri-close-line"></i></a>
-           </ng-container>
-         </div>
-       </td>
-       
-       
-    </tr>
-  </tbody>
+                              <tr *ngFor="let event of events">
+                                          <td>{{ event.nomEvent }}</td>
+                                          <td>{{ event.organisateurEvent }}</td>
+                                          <td>{{ event.lieuEvent }}</td>
+                                          <td>{{ event.dateDebutEvent }}</td>
+                                          <td>{{ event.dateFinEvent }}</td>
+                                          <td>{{ event.prixEvent }}</td>
+                                          <td>{{ event.capaciteEvent }}</td>
+                                          <td>
+                                             <span [ngClass]="{ 
+                                             'badge': true, 
+                                             'dark-icon-light': true, 
+                                             'iq-bg-primary': true, 
+                                             'badge-pending': event.statut === 'En attente', 
+                                             'badge-approved': event.statut === 'Approuvé', 
+                                             'badge-rejected': event.statut === 'Rejeté', 
+                                             'text-white': event.statut === 'En attente' || event.statut === 'Approuvé' || event.statut === 'Rejeté'
+                                             }">
+                                             {{ event.statut === 'En attente' ? 'Pending' : event.statut === 'Approuvé' ? 'Approved' : 'Rejected' }}
+                                             </span>
+                                          </td>
+                                          <td>
+                                             <div class="flex align-items-center list-user-action">
+                                             <ng-container *ngIf="event.statut === 'En attente'">
+                                                <!-- Utilisez la méthode approveEvent créée dans le composant Angular -->
+                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="Approve" (click)="approveEvent(event)"><i class="ri-check-line"></i></a>
+                                             </ng-container>
+                                             <ng-container *ngIf="event.statut === 'En attente'">
+                                                <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="Reject" (click)="rejectEvent(event)"><i class="ri-close-line"></i></a>
+                                             </ng-container>
+                                             </div>
+                                          </td>
+                                 </tr>
+                           </tbody>
                          </table>
                       </div>
                          <div class="row justify-content-between mt-3">

@@ -30,7 +30,7 @@
           <div class="col-lg-8">
             <article class="article">
               <div class="post-img">
-                <img src="/assets/FrontOffice/img/blog/blog-1.jpg" alt="" class="img-fluid">
+                <img [src]="event.imageEvent" alt="Event Image" class="img-fluid"  style="width: 100%;  max-width: 600px; max-height: 500px;">
               </div>
               <h2 class="title">{{ event.nomEvent }}</h2>
               <div class="meta-top">

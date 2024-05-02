@@ -51,4 +51,13 @@ updateEvent(idEvent: number, updatedEvent: Event): Observable<Event> {
 deleteEvent(idEvent: number): Observable<Event> {
   return this.httpClient.delete<Event>(`${this.baseUrl}/DeleteById/${idEvent}`, {});
 }
+searchEventsByOrganisateur(organisateurEvent: string): Observable<Event[]> {
+  return this.httpClient.get<Event[]>(`${this.baseUrl}/searchEventsByOrganisateur/${organisateurEvent}`);
+}
+findAllOrderByPriceDesc(): Observable<Event[]> {
+  return this.httpClient.get<Event[]>(`${this.baseUrl}/orderByPriceDesc`);
+}
+findByDateDebutEvent(date: String): Observable<Event[]> {
+  return this.httpClient.get<Event[]>(`${this.baseUrl}/findByDateDebutEvent/${date}`);
+}
 }

@@ -3,7 +3,9 @@ import { EventService } from 'src/app/Services/event.service';
 import {Event} from 'src/app/Models/event/event.model';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AngularFireStorage } from '@angular/fire/compat/storage'; 
 declare var $: any;
+
 @Component({
   selector: 'app-event-list-user',
   templateUrl: './event-list-user.component.html',
@@ -16,7 +18,7 @@ export class EventListUserComponent implements OnInit{
   selectedEventId!: number;
   selectedEvent: Event | undefined;
 
-  constructor(private eventService: EventService, private router: Router) { }
+  constructor(private eventService: EventService, private router: Router, private fireStorage:AngularFireStorage) { }
 
   navigateToEventDetail(idEvent: number) {
     this.router.navigate(['/eventdetail', idEvent]); // Redirige vers la page event-detail avec l'ID de l'événement en tant que paramètre
@@ -32,6 +34,7 @@ export class EventListUserComponent implements OnInit{
     
   }
 
+  
   getEventsByUser(id: number): void {
     this.eventService.getEventsByUser(id).subscribe(
       (events: Event[]) => {
@@ -47,11 +50,26 @@ export class EventListUserComponent implements OnInit{
     this.selectedEvent = this.userEvents.find(event => event.idEvent === eventId);
     $('#editEventModal').modal('show');
   }
+  async onFileSelected(event:any){
+    const file = event.target.files[0]
+    if(file){
+      const path = `yt/${file.name}`
+      const uploadTask =await this.fireStorage.upload(path,file)
+      const url = await uploadTask.ref.getDownloadURL()
+      console.log(url)
+      if (this.selectedEvent) {
+        this.selectedEvent.imageEvent = url; // Affecter l'URL de l'image si selectedEvent est défini
+      }
+    }
+  }
 
-  editEvent(): void {
+  async editEvent() {
     const updatedEvent = this.userEvents.find(event => event.idEvent === this.selectedEventId);
     if (updatedEvent) { // Vérifiez si updatedEvent est défini
-      this.eventService.updateEvent(this.selectedEventId, updatedEvent)
+      if (this.event.imageEvent) {
+        updatedEvent.imageEvent = this.event.imageEvent;
+      }
+     await this.eventService.updateEvent(this.selectedEventId, updatedEvent)
         .subscribe(
           (updatedEvent: Event) => {
             $('#editEventModal').modal('hide');

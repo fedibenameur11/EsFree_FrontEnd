@@ -56,7 +56,7 @@
       </div>
 
       <div class="col-md-12">
-        <input type="file" [(ngModel)]="event.imageEvent" name="imageEvent" class="form-control" required accept="image/*">
+        <input type="file" (change)="onFileSelected($event)" [(ngModel)]="event.imageEvent" name="imageEvent" class="form-control" required accept=".png">
       </div>
 
       <div class="col-md-12 text-center">

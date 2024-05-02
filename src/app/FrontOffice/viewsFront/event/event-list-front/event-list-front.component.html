@@ -29,58 +29,60 @@
     </div><!-- End Page Title -->
 
     <section id="blog" class="blog">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row gy-4 posts-list">
-            <div class="col-xl-4 col-lg-6" *ngFor="let event of events">
-              <article>
-                <div class="post-img">
-                <!--  <img [src]="event.imageEvent" alt="" class="img-fluid">-->
-               <img src="/assets/FrontOffice/img/blog/blog-2.jpg" alt=""> 
-                </div>
-                <p class="post-category">{{ event.organisateurEvent }}</p>
-                <h2 class="title" (click)="navigateToEventDetail(event.idEvent)">
-  <span style="cursor: pointer;">{{ event.nomEvent }}</span>
-</h2>
-               <div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="search-container mb-4 d-flex align-items-center">
+            <input type="text" [(ngModel)]="searchTerm" placeholder="Search by Event planner..." (input)="searchEvents()" class="form-control col-4">
+            <input type="date" [(ngModel)]="searchDate" (change)="filterEventsByDate()" class="form-control mr-3" placeholder="Enter start date...">
+            <button class="btn btn-primary" (click)="resetFilters()">All Events</button>
+          </div>
+          
+        <div class="row gy-4 posts-list">
+          <div class="col-xl-4 col-lg-6" *ngFor="let event of events">
+            <article>
+              <div class="post-img">
+                <img [src]="event.imageEvent" alt="Event Image" style="max-width: 100%; height: auto;">
+              </div>
+              <p class="post-category">{{ event.organisateurEvent }}</p>
+              <h2 class="title" (click)="navigateToEventDetail(event.idEvent)">
+                <span style="cursor: pointer;">{{ event.nomEvent }}</span>
+              </h2>
+              <div>
                 <div class="d-flex align-items-center">
                   <!-- Ligne supérieure avec lieu et icône de localisation -->
                   <div class="mr-1">
-                      <i class="material-icons" style="font-size: 24px;">place</i>
+                    <i class="material-icons" style="font-size: 24px;">place</i>
                   </div>
                   <div class="post-meta">
-                      <p class="post-author mb-0">{{ event.lieuEvent }}</p>
+                    <p class="post-author mb-0">{{ event.lieuEvent }}</p>
                   </div>
                 </div>
-              <!-- Ligne inférieure avec les dates et l'icône du calendrier -->
-              <div class="d-flex align-items-center">
+                <!-- Ligne inférieure avec les dates et l'icône du calendrier -->
+                <div class="d-flex align-items-center">
                   <div class="mr-1">
-                      <i class="material-icons" style="font-size: 24px;">date_range</i>
+                    <i class="material-icons" style="font-size: 24px;">date_range</i>
                   </div>
                   <div class="post-meta">
-                      <p class="post-date mb-0">
-                          <time>{{ event.dateDebutEvent | date: 'mediumDate' }}</time> - <time>{{ event.dateFinEvent | date: 'mediumDate' }}</time>
-                      </p>
+                    <p class="post-date mb-0">
+                      <time>{{ event.dateDebutEvent | date: 'mediumDate' }}</time> - <time>{{ event.dateFinEvent | date: 'mediumDate' }}</time>
+                    </p>
                   </div>
-                  <button  [routerLink]="['/eventdetail', event.idEvent]" class="btn btn-primary ml-3" [disabled]="event.capaciteEvent === 0" [ngClass]="{ 'disabled-button': event.capaciteEvent === 0 }">
+                  <button [routerLink]="['/eventdetail', event.idEvent]" class="btn btn-primary ml-3" [disabled]="event.capaciteEvent === 0" [ngClass]="{ 'disabled-button': event.capaciteEvent === 0 }">
                     {{ event.capaciteEvent === 0 ? 'Event complete' : 'Participate' }}
                   </button>
-                  
+                </div>
               </div>
-              
-            </div> 
-              
-              </article>
-            </div><!-- End post list item -->
-          </div><!-- End blog posts list -->
-          <div class="pagination d-flex justify-content-center">
-            <ul>
-              <li><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-            </ul>
-          </div><!-- End pagination -->
-        </div>
-      </section><!-- End Blog Section -->
-      
+            </article>
+          </div><!-- End post list item -->
+        </div><!-- End blog posts list -->
+        <div class="pagination d-flex justify-content-center">
+          <ul>
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+          </ul>
+        </div><!-- End pagination -->
+      </div>
+    </section><!-- End Blog Section -->
+    
 
   </main>

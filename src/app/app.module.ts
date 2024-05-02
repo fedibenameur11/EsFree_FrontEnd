@@ -23,6 +23,9 @@ import { ParticipationListFrontComponent } from './FrontOffice/viewsFront/event/
 import { ParticipationListComponent } from './BackOffice/viewsBack/event/participation-list/participation-list.component';
 import { EventListUserComponent } from './FrontOffice/viewsFront/event/event-list-user/event-list-user.component';
 import { StatEventComponent } from './BackOffice/viewsBack/event/stat-event/stat-event.component';
+import { environment } from './environnement/environnement';
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 
 @NgModule({
   declarations: [
@@ -52,7 +55,9 @@ import { StatEventComponent } from './BackOffice/viewsBack/event/stat-event/stat
     HttpClientModule,
     ReactiveFormsModule ,
     FormsModule,
-    FullCalendarModule
+    FullCalendarModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
