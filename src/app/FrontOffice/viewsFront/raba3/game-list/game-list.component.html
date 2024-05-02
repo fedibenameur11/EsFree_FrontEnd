@@ -12,6 +12,8 @@
     <div class="container section-title" data-aos="fade-up">
       <h2>GAMES</h2>
       <p>Select The Game You Want To Play With Your Friends !</p>
+      <br>
+      <br>
     </div><!-- End Section Title -->
 
     <div class="container">
@@ -21,8 +23,8 @@
         <div class="row">
           <div class="col-lg-4 col-md-6 member" *ngFor="let jeu of games" data-aos="fade-up" data-aos-delay="100">
             <div class="member-img">
-              <a [routerLink]="['/sessionAdd']">
-                <img src="assets/FrontOffice/img/chkobba.png" class="img-fluid" alt="">
+              <a [routerLink]="['/sessionList',jeu.idJeux]">
+                <img src="assets/FrontOffice/img/chkobba.png" class="img-fluid" alt=""  style="width: 100%; height: 100%; object-fit: cover;">
               </a>    
             </div>
             <div class="member-info text-center">

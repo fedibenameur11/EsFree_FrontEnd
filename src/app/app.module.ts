@@ -15,6 +15,13 @@ import { SessionAddComponent } from './FrontOffice/viewsFront/raba3/session-add/
 import { GameListComponent } from './FrontOffice/viewsFront/raba3/game-list/game-list.component';
 import { SessionListComponent } from './FrontOffice/viewsFront/raba3/session-list/session-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GameAddComponent } from './BackOffice/viewsBack/raba3/game-add/game-add.component';
+import { GameEditComponent } from './BackOffice/viewsBack/raba3/game-edit/game-edit.component';
+import { GameListBComponent } from './BackOffice/viewsBack/raba3/game-list-b/game-list-b.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SessionListBComponent } from './BackOffice/viewsBack/raba3/session-list-b/session-list-b.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -28,6 +35,10 @@ import { HttpClientModule } from '@angular/common/http';
     SessionAddComponent,
     GameListComponent,
     SessionListComponent,
+    GameAddComponent,
+    GameEditComponent,
+    GameListBComponent,
+    SessionListBComponent,
     
     
   ],
@@ -35,8 +46,15 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

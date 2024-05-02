@@ -4,24 +4,25 @@ import { Raba3 } from 'src/app/Models/raba3';
 import { Raba3Service } from 'src/app/Services/raba3.service';
 
 @Component({
-  selector: 'app-session-list',
-  templateUrl: './session-list.component.html',
-  styleUrls: ['./session-list.component.css']
+  selector: 'app-session-list-b',
+  templateUrl: './session-list-b.component.html',
+  styleUrls: ['./session-list-b.component.css']
 })
-export class SessionListComponent implements OnInit{
-  idJeux!: number
+export class SessionListBComponent implements OnInit{
 
   raba3: Raba3 = new Raba3();
   constructor(private act:ActivatedRoute,private raba3Service:Raba3Service){ }
   public sessions: Array<Raba3> =[];
+
+
   ngOnInit(): void {
-    this.idJeux = this.act.snapshot.params['idJeux']
-    this.getListSessions(this.idJeux);
+    this.getListSessions2();
     
   }
-  getListSessions(idJeux:number)
+
+  getListSessions2()
   {
-   this.raba3Service.getListSessions(this.idJeux).subscribe(
+   this.raba3Service.getListSessions2().subscribe(
      (d) => {
       d.forEach((type:Raba3) =>
        {
@@ -41,13 +42,5 @@ export class SessionListComponent implements OnInit{
      );
     }
 
-    getNumberArray(count: number): number[] {
-      return Array.from({ length: count }, (_, i) => i + 1);
-    }
-
-
 }
-
-
-
 

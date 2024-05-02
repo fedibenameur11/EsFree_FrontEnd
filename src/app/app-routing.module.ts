@@ -9,6 +9,13 @@ import { SessionAddComponent } from './FrontOffice/viewsFront/raba3/session-add/
 import { SessionListComponent } from './FrontOffice/viewsFront/raba3/session-list/session-list.component';
 
 
+import { GameEditComponent } from './BackOffice/viewsBack/raba3/game-edit/game-edit.component';
+import { GameAddComponent } from './BackOffice/viewsBack/raba3/game-add/game-add.component';
+import { GameListBComponent } from './BackOffice/viewsBack/raba3/game-list-b/game-list-b.component';
+import { SessionListBComponent } from './BackOffice/viewsBack/raba3/session-list-b/session-list-b.component';
+
+
+
 const routes: Routes = [
    {
     path:"",
@@ -18,9 +25,7 @@ const routes: Routes = [
       {path:"collocationList", component:CollocationListComponent},
       {path:"collocationadd", component:CollocationAddComponent},
       {path:"raba3", component:GameListComponent},
-      {path:"sessionAdd", component:SessionAddComponent},
-      {path:"sessionList", component:SessionListComponent},
-
+      {path:"sessionList/:idJeux", component:SessionListComponent},
 
       // hné l components mta3 l frontOffice lkol
    
@@ -32,6 +37,10 @@ const routes: Routes = [
     path:"admin",
     component : AllTemplatesBackComponent,
     children:[
+      {path:"gameAdd", component:GameAddComponent},
+      {path:"gameListB", component:GameListBComponent},
+      {path:"gameEdit", component:GameEditComponent},
+      {path:"sessionListB", component:SessionListBComponent},
 
       // hné l components mta3 l backOffice lkol 
 
