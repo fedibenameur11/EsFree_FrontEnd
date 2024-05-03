@@ -28,4 +28,7 @@
     vertical-align: middle;
     line-height: 1;
   }
+  .pagination {
+    justify-content: flex-end;
+  }
   

@@ -16,20 +16,44 @@ export class EventListComponent implements OnInit{
   ascendingOrder: boolean = true;
   filteredEvents: Event[] = [];
   searchDate: string = '';
-  
+
+  currentPage: number = 1;
+eventsPerPage: number = 4;
+totalEvents: number = 0;
+totalPages: number = 0;
+pages: number[] = [];
+startIndex: number = 0;
+endIndex: number = 0;
 
   constructor(private eventService: EventService, private router: Router) {}
 
   ngOnInit(): void {
     this.eventService.getAllEvents().subscribe(events => {
       this.events = events;
-      this.filteredEvents = events;
+      this.totalEvents = events.length;
+      this.totalPages = Math.ceil(this.totalEvents / this.eventsPerPage);
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+      this.updateEventsPerPage();
     });
   }
+
+  updateEventsPerPage(): void {
+    this.startIndex = (this.currentPage - 1) * this.eventsPerPage;
+    this.endIndex = Math.min(this.startIndex + this.eventsPerPage, this.totalEvents);
+    this.filteredEvents = this.events.slice(this.startIndex, this.endIndex);
+  }
+  
+
+  changePage(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.updateEventsPerPage();
+  }
+
   searchEvents(): void {
     if (this.searchTerm.trim()) {
       this.eventService.searchEventsByOrganisateur(this.searchTerm).subscribe(events => {
         this.events = events;
+        this.updateEventsPerPage();
       });
     } else {
       // Si le champ de recherche est vide, rechargez la liste complète des événements approuvés
@@ -42,6 +66,7 @@ export class EventListComponent implements OnInit{
     this.eventService.getAllEvents().subscribe(events => {
       this.events = events;
       this.filteredEvents = events;
+      this.updateEventsPerPage();
     });
 }
   filterEventsByDate(): void {
@@ -61,10 +86,10 @@ export class EventListComponent implements OnInit{
   sortEventsByPrice(): void {
     this.ascendingOrder = !this.ascendingOrder;
     if (this.ascendingOrder) {
-      this.events.sort((a, b) => a.prixEvent - b.prixEvent);
+      this.filteredEvents.sort((a, b) => a.prixEvent - b.prixEvent);
     } else {
       // Inverser l'ordre de tri en utilisant la méthode reverse()
-      this.events.reverse();
+      this.filteredEvents.reverse();
     }
   }
   
