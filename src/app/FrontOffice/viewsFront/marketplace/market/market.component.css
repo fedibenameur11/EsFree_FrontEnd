@@ -22,7 +22,7 @@ a{
 }
 .content{
     position: relative;
-    width: 18%; /* Make the cards slightly smaller */
+    width: 30%; /* Adjust the width to give the cards more space */
     margin: 15px;
     box-sizing: border-box;
     float: left;
@@ -38,8 +38,8 @@ a{
 
 
 img {
-   width: 200px;
-   height:200px;
+   width: 100px;
+   height:100px;
    text-align: center;
    margin: 0 auto;
    display: block; 

@@ -10,17 +10,38 @@
       </div>
     </div>
   </div!-->
-<div class="gallery">
-<div class="content">
-<img src="/src/assets/Apple-iPhone-13-5G-256GB-Blue.png" >
-<h3>Nom de prod</h3>
-<h6>30 dt</h6>
-<br>
-<br>
-<div class="icons">
-  <i class="ri-shopping-cart-line text-success"></i>
-  <a routerLink="/itemdetail"><i  class="ri-information-line "></i></a>
-</div>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Filters</h5>
+              <!-- Add your filter options here -->
+          </div>
+      </div>
+  </div>
+  <div class="col-md-9">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Search items..." aria-label="Search items" aria-describedby="search-button">
+  </div>
+  <div class="row">
 
+    <div class="gallery">
+      <div class="content" *ngFor="let pubItem of pubItems">
+      <img [src]="pubItem.image" alt="Product Image" >
+      <h3>{{ pubItem.name}}</h3>
+      <h6>{{ pubItem.prix }} dt</h6>
+      <br>
+      <br>
+      <div class="icons">
+        <i class="ri-shopping-cart-line text-success"></i>
+        <a routerLink="/itemdetail"><i  class="ri-information-line "></i></a>
+      </div>
+
+      </div>
+
+    </div> 
+    </div>
+  </div>
 </div>
 </div>

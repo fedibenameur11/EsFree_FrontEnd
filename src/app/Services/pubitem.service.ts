@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PubItem } from '../Models/pubitem';
 
@@ -44,5 +44,10 @@ export class PubitemService {
 
     getPubItemById(id: number): Observable<PubItem> {
       return this.httpClient.get<PubItem>(`${this.baseUrl}${id}`);
+    }
+
+    getItemsSortedByEtat(etat: string): Observable<PubItem[]> {
+      const params = new HttpParams().set('etat', etat);
+      return this.httpClient.get<PubItem[]>('/api/itemsbyetat', { params });
     }
 }
