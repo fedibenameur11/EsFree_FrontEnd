@@ -44,6 +44,8 @@ export class MaisonService {
   supprimerDemandeur(maisonId: number, nom_demandeur: String): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${maisonId}/demandeurs/${nom_demandeur}`);
   }
+
+  
 }
 
 

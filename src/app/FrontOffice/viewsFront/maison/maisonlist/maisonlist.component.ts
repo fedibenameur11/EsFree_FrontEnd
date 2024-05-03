@@ -5,6 +5,7 @@ import { Maison } from 'src/app/Models/maison';
 import { MaisonService } from 'src/app/Services/maison.service';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/Models/user';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-maisonlist',
@@ -19,6 +20,7 @@ export class MaisonlistComponent {
   showAddDialog: boolean = false;
   showUpdateDialog: boolean = false;
   demandeur!:User;
+  maisonsDisponibles: Maison[]=[];
 
 
   openAddDialog() {
@@ -53,9 +55,9 @@ export class MaisonlistComponent {
   }
   ngOnInit(){
     this.listMaisons();
-
+    
   }
-  listMaisons(){
+  /*listMaisons(){
     this.maisonService.findAllMaisons().subscribe(
       maison => {
         this.maison =maison
@@ -66,14 +68,27 @@ export class MaisonlistComponent {
         console.error('Error loading houses:', error);
       }
     );
-  }
-
+  }*/
+  
+  listMaisons() {
+  this.maisonService.findAllMaisons().subscribe(
+    maisons => {
+      // Filtrer les maisons avec un nombre de places disponibles > 0
+      this.maisonsDisponibles = maisons.filter(maison => maison.nbrplacedispo > 0);
+      console.error('Done:', this.maisonsDisponibles);
+    },
+    error => {
+      console.error('Error loading houses:', error);
+    }
+  );
+}
   onSubmit(): void {
     console.log('Nouvelle maison a été ajouté', this.newMaison);
 
     this.maisonService.addMaisonByUser(this.newMaison,this.newMaison.user.userName).subscribe(() => {
       console.log('Nouvelle maison a été ajouté', this.newMaison);
       this.showAddDialog = false;
+      window.location.reload();
       
     });
   }
@@ -100,6 +115,7 @@ export class MaisonlistComponent {
       //this.dialogRef.close(true); 
     });
     console.log('La maison a été modifié', this.newMaison);
+    window.location.reload();
   }
 
   deleteMaison(idMaison: number): void {
@@ -108,16 +124,19 @@ export class MaisonlistComponent {
     }, (error) => {
       console.log("Echec dasn la suppression de cette maison ");
     });
+    window.location.reload();
   }
 
   reserverMaison(maisonId: number, demandeur: User): void {
     this.maisonService.ajouterDemandeur(maisonId, demandeur)
-      .subscribe((result) => {
-        // Traitez ici la réponse si nécessaire
-        console.log('Demandeur ajouté avec succès : ', result);
+      .subscribe(() => {
+        // Affichez une alerte de succès pour la demande envoyée
+        Swal.fire('Success!', 'Demande envoyée avec succès', 'success');
+        console.log('Demandeur ajouté avec succès');
       }, (error) => {
-        // Gérez ici les erreurs si nécessaire
-        console.error('Erreur lors de l\'ajout du demandeur : ', error);
+        console.error('Erreur dans l\'Envoie de cette demande. : ', error);
+        // Affichez une alerte d'erreur en cas d'échec de l'ajout du demandeur
+        Swal.fire('Error!', 'Erreur dans l\'Envoie de cette demande.', 'error');
       });
       
   }

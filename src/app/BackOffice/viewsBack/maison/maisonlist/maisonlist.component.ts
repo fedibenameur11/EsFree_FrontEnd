@@ -17,9 +17,13 @@ export class MaisonlistbackComponent {
   newMaison: Maison = new Maison(); 
   showAddDialog: boolean = false;
   showUpdateDialog: boolean = false;
+  showAddContratDialog: boolean = false;
   
   openAddDialog() {
     this.showAddDialog = true;
+  }
+  openAddContratDialog() {
+    this.showAddContratDialog = true;
   }
   openUpdateDialog() {
     this.showUpdateDialog = true;
@@ -51,55 +55,43 @@ export class MaisonlistbackComponent {
   listMaisons(){
     this.maisonService.findAllMaisons().subscribe(
       maison => {
-        this.maison =maison
-        console.error('Done:', );
-        
-      },
-      error => {
-        console.error('Error loading houses:', error);
+        this.maison =maison     
       }
     );
   }
   onSubmit(): void {
-    console.log('Nouvelle maison a été ajouté', this.newMaison);
-
     this.maisonService.addMaisonByUser(this.newMaison,this.newMaison.user.userName).subscribe(() => {
       console.log('Nouvelle maison a été ajouté', this.newMaison);
       this.showAddDialog = false;
       
     });
+    window.location.reload();
   }
 
-  onClose(): void {
-    //this.dialogRef.close(); 
-  }
-  
   onModalUpdateOpen(maisonId: number): void {
     this.openUpdateDialog();
     this.maisonService.getMaisonById(maisonId).subscribe((maison: Maison) => {
-      // Affecter les valeurs récupérées aux champs de formulaire
-      this.newMaison = maison;
-      
+      this.newMaison = maison;   
       
     });
   }
   onSubmitUpdate(): void {
     
-
     this.maisonService.updateMaison(this.newMaison).subscribe(() => {
       console.log('Nouvelle maison a été ajouté', this.newMaison);
       this.closeUpdateDialog();
-      //this.dialogRef.close(true); 
     });
     console.log('La maison a été modifié', this.newMaison);
+    window.location.reload();
   }
 
   deleteMaison(idMaison: number): void {
     this.maisonService.deleteMaison(idMaison).subscribe(() => {
       console.log("Maison supprimé avec succés");
     }, (error) => {
-      console.log("Echec dasn la suppression de cette maison ");
+      console.log("Echec dans la suppression de cette maison ");
     });
+    window.location.reload();
   }
   
   

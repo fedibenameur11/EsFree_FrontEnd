@@ -21,26 +21,10 @@
     <h3>Il n'existe aucun demandeur pour le moment.</h3>
 </div>
 
-  
-
-  <!-- Afficher la liste des demandeurs s'il existe -->
-  <!-- <div *ngIf="maison.demandeurs && maison.demandeurs.length > 0">
-    <h3>Liste des demandeurs :</h3>
-    <ul>
-      <li *ngFor="let demandeur of maison.demandeurs">
-        {{ demandeur.userName }}
-        {{ demandeur.userLastName }}
-        {{ demandeur.userFirstName }}
-        <div class="btn-group" role="group" aria-label="Actions">
-          <button type="button" class="btn btn-success">Accepter</button>
-          <button type="button" class="btn btn-danger">Refuser</button>
-      </div>
-      </li>
-    </ul>
-  </div>
--->
+<br>
 <div *ngIf="maison.demandeurs && maison.demandeurs.length > 0">
   <h3>Liste des demandeurs :</h3>
+  <br>
   <table class="table">
       <thead>
           <tr>
@@ -57,7 +41,7 @@
               <td>{{ demandeur.userFirstName }}</td>
               <td>
                   <div class="btn-group" role="group" aria-label="Actions">
-                      <button type="button" class="btn btn-success">Accepter</button>
+                      <button type="button" class="btn btn-success" (click)="openAddContratDialog(demandeur.userName,maison.id_maison);" data-toggle="modal" data-toggle="modal" data-target="#Modaladdcontrat">Accepter</button>
                       <button type="button" class="btn btn-danger" (click)="refuserDemandeur(maison.id_maison, demandeur.userName)">Refuser</button>
                   </div>
               </td>
@@ -65,8 +49,46 @@
       </tbody>
   </table>
 </div>
-
-  
 </div>
 
+
+<!-- Afficher add contrat modal -->
+
+<div class="modal fade" id="Modaladdcontrat" role="dialog" *ngIf="showAddContratDialog">
+  <br>
+  <br>
+  <div class="modal-dialog">
   
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Ajouter un contrat de location</h2>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmitContrat()" #contratForm="ngForm">
+          <div class="form-group">
+              <label for="date_debut">Date de début :</label>
+              <input type="date" id="date_debut" [(ngModel)]="newContrat.date_debut" name="date_debut" class="form-control" required>
+          </div>
+          <br>
+          <div class="form-group">
+              <label for="date_fin">Date de fin :</label>
+              <input type="date" id="date_fin" [(ngModel)]="newContrat.date_fin" name="date_fin" class="form-control" required>
+          </div>
+          <br>
+          <div class="form-group">
+              <label for="colocataires">Colocataire :</label>
+              <input type="text" id="colocataires" [(ngModel)]="this.Username" name="colocataires" class="form-control" required readonly >
+          </div>
+          <br>
+          
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" [disabled]="contratForm.invalid">Ajouter ce contrat</button>
+              <button type="button" class="btn btn-secondary btn-default" data-dismiss="modal">Annuler</button>
+          </div>
+      </form>
+      </div>
+    </div>
+    
+  </div>
+</div>

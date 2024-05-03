@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Contratlocation } from 'src/app/Models/contratlocation';
 import { Maison } from 'src/app/Models/maison';
+import { ContratlocationService } from 'src/app/Services/contratlocation.service';
 import { MaisonService } from 'src/app/Services/maison.service';
 import Swiper from 'swiper';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-maisondetailback',
@@ -14,7 +17,21 @@ export class MaisondetailbackComponent {
   currentImageIndex: number = 0;
   swiper: Swiper | undefined;
   private autoChangeInterval: any;
-  constructor(private route: ActivatedRoute, private maisonservice: MaisonService){}
+  showAddContratDialog: boolean = false;
+  newContrat: Contratlocation = new Contratlocation();
+  newMaison: Maison = new Maison();
+  Username !: String;
+  idM!:number;
+  
+  openAddContratDialog(username : String,id:number) {
+    this.showAddContratDialog = true;
+    this.Username=username;
+    this.idM=id;
+  }
+  closeAddContratDialog() {
+    this.showAddContratDialog = false;
+  }
+  constructor(private route: ActivatedRoute, private maisonservice: MaisonService,private contratservice: ContratlocationService){}
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const maisonId = params['id']; // Récupérer l'ID de la maison depuis les paramètres de l'URL
@@ -83,6 +100,26 @@ export class MaisondetailbackComponent {
         console.error('Erreur lors de la suppression du demandeur : ', error);
       });
   }
-  
+
+  onSubmitContrat()
+  {
+    this.contratservice.addContratByUserAndMaison(this.newContrat, this.Username, this.maison.id_maison)
+    .subscribe(
+      () => {
+
+        Swal.fire('Success!', 'Contrat de colocation ajouté avec succès', 'success');
+      },
+      (error) => {
+        Swal.fire('Error!', 'Erreur lors de l\'ajout du contrat de colocation ', 'error');
+      }
+    );
+    console.log(this.newContrat);
+    this.refuserDemandeur(this.maison.id_maison, this.Username);
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  }
+
 
 }

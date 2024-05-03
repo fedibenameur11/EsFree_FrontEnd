@@ -1,4 +1,4 @@
-@import '~swiper/swiper-bundle.css';
+/*@import '~swiper/swiper-bundle.css'; */
 
 /*
 .main-image {
@@ -52,8 +52,8 @@
 
 */
 
-
-@import '~swiper/swiper-bundle.css';
+/* Le vrai CSS */ 
+/*@import '~swiper/swiper-bundle.css';*/
 
 /* Styles pour l'image principale */
 .main-image {

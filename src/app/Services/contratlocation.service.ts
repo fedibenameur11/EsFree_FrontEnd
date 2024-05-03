@@ -19,13 +19,17 @@ export class ContratlocationService {
     return this.http.post<Contratlocation>(this.baseUrl + '/addContratLocation',contratlocation);
   }
 
-  updateMaison(contratlocation : Contratlocation): Observable<Contratlocation>{
+  updateContrat(contratlocation : Contratlocation): Observable<Contratlocation>{
     return this.http.put<Contratlocation>(this.baseUrl + '/updateContratLocation',contratlocation);
   }
-  getMaisonById(contrat_id: number): Observable<Contratlocation> {
+  getContratById(contrat_id: number): Observable<Contratlocation> {
     return this.http.get<Contratlocation>(`${this.baseUrl}/getContratLocation/${contrat_id}`);
   }
-  deleteMaison(contrat_id: number): Observable<void> {
+  deleteContrat(contrat_id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/deleteContratLocation/${contrat_id}`);
+  }
+  addContratByUserAndMaison(contratLocation :Contratlocation, nom: String, idMmaison: number): Observable<Contratlocation>{
+    return this.http.post<Contratlocation>(`${this.baseUrl}/addContratMaisonColocataire?nom=${nom}&idMmaison=${idMmaison}`,contratLocation);
+    
   }
 }

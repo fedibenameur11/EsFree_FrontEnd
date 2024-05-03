@@ -135,32 +135,30 @@
 <br>
 
 <div class="container">
-  <button class="btn btn-primary " (click)="openAddDialog();" data-toggle="modal" data-toggle="modal" data-target="#myModal">
-      <i class="bi bi-plus"></i> Ajouter une maison
-  </button>
-  <br><br>
-  <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-12" >
-        <div class="card mb-3"  *ngFor="let maison of maison">
-          <div *ngIf="maison.nbrplacedispo > 0">
-              <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcdyHdWn4oCIwCtIrHpBdEKDim4YO1S0T5FHV-_DTrJg&s" alt="Image de la maison">
-              <div class="card-body">
-                  <h5 class="card-title">{{ maison.adresse }}</h5>
-                  <p class="card-text">Prix : {{ maison.prix }} TND</p>
-                  <p class="card-text">{{ maison.description }}</p>
-                  <div class="img-cap">
-                      <a  [routerLink]="['/afficherMaison', maison.id_maison]"class=""> Détails !!<i class="ti-arrow-right"></i></a>
-                      <button class="btn btn-primary " (click)="reserverMaison(maison.id_maison, demandeur)" >
-                        <i class="bi bi-plus"></i> Réserver
-                    </button>
-                  </div>
-                  
-              </div>
-          </div>
-          </div>
-      </div>
+    <button class="btn btn-primary " (click)="openAddDialog();" data-toggle="modal" data-toggle="modal" data-target="#myModal">
+        <i class="bi bi-plus"></i> Ajouter une maison
+    </button>
+    <br><br>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let maison of maisonsDisponibles">
+            <div class="card mb-3">
+                <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcdyHdWn4oCIwCtIrHpBdEKDim4YO1S0T5FHV-_DTrJg&s" alt="Image de la maison">
+                <div class="card-body">
+                    <h5 class="card-title">{{ maison.adresse }}</h5>
+                    <p class="card-text">Prix : {{ maison.prix }} TND</p>
+                    <p class="card-text">{{ maison.description }}</p>
+                    <div class="img-cap">
+                        <a  [routerLink]="['/afficherMaison', maison.id_maison]"class=""> Détails !!<i class="ti-arrow-right"></i></a>
+                        <button class="btn btn-primary " (click)="reserverMaison(maison.id_maison, demandeur)" >
+                          <i class="bi bi-plus"></i> Réserver
+                      </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
-</div>
   <!--------------------- Ajouter une maison--------------------- >
   <!--<div class="modal-container" *ngIf="showAddDialog">
     <div class="modal-header">
@@ -239,6 +237,15 @@
                 <div *ngIf="taskForm.controls['prix'].invalid && (taskForm.controls['prix'].dirty || taskForm.controls['prix'].touched)">
                     <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['required']">Veuillez insérer le prix.</div>
                     <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['pattern']">Le prix doit être un nombre valide.</div>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="nbrplacedispo">Nombre de place :</label>
+                <input type="text" id="nbrplacedispo" [(ngModel)]="newMaison.nbrplacedispo" name="nbrplacedispo" class="form-control" required pattern="[0-9]+(\.[0-9]+)?">
+                <div *ngIf="taskForm.controls['prix'].invalid && (taskForm.controls['prix'].dirty || taskForm.controls['prix'].touched)">
+                    <div class="text-danger" *ngIf="taskForm.controls['nbrplacedispo'].errors?.['required']">Veuillez insérer le prix.</div>
+                    <div class="text-danger" *ngIf="taskForm.controls['nbrplacedispo'].errors?.['pattern']">Le prix doit être un nombre valide.</div>
                 </div>
             </div>
             <br>
