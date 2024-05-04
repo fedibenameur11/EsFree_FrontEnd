@@ -6,6 +6,7 @@ import { MaisonService } from 'src/app/Services/maison.service';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/Models/user';
 import Swal from 'sweetalert2';
+import { Options } from 'ng5-slider';
 
 @Component({
   selector: 'app-maisonlist',
@@ -21,6 +22,19 @@ export class MaisonlistComponent {
   showUpdateDialog: boolean = false;
   demandeur!:User;
   maisonsDisponibles: Maison[]=[];
+  maisons!: any[];
+  priceRange: number = 0;
+  minPrice: number = 0;
+  maxPrice: number = 2000;
+  sortDirection: string = 'asc';
+  sortOrder: string = 'asc'; 
+  /*sliderOptions: Options = { // Définissez les options du slider
+    floor: 0, // Valeur minimale du slider
+    ceil: 1000, // Valeur maximale du slider
+    step: 10, // Incrément/decrement du slider
+    showTicks: true // Afficher les marques de graduation
+    // Autres options nécessaires selon votre besoin
+  };*/
 
 
   openAddDialog() {
@@ -55,6 +69,9 @@ export class MaisonlistComponent {
   }
   ngOnInit(){
     this.listMaisons();
+
+    // Charge les maisons
+    //this.loadMaisons();
     
   }
   /*listMaisons(){
@@ -71,17 +88,24 @@ export class MaisonlistComponent {
   }*/
   
   listMaisons() {
-  this.maisonService.findAllMaisons().subscribe(
-    maisons => {
-      // Filtrer les maisons avec un nombre de places disponibles > 0
-      this.maisonsDisponibles = maisons.filter(maison => maison.nbrplacedispo > 0);
-      console.error('Done:', this.maisonsDisponibles);
-    },
-    error => {
-      console.error('Error loading houses:', error);
-    }
-  );
-}
+    this.maisonService.findAllMaisons().subscribe(
+      maisons => {
+        // Filtrer les maisons avec un nombre de places disponibles > 0 et dans la plage de prix sélectionnée
+        this.maisonsDisponibles = maisons.filter(maison => maison.nbrplacedispo > 0 && maison.prix >= this.minPrice && maison.prix <= this.maxPrice);
+
+        // Trier les maisons en fonction de sortOrder
+        if (this.sortOrder === 'asc') {
+          this.maisonsDisponibles.sort((a, b) => a.prix - b.prix);
+        } else if (this.sortOrder === 'desc') {
+          this.maisonsDisponibles.sort((a, b) => b.prix - a.prix);
+        }
+      },
+      error => {
+        console.error('Error loading houses:', error);
+      }
+    );
+  }
+  
   onSubmit(): void {
     console.log('Nouvelle maison a été ajouté', this.newMaison);
 
@@ -140,6 +164,29 @@ export class MaisonlistComponent {
       });
       
   }
-  
-  
+
+  /*loadMaisons() {
+    this.maisonService.findAllMaisons().subscribe((data: any[]) => {
+      this.maisons = data;
+      this.filterHousesByPrice();
+    });
+  }
+  filterHousesByPrice() {
+    this.maisonsDisponibles = this.maisons.filter(maison =>
+      maison.prix >= this.priceRange && maison.prix <= this.sliderOptions!.ceil!
+    );
+  }*/
+  onRangeChange() {
+    this.listMaisons();
+}
+toggleSortDirection() {
+  // Changer la direction du tri
+  this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+  // Appeler listMaisons() lorsque la direction de tri change
+  this.listMaisons();
+}
+
+sortMaisons() {
+  this.listMaisons(); // Rechargez les maisons lorsque l'ordre de tri change
+}
 }

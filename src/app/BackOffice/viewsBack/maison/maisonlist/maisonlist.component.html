@@ -1,3 +1,5 @@
+
+
 <br>
 <br>
 <br>
@@ -5,7 +7,7 @@
 <br>
 
 <div class="container">
-  <button class="btn btn-primary " (click)="openAddDialog();" data-toggle="modal" data-toggle="modal" data-target="#m">
+  <button class="btn btn-primary " (click)="openAddDialog();" data-toggle="modal" data-toggle="modal" data-target="#myModal">
       <i class="bi bi-plus"></i> Ajouter une maison
   </button>
   <br><br>
@@ -133,9 +135,10 @@
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Ajouter cette maison</button>
                 <button type="button" class="btn btn-secondary btn-default" data-dismiss="modal">Annuler</button>
-            </div>
+            </div>      
         </form>
         </div>
+        <div #mapContainer style="height: 1000px;"></div>
       </div>
       
     </div>
@@ -199,44 +202,4 @@
   </div>
 </div>
 
-<!-- Afficher add contrat modal -->
-
-<div class="modal fade" id="m" role="dialog" *ngIf="showAddContratDialog">
-    <br>
-    <br>
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title">Ajouter un contrat de location</h2>
-        </div>
-        <div class="modal-body">
-          <form #contratForm="ngForm">
-            <div class="form-group">
-                <label for="date_debut">Date de début :</label>
-                <input type="date" id="date_debut"  name="date_debut" class="form-control" required>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="date_fin">Date de fin :</label>
-                <input type="date" id="date_fin" name="date_fin" class="form-control" required>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="colocataires">Colocataire :</label>
-                <input type="text" id="colocataires"  name="colocataires" class="form-control" required readonly >
-            </div>
-            <br>
-            
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" [disabled]="contratForm.invalid">Ajouter ce contrat</button>
-                <button type="button" class="btn btn-secondary btn-default" data-dismiss="modal">Annuler</button>
-            </div>
-        </form>
-        </div>
-      </div>
-      
-    </div>
-  </div>
   

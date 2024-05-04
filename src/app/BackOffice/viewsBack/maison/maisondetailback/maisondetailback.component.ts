@@ -6,6 +6,7 @@ import { ContratlocationService } from 'src/app/Services/contratlocation.service
 import { MaisonService } from 'src/app/Services/maison.service';
 import Swiper from 'swiper';
 import Swal from 'sweetalert2';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-maisondetailback',
@@ -110,16 +111,79 @@ export class MaisondetailbackComponent {
         Swal.fire('Success!', 'Contrat de colocation ajouté avec succès', 'success');
       },
       (error) => {
-        Swal.fire('Error!', 'Erreur lors de l\'ajout du contrat de colocation ', 'error');
+        Swal.fire({
+          title: 'Error!',
+          html: 'Erreur lors de l\'ajout du contrat de colocation <span style="color: grey;"><br>Ce colocataire a signé un autre contrat</span>',
+          icon: 'error'
+        });
       }
     );
+    this.maison.nbrplacedispo--; // Décrémente le nombre de places disponibles de 1
+
+  // Met à jour la maison dans la base de données pour refléter le changement
+  this.maisonservice.updateMaison(this.maison).subscribe(() => {
+    console.log('Nombre de places disponibles mis à jour avec succès.');
+  }, (error) => {
+    console.error('Erreur lors de la mise à jour du nombre de places disponibles : ', error);
+  });
     console.log(this.newContrat);
     this.refuserDemandeur(this.maison.id_maison, this.Username);
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+    this.generatePDF();
   }
 
+  generatePDF() {
+    const doc = new jsPDF();
+  
+    // Définir les marges et la largeur de la page
+    const margin = 15;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    
+    // Définir la position initiale du texte
+    let y = margin;
+  
+    // Titre du contrat au centre de la page
+    const title = 'Contrat de Location';
+    const titleWidth = doc.getStringUnitWidth(title) * 24 / doc.internal.scaleFactor; // Taille de police 24
+    const titleX = (pageWidth - titleWidth) / 2;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(24);
+    doc.setTextColor("#FF0000"); // Rouge
+    doc.text(title, titleX, y);
+    y += 30; // Augmenter la position y pour le texte suivant
+    
+    // Informations sur le contrat
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(14);
+    doc.setTextColor("#333333"); // Noir
+    doc.text(`Date de début: ${this.newContrat.date_debut}`, margin, y);
+    y += 10;
+    doc.text(`Date de fin: ${this.newContrat.date_fin}`, margin, y);
+    y += 10;
+    doc.text(`Colocataire: ${this.Username}`, margin, y);
+    y += 20; // Augmenter la position y pour le texte suivant
+  
+    // Ajouter une ligne de séparation
+    doc.setLineWidth(0.5);
+    doc.setDrawColor("#FF0000"); // Rouge
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 5; // Augmenter la position y pour le texte suivant
+  
+    // Ajouter un paragraphe de texte descriptif
+    const description = `Le présent contrat de location établit les termes et les conditions de la location de la maison entre les parties impliquées. Toute violation des termes du contrat peut entraîner des conséquences légales.`;
+    doc.setFontSize(12);
+    doc.setTextColor("#333333"); // Noir
+    doc.text(description, margin, y, { maxWidth: pageWidth - 2 * margin });
+    y += 40; // Augmenter la position y pour le texte suivant
+  
+    // Ajouter une note de bas de page
+    doc.setFontSize(10);
+    doc.setTextColor("#757575"); // Gris
+    doc.text('Félicitations! Vous venez de signer un contrat de location. Bienvenue chez vous!', margin, doc.internal.pageSize.getHeight() - margin);
+  
+    // Enregistrer le PDF avec un nom de fichier spécifié
+    doc.save('contrat_location.pdf');
+  }
+  
+  
 
 }

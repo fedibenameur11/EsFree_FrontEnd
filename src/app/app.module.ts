@@ -19,6 +19,8 @@ import { CommonModule } from '@angular/common';
 import { MaisonlistbackComponent } from './BackOffice/viewsBack/maison/maisonlist/maisonlist.component';
 import { MaisondetailComponent } from './FrontOffice/viewsFront/maison/maisondetail/maisondetail.component';
 import { MaisondetailbackComponent } from './BackOffice/viewsBack/maison/maisondetailback/maisondetailback.component';
+import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
+
 
 
 @NgModule({
@@ -46,7 +48,7 @@ import { MaisondetailbackComponent } from './BackOffice/viewsBack/maison/maisond
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    
+    NgxBootstrapSliderModule     
   ],
   providers: [],
   bootstrap: [AppComponent]

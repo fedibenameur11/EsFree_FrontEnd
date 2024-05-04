@@ -27,3 +27,7 @@
   text-decoration: underline; /* Soulignement au survol */
   cursor: pointer; /* Afficher le curseur pointer au survol pour indiquer que c'est cliquable */
 }
+
+.left-150 {
+  margin-left: 150px;
+}
