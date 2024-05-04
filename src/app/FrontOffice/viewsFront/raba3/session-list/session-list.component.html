@@ -19,8 +19,9 @@
               Playing Card Games with university friends can be a delightful blend of camaraderie, strategy, and friendly competition. As the cards are dealt and the game begins, the air is often filled with laughter, banter, and the occasional groan of frustration or cheer of triumph.
             </p>
           </div>
-
+                
           <div class="col-lg-7" data-aos="fade-up" data-aos-delay="200">
+            <a class="btn btn-primary" [routerLink]="['/userSessions/rechpa']">Join Lobby</a>
 
             <div class="swiper">
                
@@ -39,10 +40,11 @@
                   }
                 }
               </script>
+
               <div class="swiper-wrapper">
 
                 <div class="swiper-slide" >
-                  <div class="testimonial-item" *ngFor="let session of sessions">
+                  <div class="testimonial-item"  *ngFor="let session of sessions">
                     <div class="d-flex">
                       <img src="assets/FrontOffice/img/testimonials/testimonials-5.jpg" class="testimonial-img flex-shrink-0" alt="">
                       <div>
@@ -67,9 +69,6 @@
                   </div>
                 </div><!-- End testimonial item --> 
 
-                
-                
-
               </div>
               <div class="swiper-pagination"></div>
             </div>
@@ -82,4 +81,50 @@
 
     </section><!-- End Testimonials Section -->
 
-    
+                <!-- Call-to-action Section - Home Page -->
+    <section id="call-to-action" class="call-to-action">
+
+      <img src="assets/FrontOffice/img/cta-bg.jpg" alt="">
+
+      <div class="container">
+        <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-xl-10">
+            <div class="text-center">
+              <h3>Create Your Own Game Session</h3>
+              <p>"Ready to dive into the fun? Create your own game session now and invite your friends to join in on the excitement! Whether you're up for a challenge or just looking to have a good time, gather your crew and let the games begin. Get ready to unleash your competitive spirit and make memories that will last a lifetime!"</p>
+              <a class="cta-btn"  (click)="addGameSession()">Create Game Session</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End Call-to-action Section -->
+
+    <div class="modal fade" id="myModal" role="dialog" *ngIf="showUpdateDialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Ajouter une maison</h2>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="addGameSession()" #taskForm="ngForm">
+            
+              <br>
+              <div class="form-group">
+                  <label for="description">Description :</label>
+                  <input type="text" id="description" [(ngModel)]="newSession.description" name="description" class="form-control" required minlength="5">
+              
+              </div>
+              <br>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Ajouter cette maison</button>
+                  <button type="button" class="btn btn-secondary btn-default" data-dismiss="modal">Annuler</button>
+              </div>
+          </form>
+          </div>
+        </div>
+        
+      </div>
+  </div>
