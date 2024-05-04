@@ -22,4 +22,8 @@ export class CovoiturageService {
     const url = `${this.baseUrl}/removeCovoiturage/${id_cov}`;
     return this.httpClient.delete(url);
   }
+  retrieveCov(idCov: number): Observable<Covoiturage> {
+    const url = `${this.baseUrl}/retreiveCov/${idCov}`;
+    return this.httpClient.get<Covoiturage>(url);
+  }
 }

@@ -5,8 +5,7 @@
 <br>
 <br>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
- <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>   
+
 <main id="main">
     <!-- Blog Page Title & Breadcrumbs -->
     <div data-aos="fade" class="page-title">
@@ -31,7 +30,7 @@
      <div class="row gy-4 posts-list">
 
        <div class="col-xl-4 col-lg-6" *ngFor="let type of covoiturages">
-         <article>
+         <article class="zoom">
 
            
            <p class="post-category">{{type.date_depart}}</p>
@@ -40,22 +39,24 @@
              <a >From {{type.lieu_depart}} to {{type.destination}}</a> 
 
            </h2>
-           <div class="post-meta">
+          <!--<div class="post-meta">
             <button class="btn btn-primary btn-lg"  data-toggle="modal" data-toggle="modal" data-target="#myModal" (click)="openDialog(type.lieu_depart)">View on Map </button>
            </div>
+           --> 
 
            <div class="d-flex align-items-center">
              <div class="post-meta">
                <p class="post-author">Username</p> 
-               <p class="post-date">
-                 <time datetime="2022-01-01">Jan 1, 2022</time>
-               </p>
+            
              </div>
+             
            </div>
-           <hr>
-                   <p>Notices</p>
-                   <hr>
-           <ul class="post-comments p-0 m-0">
+           <div class="post-meta">
+            <button style="margin-left: 280px;" class="btn btn-primary btn-lg"  (click)="navigateToCovDetail(type.id_cov)">View Carpooling</button>
+           </div>
+           
+           
+         <!--  <ul class="post-comments p-0 m-0">
             <li class="mb-2">
                <div   *ngFor="let aviss of listavisCov[type.id_cov]" class="d-flex flex-wrap">
                  
@@ -80,10 +81,10 @@
           </div>
           <button type="submit" class="btn btn-primary">Add Notice</button>
         </form>
-
+ -->
          </article>
-       </div><!-- End post list item -->
-
+       </div>
+     
      
     
        
@@ -120,7 +121,7 @@
 
 
 <!-- HTML structure for map -->
-<div id="map" style="height: 400px;"></div>
+
 
 <!-- Include Leaflet JavaScript -->
 

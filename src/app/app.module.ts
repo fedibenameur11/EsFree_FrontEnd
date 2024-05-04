@@ -17,8 +17,9 @@ import { AddCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/ad
 import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/list-covoiturage/list-covoiturage.component';
 import { AvisComponent } from './BackOffice/viewsBack/avis/avis.component'; 
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MapComponent } from './FrontOffice/viewsFront/covoiturage/map/map.component';  
-
+import { MapComponent } from './FrontOffice/viewsFront/covoiturage/map/map.component';
+import { DetailCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/detail-covoiturage/detail-covoiturage.component';  
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,9 +32,11 @@ import { MapComponent } from './FrontOffice/viewsFront/covoiturage/map/map.compo
     CovoiturageComponent,
     AddCovoiturageComponent,
     ListCovoiturageComponent,
+
     
     AvisComponent,
-          MapComponent
+          MapComponent,
+          DetailCovoiturageComponent
     
     
   ],
@@ -43,7 +46,8 @@ import { MapComponent } from './FrontOffice/viewsFront/covoiturage/map/map.compo
     NgbModule,
     HttpClientModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule,
     
    
   ],

@@ -6,6 +6,7 @@ import { CovoiturageComponent } from './BackOffice/viewsBack/covoiturage/covoitu
 import { AddCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/add-covoiturage/add-covoiturage.component';
 import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/list-covoiturage/list-covoiturage.component';
 import { AvisComponent } from './BackOffice/viewsBack/avis/avis.component'; 
+import { DetailCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/detail-covoiturage/detail-covoiturage.component';
 
 
 
@@ -15,7 +16,8 @@ const routes: Routes = [
     component : AllTemplatesFrontComponent,
     children:[
       {path:"listCovoiturage",component:ListCovoiturageComponent},
-      {path:"addCovoiturage",component:AddCovoiturageComponent}
+      {path:"addCovoiturage",component:AddCovoiturageComponent},
+      {path:"DetailCov/:id_cov",component:DetailCovoiturageComponent}
       // {path:"collocationList", component:CollocationListComponent},
      // {path:"collocationadd", component:CollocationAddComponent}
 

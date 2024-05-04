@@ -18,31 +18,38 @@
                         </div>
                     </div>
                     <div class="iq-card-body">
-                        <form (ngSubmit)="onSubmit()">
+                        <form (ngSubmit)="onSubmit()"  [formGroup]="form" >
                             <div class="form-row">
+                              <div class="col-md-3"></div>
+                              <div class="col-md-6 mb-3">
+                                <input type="number" class="form-control" [(ngModel)]="covoiturage.nombre_placecov" formControlName="nombre_placecov" min="1" max="4" required>
+                                <div *ngIf="form.controls['nombre_placecov'].errors && (form.controls['nombre_placecov'].dirty || form.controls['nombre_placecov'].touched)">
+                                   <div *ngIf="form.controls['nombre_placecov'].errors['required']">Le champ nombre de places est requis.</div>
+                                   <div *ngIf="form.controls['nombre_placecov'].errors['min'] || form.controls['nombre_placecov'].errors['max']">Le nombre de places doit être entre 1 et 4.</div>
+                                  </div>
+                                </div>
+                              
+                                <div class="col-md-6 mb-3">
+                                  <label>Departure location</label>
+                                  <select class="form-control" [(ngModel)]="covoiturage.lieu_depart" formControlName="lieu_depart">
+                                      <option value="">Select a city</option>
+                                      <option *ngFor="let city of tunisianCities" [value]="city">{{ city }}</option>
+                                  </select>
+                              </div>
+                              <div class="col-md-6 mb-3">
+                                <label>destination</label>
+                                <select class="form-control" [(ngModel)]="covoiturage.destination" formControlName="destination">
+                                    <option value="">Select a city</option>
+                                    <option *ngFor="let city of tunisianCities" [value]="city">{{ city }}</option>
+                                </select>
+                            </div>
                               <div class="col-md-12">
                                 <label>Description</label>
-                                <input type="text" class="form-control" [(ngModel)]="covoiturage.description" name="description">
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                <label>Nombre de places</label>
-                                <input type="text" class="form-control" [(ngModel)]="covoiturage.nombre_placecov" name="nombre_placecov">
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                <label>Date de Départ</label>
-                                <input type="date" class="form-control" [(ngModel)]="covoiturage.date_depart" name="date_depart">
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                <label>Lieu de départ</label>
-                                <input type="text" class="form-control" [(ngModel)]="covoiturage.lieu_depart" name="lieu_depart">
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                <label>Destination</label>
-                                <input type="text" class="form-control" [(ngModel)]="covoiturage.destination" name="destination">
+                                <textarea type="text" class="form-control" [(ngModel)]="covoiturage.description" formControlName="description"> </textarea>
                               </div>
                             </div> 
-                            <div class="form-group">
-                                <button  class="btn btn-primary" type="submit">Ajouter covoiturage</button>
+                            <div class="form-group" >
+                                <button  class="btn btn-primary"  [disabled]="!form.valid" type="submit">Ajouter covoiturage</button> 
             
                             </div> 
                           </form>

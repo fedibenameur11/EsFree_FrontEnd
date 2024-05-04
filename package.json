@@ -24,6 +24,7 @@
     "bootstrap": "^5.2.3",
     "httpclient": "^0.1.0",
     "leaflet": "^1.9.4",
+    "leaflet-routing-machine": "^3.2.12",
     "lottie-web": "^5.12.2",
     "luxon": "^3.4.4",
     "moment": "^2.30.1",

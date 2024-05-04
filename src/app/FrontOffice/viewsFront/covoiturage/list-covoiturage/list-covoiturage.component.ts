@@ -8,24 +8,24 @@ import { AvisService } from 'src/app/Services/avis.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MapComponent } from '../map/map.component'; 
 import { MapService } from 'src/app/Services/map.service';
-import * as L from 'leaflet';
+
 @Component({
   selector: 'app-list-covoiturage',
   templateUrl: './list-covoiturage.component.html',
   styleUrls: ['./list-covoiturage.component.css']
 })
 export class ListCovoiturageComponent implements OnInit{
-  constructor(private router:Router , private covoiturageService:CovoiturageService , private avisService:AvisService,public dialog: MatDialog,private MapService:MapService){ } 
+  constructor(private router:Router , private covoiturageService:CovoiturageService , private avisService:AvisService,public dialog: MatDialog,){ } 
   
   public covoiturages: Array<Covoiturage> =[];
   covoiturage: Covoiturage = new Covoiturage();
   avis : Avis = new Avis();
-  map!: L.Map;
+  listavisCov: { [id_cov: string]: Avis[] } = {};
+
   showAddDialog: boolean = false;
   selectedCovoiturageId!: number;
 
   //public listavisCov: Array<Avis> =[];
-  listavisCov: { [id_cov: string]: Avis[] } = {};
 
   ngOnInit(): void {
     this.getListCovoiturage();
@@ -110,38 +110,18 @@ export class ListCovoiturageComponent implements OnInit{
   }
   
 
-  initMap(lieu_depart: string): void {
-    this.map = L.map('map').setView([36.8065, 10.1815], 12);
   
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(this.map);
-  
-  
-  }
-  addMarker(latitude: number, longitude: number): void {
-    L.marker([latitude, longitude]).addTo(this.map);
-  }
 
     openDialog(lieu_depart: string): void {
       this.showAddDialog = true;
       setTimeout(() => {
-        this.initMap(lieu_depart);
       }, 100); // Delay to ensure that the dialog is fully rendered before initializing the map
     }
     
 
-  
-  getLocationCoordinates(lieu_depart:string): void {
-    this.MapService.getCoordinates(lieu_depart)
-      .then(coordinates => {
-        console.log('Latitude:', coordinates.latitude);
-        console.log('Longitude:',coordinates.longitude);
-       this.addMarker(coordinates.latitude, coordinates.longitude);
-  
-        // Now you can use these coordinates as needed
-      })
-      
+ 
+  navigateToCovDetail(id_cov:number) {
+    this.router.navigate(['/DetailCov',id_cov]); // Redirige vers la page event-detail avec l'ID de l'événement en tant que paramètre
   }
  
 
