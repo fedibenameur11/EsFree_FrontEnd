@@ -20,51 +20,63 @@
 </div><!-- End Page Title -->
 
 <div class="col-lg-6 mx-auto"> <!-- Centrer le formulaire -->
-  <form (ngSubmit)="submitEvent()" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+  <form (ngSubmit)="submitEvent()" [formGroup]="eventForm" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
     <div class="row gy-4">
-
       <div class="col-md-6">
-        <input type="text"  [(ngModel)]="event.nomEvent" name="nomEvent" class="form-control" placeholder="Event Name" required>
+        <input type="text" formControlName="nomEvent" class="form-control" placeholder="Event Name">
+        <div *ngIf="eventForm.get('nomEvent')?.invalid && eventForm.get('nomEvent')?.touched" class="text-danger">The field is required.</div>
       </div>
-
+  
       <div class="col-md-6">
-        <input type="text" [(ngModel)]="event.organisateurEvent" name="organisateurEvent" class="form-control" placeholder="Organizer" required>
+        <input type="text" formControlName="organisateurEvent" class="form-control" placeholder="Organizer">
+        <div *ngIf="eventForm.get('organisateurEvent')?.invalid && eventForm.get('organisateurEvent')?.touched" class="text-danger">The field is required.</div>
       </div>
-
+  
       <div class="col-md-12">
-        <input type="text" [(ngModel)]="event.descriptionEvent" name="descriptionEvent" class="form-control" placeholder="Description" required>
+        <input type="text" formControlName="descriptionEvent" class="form-control" placeholder="Description">
+        <div *ngIf="eventForm.get('descriptionEvent')?.invalid && eventForm.get('descriptionEvent')?.touched" class="text-danger">The field is required.</div>
       </div>
-
+  
       <div class="col-md-6">
-        <input type="text" [(ngModel)]="event.lieuEvent" name="lieuEvent" class="form-control" placeholder="Location" required>
+        <input type="text" formControlName="lieuEvent" class="form-control" placeholder="Location">
+        <div *ngIf="eventForm.get('lieuEvent')?.invalid && eventForm.get('lieuEvent')?.touched" class="text-danger">The field is required.</div>
       </div>
-
+  
       <div class="col-md-6">
-        <input type="date" [(ngModel)]="event.dateDebutEvent" name="dateDebutEvent" class="form-control" placeholder="Start Date" required>
+        <input type="date" formControlName="dateDebutEvent" class="form-control" placeholder="Start Date">
+        <div *ngIf="eventForm.get('dateDebutEvent')?.invalid && eventForm.get('dateDebutEvent')?.touched" class="text-danger">The field is required.</div>
+        <div *ngIf="eventForm.get('dateDebutEvent')?.errors?.['startDateInvalid'] && eventForm.get('dateDebutEvent')?.touched" class="text-danger">The start date cannot be earlier than the current date.</div>
       </div>
-
+      
       <div class="col-md-6">
-        <input type="date" [(ngModel)]="event.dateFinEvent" name="dateFinEvent" class="form-control" placeholder="End Date" required>
+        <input type="date" formControlName="dateFinEvent" class="form-control" placeholder="End Date">
+        <div *ngIf="eventForm.get('dateFinEvent')?.invalid && eventForm.get('dateFinEvent')?.touched" class="text-danger">The field is required.</div>
+        <div *ngIf="eventForm.get('dateFinEvent')?.errors?.['endDateInvalid'] && eventForm.get('dateFinEvent')?.touched" class="text-danger">The end date cannot be earlier than the start date.</div>
       </div>
-
+      
+  
       <div class="col-md-6">
-        <input type="number" [(ngModel)]="event.prixEvent" name="prixEvent" class="form-control" placeholder="Price" required>
+        <input type="number" formControlName="prixEvent" class="form-control" placeholder="Price">
+        <div *ngIf="eventForm.get('prixEvent')?.invalid && eventForm.get('prixEvent')?.touched" class="text-danger">The price cannot be negative.</div>
       </div>
-
+  
       <div class="col-md-6">
-        <input type="number" [(ngModel)]="event.capaciteEvent" name="capaciteEvent" class="form-control" placeholder="Capacity" required>
+        <input type="number" formControlName="capaciteEvent" class="form-control" placeholder="Capacity">
+        <div *ngIf="eventForm.get('capaciteEvent')?.invalid && eventForm.get('capaciteEvent')?.touched" class="text-danger">The capacity cannot be negative.</div>
       </div>
-
+  
       <div class="col-md-12">
-        <input type="file" (change)="onFileSelected($event)" [(ngModel)]="event.imageEvent" name="imageEvent" class="form-control" required accept=".png">
+        <input type="file" (change)="onFileSelected($event)" formControlName="imageEvent" class="form-control" required accept=".png">
+        <div *ngIf="eventForm.get('imageEvent')?.invalid && eventForm.get('imageEvent')?.touched" class="text-danger">The field is required.</div>
       </div>
-
+  
       <div class="col-md-12 text-center">
-        <button class="btn btn-primary btn-lg" type="submit">Create Event</button>
+        <button type="submit" [disabled]="eventForm.invalid" class="btn btn-primary">Create Event</button>
       </div>
-
     </div>
   </form>
+  
+  
 </div><!-- End Contact Form -->
 <br>
 <br>

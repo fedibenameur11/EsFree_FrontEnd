@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/Services/event.service'; // Assurez-vous d'importer le service EventService
 import { Event } from 'src/app/Models/event/event.model'; // Assurez-vous d'importer le modèle Event
 import {HttpErrorResponse} from '@angular/common/http';
@@ -6,17 +6,31 @@ import Swal from 'sweetalert2';
 import { finalize } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage'; 
 import { Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-event-add-front',
   templateUrl: './event-add-front.component.html',
   styleUrls: ['./event-add-front.component.css']
 })
-export class EventAddFrontComponent {
+export class EventAddFrontComponent implements OnInit {
   event: Event = {} as Event; // Initialisation de l'objet eventData
-
-  constructor(private eventService: EventService, private fireStorage:AngularFireStorage, private router:Router) {} // Injection du service EventService
-
+  eventForm!: FormGroup;
+  
+  constructor(private eventService: EventService, private fireStorage:AngularFireStorage, private router:Router, private formBuilder: FormBuilder) {} // Injection du service EventService
+  ngOnInit(): void {
+    this.eventForm = this.formBuilder.group({
+      nomEvent: ['', Validators.required],
+      organisateurEvent: ['', Validators.required],
+      descriptionEvent: ['', Validators.required],
+      lieuEvent: ['', Validators.required],
+      dateDebutEvent: ['', [Validators.required, this.validateStartDate.bind(this)]],
+      dateFinEvent: ['', [Validators.required, this.validateEndDate.bind(this)]],
+      prixEvent: ['', [Validators.required, Validators.min(0)]],
+      capaciteEvent: ['', [Validators.required, Validators.min(0)]],
+      imageEvent: ['', Validators.required]
+    });
+  }
 
   async onFileSelected(event:any){
     const file = event.target.files[0]
@@ -28,24 +42,52 @@ export class EventAddFrontComponent {
       this.event.imageEvent=url;
     }
   }
-  async submitEvent() {
-   
-    await this.eventService.addEvent(this.event, 1).subscribe(
-      () => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Event added Successfully !',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        this.router.navigate(['/myevents']);
-      },
-      (error: HttpErrorResponse) => {
-        console.error('Error adding event:', error);
-      }
-    );
-    
+  validateStartDate(control: AbstractControl): ValidationErrors | null {
+    const startDate = new Date(control.value);
+    const today = new Date();
+    return startDate >= today ? null : { startDateInvalid: true };
   }
+  
+  validateEndDate(control: AbstractControl): ValidationErrors | null {
+    const endDate = new Date(control.value);
+    const startDateControl = control.parent?.get('dateDebutEvent');
+    
+    if (!startDateControl) {
+      return null; // Si le contrôle de la date de début n'existe pas, retourner null
+    }
+  
+    const startDate = new Date(startDateControl.value);
+  
+    return endDate >= startDate ? null : { endDateInvalid: true };
+  }
+  
+  async submitEvent() {
+    // Vérifier si le formulaire est valide
+    if (this.eventForm.valid) {
+      // Si le formulaire est valide, récupérer les valeurs du formulaire
+      const formData = this.eventForm.value;
+      // Soumettre les données
+      await this.eventService.addEvent(formData, 1).subscribe(
+        () => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Event added Successfully !',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.router.navigate(['/myevents']);
+        },
+        (error: HttpErrorResponse) => {
+          console.error('Error adding event:', error);
+        }
+      );
+    } else {
+      // Si le formulaire est invalide, affichez un message d'erreur ou effectuez d'autres actions nécessaires
+      console.log('Form is invalid');
+    }
+  }
+  
+  
  
 }
