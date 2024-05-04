@@ -11,7 +11,7 @@ import { NavbarBackComponent } from './BackOffice/navbar-back/navbar-back.compon
 import { SidebarBackComponent } from './BackOffice/sidebar-back/sidebar-back.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaisonlistComponent } from './FrontOffice/viewsFront/maison/maisonlist/maisonlist.component';
-import { ContratLocationlistComponent } from './FrontOffice/viewsFront/contratLocation/contrat-locationlist/contrat-locationlist.component';
+import { ContratLocationlistComponent } from './BackOffice/viewsBack/contratLocation/contrat-locationlist/contrat-locationlist.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,7 +36,8 @@ import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
     ContratLocationlistComponent,
     MaisonlistbackComponent,
     MaisondetailComponent,
-    MaisondetailbackComponent
+    MaisondetailbackComponent,
+    ContratLocationlistComponent
     
   ],
   imports: [

@@ -32,4 +32,8 @@ export class ContratlocationService {
     return this.http.post<Contratlocation>(`${this.baseUrl}/addContratMaisonColocataire?nom=${nom}&idMmaison=${idMmaison}`,contratLocation);
     
   }
+
+  getContratsByUser(nom: string): Observable<Contratlocation[]> {
+    return this.http.get<Contratlocation[]>(`${this.baseUrl}/contrats?nom=${nom}`);
+  }
 }
