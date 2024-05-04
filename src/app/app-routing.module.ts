@@ -8,6 +8,8 @@ import { PubitemComponent } from './BackOffice/viewsBack/marketplace/pubitem/pub
 import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
 import { MarketComponent } from './FrontOffice/viewsFront/marketplace/market/market.component';
 import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemdetail/itemdetail.component';
+import { MyitemsComponent } from './FrontOffice/viewsFront/marketplace/myitems/myitems.component';
+import { CartfComponent } from './FrontOffice/viewsFront/marketplace/cartf/cartf.component';
 
 
 
@@ -20,10 +22,9 @@ const routes: Routes = [
       {path:"collocationList", component:CollocationListComponent},
       {path:"collocationadd", component:CollocationAddComponent},
       {path:"market", component:MarketComponent},
-      {path:"itemdetail", component:ItemdetailComponent}
-
-
-      // hné l components mta3 l frontOffice lkol
+      {path:"itemdetail/:id_pub", component:ItemdetailComponent},
+      {path:"myitems", component:MyitemsComponent},
+      {path:"cartf", component: CartfComponent}
    
    ]
    },

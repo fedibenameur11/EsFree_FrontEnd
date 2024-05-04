@@ -7,6 +7,7 @@ export class PubItem {
     numTelephone!: number;
     etat!: Etat;
     datePost?: Date;
+
 }
 
 export enum Etat {

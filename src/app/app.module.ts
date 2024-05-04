@@ -13,12 +13,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PubitemComponent } from './BackOffice/viewsBack/marketplace/pubitem/pubitem.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
 import { MarketComponent } from './FrontOffice/viewsFront/marketplace/market/market.component';
 import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemdetail/itemdetail.component';
+import { MyitemsComponent } from './FrontOffice/viewsFront/marketplace/myitems/myitems.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { CartfComponent } from './FrontOffice/viewsFront/marketplace/cartf/cartf.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 
 
 
@@ -35,6 +41,8 @@ import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemde
     CartComponent,
     MarketComponent,
     ItemdetailComponent,
+    MyitemsComponent,
+  CartfComponent
 
     
     
@@ -48,7 +56,12 @@ import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemde
     BrowserAnimationsModule,
     MatDialogModule,
     MatPaginatorModule,
-    NgbModule
+    NgbModule,
+    MatSliderModule,
+    BrowserAnimationsModule, // Add BrowserAnimationsModule to imports
+    MatSnackBarModule,
+ 
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,6 @@
+.grid-view-img {
+    max-width: 250px; /* Set the maximum width */
+    max-height: 200px; /* Set the maximum height */
+    width: auto; /* Ensure the image maintains its aspect ratio */
+    height: auto; /* Ensure the image maintains its aspect ratio */
+  }

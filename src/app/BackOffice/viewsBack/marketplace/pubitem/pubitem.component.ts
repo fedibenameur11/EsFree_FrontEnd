@@ -20,17 +20,25 @@ export class PubitemComponent implements OnInit {
   pubItem: PubItem = new PubItem();
   productAddedSuccessfully: boolean = false;
 
+  public paginatedPubItems: PubItem[] = [];
+  public currentPage: number = 1;
+  public itemsPerPage: number = 5; // Adjust this value as needed
+  public totalPages: number = 0;
+  public pages: number[] = [];
+
 
   
 
   ngOnInit(): void {
-    this.loadPubItems(); // Load items when component initializes
+    this.loadPubItems();
   }
 
   loadPubItems(): void {
     this.pubItemService.getPubitems().subscribe(
-      (data) => {
+      (data) =>  {
         this.pubItems = data;
+        this.totalPages = Math.ceil(this.pubItems.length / this.itemsPerPage);
+        this.updatePagination();
       },
       (error) => {
         console.error('Error fetching pub items:', error);
@@ -131,7 +139,18 @@ addPubItemm(): void {
     }
   );
 }
+updatePagination(): void {
+  this.pages = [];
+  for (let i = 1; i <= this.totalPages; i++) {
+    this.pages.push(i);
+  }
+  this.paginatedPubItems = this.pubItems.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
+}
 
+changePage(page: number): void {
+  this.currentPage = page;
+  this.paginatedPubItems = this.pubItems.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
+}
 
 }
 
