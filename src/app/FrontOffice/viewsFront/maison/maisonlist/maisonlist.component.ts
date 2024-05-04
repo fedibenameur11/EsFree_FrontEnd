@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/Models/user';
 import Swal from 'sweetalert2';
 import { Options } from 'ng5-slider';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-maisonlist',
@@ -50,7 +51,7 @@ export class MaisonlistComponent {
     this.showUpdateDialog = false;
   }
 
-  constructor(private maisonService: MaisonService, private router: Router,private dialog :MatDialog) {
+  constructor(private maisonService: MaisonService, private router: Router,private dialog :MatDialog,private http: HttpClient) {
     this.newMaison.user = {
       userName: 'fedi',
       userFirstName: 'fedi',
@@ -162,6 +163,14 @@ export class MaisonlistComponent {
         // Affichez une alerte d'erreur en cas d'échec de l'ajout du demandeur
         Swal.fire('Error!', 'Erreur dans l\'Envoie de cette demande.', 'error');
       });
+      this.http.post<any>('http://localhost:8079/send-sms', {}).subscribe(
+      response => {
+        console.log('SMS envoyé avec succès');
+      },
+      error => {
+        console.error('Erreur lors de l\'envoi du SMS :', error);
+      }
+    );
       
   }
 
