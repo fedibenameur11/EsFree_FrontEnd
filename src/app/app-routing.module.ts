@@ -13,6 +13,7 @@ import { GameEditComponent } from './BackOffice/viewsBack/raba3/game-edit/game-e
 import { GameAddComponent } from './BackOffice/viewsBack/raba3/game-add/game-add.component';
 import { GameListBComponent } from './BackOffice/viewsBack/raba3/game-list-b/game-list-b.component';
 import { SessionListBComponent } from './BackOffice/viewsBack/raba3/session-list-b/session-list-b.component';
+import { UserSessionsComponent } from './FrontOffice/viewsFront/raba3/user-sessions/user-sessions.component';
 
 
 
@@ -26,6 +27,8 @@ const routes: Routes = [
       {path:"collocationadd", component:CollocationAddComponent},
       {path:"raba3", component:GameListComponent},
       {path:"sessionList/:idJeux", component:SessionListComponent},
+      {path:"userSessions/:userName", component:UserSessionsComponent},
+
 
       // hné l components mta3 l frontOffice lkol
    

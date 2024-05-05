@@ -22,6 +22,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SessionListBComponent } from './BackOffice/viewsBack/raba3/session-list-b/session-list-b.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common'
+import { UserSessionsComponent } from './FrontOffice/viewsFront/raba3/user-sessions/user-sessions.component';
+import { environment } from 'src/environements/environement';
+import {initializeApp} from 'firebase/app';
+
+initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [
@@ -39,7 +45,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     GameEditComponent,
     GameListBComponent,
     SessionListBComponent,
-    
+    UserSessionsComponent
     
   ],
   imports: [
@@ -52,6 +58,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    CommonModule
 
   ],
 

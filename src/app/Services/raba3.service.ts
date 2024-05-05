@@ -19,4 +19,12 @@ export class Raba3Service {
   getListSessions(idJeux: number): Observable<Raba3[]> {
     return this.httpClient.get<Raba3[]>(`${this.baseUrl}/retrieveAllGameSessions/${idJeux}`);
   }
+  addGameSession(raba3: Raba3): Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}/addGameService`, raba3);
+  }
+
+  retrieveUserGameSession(userName: String): Observable<Raba3[]> {
+    return this.httpClient.get<Raba3[]>(`${this.baseUrl}/retrieveUserGameSession/${userName}`);
+  }
+
 }
