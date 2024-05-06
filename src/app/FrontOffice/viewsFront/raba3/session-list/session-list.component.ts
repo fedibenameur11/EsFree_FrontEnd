@@ -14,26 +14,33 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class SessionListComponent implements OnInit{
   idJeux!: number
   newSession: Raba3 = new Raba3(); 
-  showUpdateDialog: boolean = false;
+  showAddDialog: boolean = false;
 
 
-  openUpdateDialog() {
-    this.showUpdateDialog = true;
+  openAddDialog() {
+    this.showAddDialog = true;
   }
 
-  closeUpdateDialog() {
-    this.showUpdateDialog = false;
+  closeAddDialog() {
+    this.showAddDialog = false;
   }
   
 
   raba3: Raba3 = new Raba3();
   constructor(private act:ActivatedRoute,private raba3Service:Raba3Service , private router: Router,private dialog :MatDialog){ }
   public sessions: Array<Raba3> =[];
+
+
   ngOnInit(): void {
-    this.idJeux = this.act.snapshot.params['idJeux']
+    this.act.paramMap.subscribe(params => {
+      this.idJeux = this.act.snapshot.params['idJeux']
+    });
+
     this.getListSessions(this.idJeux);
     
   }
+
+
   getListSessions(idJeux:number)
   {
    this.raba3Service.getListSessions(this.idJeux).subscribe(
@@ -57,24 +64,31 @@ export class SessionListComponent implements OnInit{
     }
 
     getNumberArray(count: number): number[] {
-      return Array.from({ length: count }, (_, i) => i + 1);
+      return Array.from({ length: 4 - count }, (_, i) => 4 - i);
     }
-
-    addGameSession(): void {
-      this.raba3Service.addGameSession(this.newSession).subscribe(() => {
-        console.log("Session added successfully");
-        this.showUpdateDialog = false;
-        this.router.navigate(['/sessionList', this.idJeux]);
-      
-    });
-    window.location.reload();
     
+
+    addGameSessionAndAssignToGame(): void {
+      this.raba3Service.addGameSessionAndAssignToGame(this.newSession, this.idJeux)
+        .subscribe(response => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Game Session added Successfully !',
+            showConfirmButton: false,
+            timer: 1500})
+          this.showAddDialog = false;
+          window.location.reload();
+        });
+
+
     }
-
-
-
+    shareOnFacebook() {
+      const urlToShare = 'https://virtiverse.com'; // URL to share
+      const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlToShare)}`;
+      window.open(facebookShareUrl, 'join us in this game session !!');
+    }
+    
 }
-
-
 
 

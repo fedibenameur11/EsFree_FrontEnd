@@ -27,7 +27,7 @@ const routes: Routes = [
       {path:"collocationadd", component:CollocationAddComponent},
       {path:"raba3", component:GameListComponent},
       {path:"sessionList/:idJeux", component:SessionListComponent},
-      {path:"userSessions/:userName", component:UserSessionsComponent},
+      {path:"userSessions/:name", component:UserSessionsComponent},
 
 
       // hné l components mta3 l frontOffice lkol

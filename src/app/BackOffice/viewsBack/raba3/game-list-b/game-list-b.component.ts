@@ -19,7 +19,7 @@ declare var $: any;
 export class GameListBComponent implements OnInit{
 
   games: Jeux[] = [];
-  jeux: any = {};
+  jeux: Jeux = {} as Jeux;
   affiche_modif : boolean = false;
   newGame: Jeux = new Jeux(); 
   showUpdateDialog: boolean = false;
@@ -62,10 +62,14 @@ export class GameListBComponent implements OnInit{
   updateGame(): void {
     this.gameservice.updateGame(this.newGame).subscribe(
       response => {
-        console.log('Jeux mise à jour avec succès !', this.newGame);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Game updated Successfully !',
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.closeUpdateDialog();
-
-
       },
       error => {
         console.error('Erreur lors de la mise à jour du jeux : ', error);

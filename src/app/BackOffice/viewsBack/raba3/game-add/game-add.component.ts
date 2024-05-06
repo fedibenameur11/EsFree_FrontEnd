@@ -31,8 +31,15 @@ export class GameAddComponent{
 
 
   addGame(){
-    this.gameservice.addGame(this.formgame.value).subscribe(()=>{
-      console.log("added")
+    this.gameservice.addGame(this.formgame.value).subscribe(
+      () => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Game added Successfully !',
+          showConfirmButton: false,
+          timer: 1500
+        });
       this.router.navigate(['/admin/gameListB'])
     })
   }
