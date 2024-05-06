@@ -75,12 +75,13 @@
                         </ul>
                      </li>
 
-
                      <li>
-                        <a [routerLink]="['/admin/maisonlist']" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><span>Colocation</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                        <a href="#colocation" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><span>Colocation</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="colocation" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                            <li><a [routerLink]="['/admin/maisonlist']" ><i class="ri-profile-line"></i>Houses list</a></li>
+                            <li><a [routerLink]="['/admin/contrats']" ><i class="ri-file-edit-line"></i>Contrats list</a></li>
                         </ul>
-                     </li>
+                    </li>
 
                      <li>
                         <a href="#covoiturage" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><span>Covoiturage</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>

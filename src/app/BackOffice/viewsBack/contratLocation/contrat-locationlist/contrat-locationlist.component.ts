@@ -23,7 +23,6 @@ export class ContratLocationlistComponent implements OnInit {
         data => {
           this.contrats = data;
           console.log(this.contrats);
-           // Pour déboguer, vous pouvez afficher les données dans la console
         },
         error => {
           console.log(error);

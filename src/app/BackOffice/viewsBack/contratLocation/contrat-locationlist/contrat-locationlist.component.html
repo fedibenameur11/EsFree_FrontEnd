@@ -7,7 +7,6 @@
     <h2>Liste des contrats pour l'utilisateur {{ nomUtilisateur }}</h2>
     <div class="row">
       <ng-container *ngFor="let contrat of contrats; let i = index">
-        <!-- Affichage des contrats sous forme de cards -->
         <ng-container *ngIf="contrat.colocataires && contrat.colocataires.length > 0">
           <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card mb-3">

@@ -4,7 +4,7 @@
     }
 </style>
 
-<!--
+
 <br>
 <br>
 <br>
@@ -32,101 +32,6 @@
       </div>
   </div>
 </div>
-  <!--------------------- Ajouter une maison-->
-  <!--<div class="modal-container" *ngIf="showAddDialog">
-    <div class="modal-header">
-        <h2>Ajouter une maison</h2>
-    </div>
-    <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
-        <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
-            <div class="form-group">
-                <label for="adresse">Adresse :</label>
-                <input type="text" id="adresse" [(ngModel)]="newMaison.adresse" name="adresse" class="form-control" required minlength="5">
-                <div *ngIf="taskForm.controls['adresse'].invalid && (taskForm.controls['adresse'].dirty || taskForm.controls['adresse'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['adresse'].errors?.['required']">Veuillez insérer l'adresse.</div>
-                </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="description">Description :</label>
-                <input type="text" id="description" [(ngModel)]="newMaison.description" name="description" class="form-control" required minlength="5">
-                <div *ngIf="taskForm.controls['description'].invalid && (taskForm.controls['description'].dirty || taskForm.controls['description'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['required']">Veuillez insérer la description.</div>
-                    <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['minlength']">La description doit contenir au moins 5 caractères.</div>
-                </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="prix">Prix :</label>
-                <input type="text" id="prix" [(ngModel)]="newMaison.prix" name="prix" class="form-control" required pattern="[0-9]+(\.[0-9]+)?">
-                <div *ngIf="taskForm.controls['prix'].invalid && (taskForm.controls['prix'].dirty || taskForm.controls['prix'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['required']">Veuillez insérer le prix.</div>
-                    <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['pattern']">Le prix doit être un nombre valide.</div>
-                </div>
-            </div>
-            <br>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Ajouter cette maison</button>
-                <button type="button" class="btn btn-secondary" (click)="closeAddDialog()">Annuler</button>
-            </div>
-        </form>
-    </div>
-</div>
-
--->
-
-<!--
-<div class="modal fade" id="myModal" role="dialog" *ngIf="showAddDialog  == true">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <!--
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title">Ajouter une maison</h2>
-        </div>
-        <div class="modal-body">
-          <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
-            <div class="form-group">
-                <label for="adresse">Adresse :</label>
-                <input type="text" id="adresse" [(ngModel)]="newMaison.adresse" name="adresse" class="form-control" required minlength="5">
-                <div *ngIf="taskForm.controls['adresse'].invalid && (taskForm.controls['adresse'].dirty || taskForm.controls['adresse'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['adresse'].errors?.['required']">Veuillez insérer l'adresse.</div>
-                    <div class="text-danger" *ngIf="taskForm.controls['adresse'].errors?.['minlength']">L'adresse doit contenir au moins 5 caractères.</div>
-                </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="description">Description :</label>
-                <input type="text" id="description" [(ngModel)]="newMaison.description" name="description" class="form-control" required minlength="5">
-                <div *ngIf="taskForm.controls['description'].invalid && (taskForm.controls['description'].dirty || taskForm.controls['description'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['required']">Veuillez insérer la description.</div>
-                    <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['minlength']">La description doit contenir au moins 5 caractères.</div>
-                </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="prix">Prix :</label>
-                <input type="text" id="prix" [(ngModel)]="newMaison.prix" name="prix" class="form-control" required pattern="[0-9]+(\.[0-9]+)?">
-                <div *ngIf="taskForm.controls['prix'].invalid && (taskForm.controls['prix'].dirty || taskForm.controls['prix'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['required']">Veuillez insérer le prix.</div>
-                    <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['pattern']">Le prix doit être un nombre valide.</div>
-                </div>
-            </div>
-            <br>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid" >Ajouter cette maison</button>
-                <button type="button" class="btn btn-secondary btn-default" data-dismiss="modal">Annuler</button>
-            </div>
-        </form>
-        </div>
-      </div>
-      
-    </div>
-  </div>
--->
-
-
 
 <!-- Code pour afficher les maisons --> 
 <br>
@@ -147,8 +52,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 text-end"> <!-- Changement de la taille de la colonne et alignement à droite -->
-            <div class="row justify-content-end align-items-center"> <!-- Alignement à droite -->
+        <div class="col-lg-6 col-md-6 col-sm-12 text-end"> 
+            <div class="row justify-content-end align-items-center"> 
 
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
                     <label for="sortOrder" class="form-label"><h5 class="text-end">Ordre :&nbsp;&nbsp;&nbsp;</h5></label>
@@ -168,12 +73,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
 
 <div class="container">
     <br>
@@ -212,51 +111,9 @@
     <!-- Bouton suivant -->
     <button class="btn btn-primary" [disabled]="isNextButtonDisabled()" (click)="loadMaisons(pageNumber + 1)">Suivant</button>
   </div>
+  <br>
+  <br>
   <div id="map" style="height: 400px;"></div>
-  
-      
-  <!--------------------- Ajouter une maison--------------------- >
-  <!--<div class="modal-container" *ngIf="showAddDialog">
-    <div class="modal-header">
-        <h2>Ajouter une maison</h2>
-    </div>
-    <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
-        <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
-            <div class="form-group">
-                <label for="adresse">Adresse :</label>
-                <input type="text" id="adresse" [(ngModel)]="newMaison.adresse" name="adresse" class="form-control" required minlength="5">
-                <div *ngIf="taskForm.controls['adresse'].invalid && (taskForm.controls['adresse'].dirty || taskForm.controls['adresse'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['adresse'].errors?.['required']">Veuillez insérer l'adresse.</div>
-                </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="description">Description :</label>
-                <input type="text" id="description" [(ngModel)]="newMaison.description" name="description" class="form-control" required minlength="5">
-                <div *ngIf="taskForm.controls['description'].invalid && (taskForm.controls['description'].dirty || taskForm.controls['description'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['required']">Veuillez insérer la description.</div>
-                    <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['minlength']">La description doit contenir au moins 5 caractères.</div>
-                </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="prix">Prix :</label>
-                <input type="text" id="prix" [(ngModel)]="newMaison.prix" name="prix" class="form-control" required pattern="[0-9]+(\.[0-9]+)?">
-                <div *ngIf="taskForm.controls['prix'].invalid && (taskForm.controls['prix'].dirty || taskForm.controls['prix'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['required']">Veuillez insérer le prix.</div>
-                    <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['pattern']">Le prix doit être un nombre valide.</div>
-                </div>
-            </div>
-            <br>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Ajouter cette maison</button>
-                <button type="button" class="btn btn-secondary" (click)="closeAddDialog()">Annuler</button>
-            </div>
-        </form>
-    </div>
-</div>
-
--->
 
 <!-- Pop-Up pour ajouter une maison -->
 <div class="modal fade" id="myModal" role="dialog" *ngIf="showAddDialog">
@@ -310,10 +167,7 @@
               <input type="text" id="username" [(ngModel)]="newMaison.user.userName" name="username" class="form-control" required readonly >
           </div>
           <!-- Conteneur pour la carte Leaflet -->
-          
-          <br>
-          
-            
+          <br>            
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Ajouter cette maison</button>
                 <button type="button" class="btn btn-secondary btn-default" data-dismiss="modal">Annuler</button>

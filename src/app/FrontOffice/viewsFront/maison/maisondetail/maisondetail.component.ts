@@ -68,9 +68,6 @@ export class MaisondetailComponent {
     this.currentImageIndex = index;
     clearInterval(this.autoChangeInterval); // Arrêter l'intervalle lorsque vous cliquez sur une image floue
   }
-  ngOnDestroy(): void {
-    clearInterval(this.autoChangeInterval); // Arrêter l'intervalle lorsque le composant est détruit
-  }
   
 
 
