@@ -140,10 +140,10 @@
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <input type="range" class="form-range form-range-sm" style="width: 100%;" [(ngModel)]="minPrice" min="0" max="2000" step="10" (input)="onRangeChange()">
+                    <input type="range" class="form-range form-range-sm" style="width: 100%;" [(ngModel)]="minPrice" min="0" max="2000" step="10" (input)="onRangeChange(0)">
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <input type="range" class="form-range form-range-sm" style="width: 100%;" [(ngModel)]="maxPrice" min="0" max="2000" step="10" (input)="onRangeChange()">
+                    <input type="range" class="form-range form-range-sm" style="width: 100%;" [(ngModel)]="maxPrice" min="0" max="2000" step="10" (input)="onRangeChange(0)">
                 </div>
             </div>
         </div>
@@ -153,7 +153,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
                     <label for="sortOrder" class="form-label"><h5 class="text-end">Ordre :&nbsp;&nbsp;&nbsp;</h5></label>
 
-                    <select id="sortOrder" name="sortOrder" class=" form-select-sm" [(ngModel)]="sortOrder" (change)="sortMaisons()">
+                    <select id="sortOrder" name="sortOrder" class=" form-select-sm" [(ngModel)]="sortOrder" (change)="sortMaisons(0)">
                         <option value="asc">Croissant</option>
                         <option value="desc">Décroissant</option>
                     </select>
@@ -184,24 +184,37 @@
     <br><br>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let maison of maisonsDisponibles">
-            <div class="card mb-3">
-                <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcdyHdWn4oCIwCtIrHpBdEKDim4YO1S0T5FHV-_DTrJg&s" alt="Image de la maison">
-                <div class="card-body">
-                    <h5 class="card-title">{{ maison.adresse }}</h5>
-                    <p class="card-text">Prix : {{ maison.prix }} TND</p>
-                    <p class="card-text">{{ maison.description }}</p>
-                    <div class="img-cap">
-                        <a  [routerLink]="['/afficherMaison', maison.id_maison]"class=""> Détails !!<i class="ti-arrow-right"></i></a>
-                        <button class="btn btn-primary " (click)="reserverMaison(maison.id_maison, demandeur)" >
-                          <i class="bi bi-plus"></i> Réserver
-                      </button>
-                    </div>
-                    
-                </div>
+          <div class="card mb-3">
+            <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcdyHdWn4oCIwCtIrHpBdEKDim4YO1S0T5FHV-_DTrJg&s" alt="Image de la maison">
+            <div class="card-body">
+              <h5 class="card-title">{{ maison.adresse }}</h5>
+              <p class="card-text">Prix : {{ maison.prix }} TND</p>
+              <p class="card-text">{{ maison.description }}</p>
+              <div class="img-cap">
+                <a [routerLink]="['/afficherMaison', maison.id_maison]" class=""> Détails !!<i class="ti-arrow-right"></i></a>
+                <button class="btn btn-primary" (click)="reserverMaison(maison.id_maison, demandeur)">
+                  <i class="bi bi-plus"></i> Réserver
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
+      
+      <!-- Pagination section -->
+<div class="pagination">
+    <!-- Bouton précédent -->
+    <button class="btn btn-primary" [disabled]="isPreviousButtonDisabled()" (click)="loadMaisons(pageNumber - 1)">Précédent</button>
+  
+    <!-- Affichage du numéro de page -->
+    <span>Page {{ pageNumber + 1 }} / {{ totalPages }}</span>
+  
+    <!-- Bouton suivant -->
+    <button class="btn btn-primary" [disabled]="isNextButtonDisabled()" (click)="loadMaisons(pageNumber + 1)">Suivant</button>
   </div>
+  <div id="map" style="height: 400px;"></div>
+  
+      
   <!--------------------- Ajouter une maison--------------------- >
   <!--<div class="modal-container" *ngIf="showAddDialog">
     <div class="modal-header">
@@ -296,7 +309,10 @@
               <label for="username">Username :</label>
               <input type="text" id="username" [(ngModel)]="newMaison.user.userName" name="username" class="form-control" required readonly >
           </div>
+          <!-- Conteneur pour la carte Leaflet -->
+          
           <br>
+          
             
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Ajouter cette maison</button>

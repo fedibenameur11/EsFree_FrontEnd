@@ -1,15 +1,27 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Maison } from '../Models/maison';
 import { User } from '../Models/user';
 
+export interface Page<T> {
+  content: T[];
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  number: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class MaisonService {
 
-  private baseUrl : string = 'http://localhost:8079/maison';
+  private baseUrl : string = 'http://localhost:8082/maison';
 
   constructor(private http: HttpClient) { }
   findAllMaisons(): Observable<Maison[]>{
@@ -44,6 +56,15 @@ export class MaisonService {
   supprimerDemandeur(maisonId: number, nom_demandeur: String): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${maisonId}/demandeurs/${nom_demandeur}`);
   }
+
+  findAllMaisonsPage(pageNumber: number, pageSize: number): Observable<Page<Maison>> {
+    const params = new HttpParams()
+      .set('page', pageNumber.toString())
+      .set('size', pageSize.toString());
+
+    return this.http.get<Page<Maison>>(`${this.baseUrl}/list_page`, { params });
+  }
+  
 
   
 }

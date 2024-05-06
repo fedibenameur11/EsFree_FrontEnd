@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { Maison } from 'src/app/Models/maison';
 import { MaisonService } from 'src/app/Services/maison.service';
 import { MatDialog } from '@angular/material/dialog';
-declare var google: any;
+
+import * as L from 'leaflet';
+
 @Component({
   selector: 'app-maisonlist',
   templateUrl: './maisonlist.component.html',
@@ -21,6 +23,7 @@ export class MaisonlistbackComponent {
   @ViewChild('mapContainer', { static: false }) mapContainer!: ElementRef;
   DEFAULT_LATITUDE = 36.8065; // Coordonnées approximatives de Tunis, Tunisie
   DEFAULT_LONGITUDE = 10.1815;
+  map: any;
   openAddDialog() {
     this.showAddDialog = true;
     this.initMap();
@@ -98,20 +101,11 @@ export class MaisonlistbackComponent {
   }
 
   initMap(): void {
-    const mapOptions = {
-      center: { lat: this.DEFAULT_LATITUDE, lng: this.DEFAULT_LONGITUDE },
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+    this.map = L.map('map').setView([51.505, -0.09], 13);
 
-    const map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
-
-    // Ajoutez un écouteur d'événement de clic pour récupérer les coordonnées lorsque vous cliquez sur la carte
-    map.addListener('click', (event: google.maps.MouseEvent) => {
-      const clickedLocation = event.latLng;
-      console.log('Coordonnées de la maison:', clickedLocation.lat(), clickedLocation.lng());
-      // Vous pouvez faire ce que vous voulez avec les coordonnées ici, comme les stocker dans une variable de composant
-    });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(this.map);
   }
   
   

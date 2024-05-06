@@ -8,6 +8,7 @@ import { User } from 'src/app/Models/user';
 import Swal from 'sweetalert2';
 import { Options } from 'ng5-slider';
 import { HttpClient } from '@angular/common/http';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-maisonlist',
@@ -29,13 +30,10 @@ export class MaisonlistComponent {
   maxPrice: number = 2000;
   sortDirection: string = 'asc';
   sortOrder: string = 'asc'; 
-  /*sliderOptions: Options = { // Définissez les options du slider
-    floor: 0, // Valeur minimale du slider
-    ceil: 1000, // Valeur maximale du slider
-    step: 10, // Incrément/decrement du slider
-    showTicks: true // Afficher les marques de graduation
-    // Autres options nécessaires selon votre besoin
-  };*/
+  totalPages: number = 0;
+  pageNumber: number = 0;
+  pageSize: number = 6; 
+  map: any;
 
 
   openAddDialog() {
@@ -60,8 +58,8 @@ export class MaisonlistComponent {
       roles :[]
     };
     this.demandeur ={
-      userName: 'fedi3',
-      userFirstName: 'fedi',
+      userName: 'fedi4',
+      userFirstName: 'fedibbbbbbbbbbbb',
       userLastName: 'fedi',
       userPassword: 'fedi',
       roles :[]
@@ -69,7 +67,11 @@ export class MaisonlistComponent {
     }
   }
   ngOnInit(){
-    this.listMaisons();
+    // par exemple, charge la première page
+  
+  // Appelle la fonction pour charger les maisons de la page spécifiée
+  this.listMaisons(this.pageNumber);
+  this.initMap();
 
     // Charge les maisons
     //this.loadMaisons();
@@ -87,8 +89,8 @@ export class MaisonlistComponent {
       }
     );
   }*/
-  
-  listMaisons() {
+  ////////////////////:officiel list maison
+  /*listMaisons() {
     this.maisonService.findAllMaisons().subscribe(
       maisons => {
         // Filtrer les maisons avec un nombre de places disponibles > 0 et dans la plage de prix sélectionnée
@@ -105,7 +107,36 @@ export class MaisonlistComponent {
         console.error('Error loading houses:', error);
       }
     );
+  }*/
+  listMaisons(pageNumber: number): void {
+    this.maisonService.findAllMaisons().subscribe(
+      maisons => {
+        // Filtrer les maisons avec un nombre de places disponibles > 0 et dans la plage de prix sélectionnée
+        this.maisonsDisponibles = maisons.filter(maison => maison.nbrplacedispo > 0 && maison.prix >= this.minPrice && maison.prix <= this.maxPrice);
+  
+        // Trier les maisons en fonction de sortOrder
+        if (this.sortOrder === 'asc') {
+          this.maisonsDisponibles.sort((a, b) => a.prix - b.prix);
+        } else if (this.sortOrder === 'desc') {
+          this.maisonsDisponibles.sort((a, b) => b.prix - a.prix);
+        }
+  
+        // Recalculer le nombre total de pages
+        this.recalculateTotalPages(this.maisonsDisponibles.length);
+  
+        // Découper les maisons en pages
+        const chunkedMaisons = this.chunkArray(this.maisonsDisponibles, this.pageSize);
+  
+        // Sélectionner la page spécifique
+        this.maisonsDisponibles = chunkedMaisons[pageNumber];
+      },
+      error => {
+        console.error('Error loading houses:', error);
+      }
+    );
   }
+
+  
   
   onSubmit(): void {
     console.log('Nouvelle maison a été ajouté', this.newMaison);
@@ -185,17 +216,49 @@ export class MaisonlistComponent {
       maison.prix >= this.priceRange && maison.prix <= this.sliderOptions!.ceil!
     );
   }*/
-  onRangeChange() {
-    this.listMaisons();
+  onRangeChange(pageNumber: number) {
+    this.listMaisons(pageNumber);
 }
-toggleSortDirection() {
+toggleSortDirection(pageNumber: number) {
   // Changer la direction du tri
   this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
   // Appeler listMaisons() lorsque la direction de tri change
-  this.listMaisons();
+  this.listMaisons(pageNumber);
 }
 
-sortMaisons() {
-  this.listMaisons(); // Rechargez les maisons lorsque l'ordre de tri change
+sortMaisons(pageNumber: number) {
+  this.listMaisons(pageNumber); // Rechargez les maisons lorsque l'ordre de tri change
+}
+chunkArray(array: any[], pageSize: number): any[] {
+  const chunkedArray = [];
+  for (let i = 0; i < array.length; i += pageSize) {
+    chunkedArray.push(array.slice(i, i + pageSize));
+  }
+  return chunkedArray;
+}
+
+isNextButtonDisabled(): boolean {
+  return this.pageNumber >= this.totalPages - 1;
+}
+
+// Méthode pour activer/désactiver le bouton précédent en fonction du numéro de la page actuelle
+isPreviousButtonDisabled(): boolean {
+  return this.pageNumber <= 0;
+}
+
+// Méthode pour recalculer le nombre total de pages
+recalculateTotalPages(totalMaisons: number): void {
+  this.totalPages = Math.ceil(totalMaisons / this.pageSize);
+}
+loadMaisons(pageNumber: number): void {
+  this.pageNumber = pageNumber; // Mettre à jour le numéro de page
+  this.listMaisons(pageNumber); // Appeler la méthode listMaisons pour charger les maisons de la page spécifiée
+}
+initMap(): void {
+  this.map = L.map('map').setView([51.505, -0.09], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(this.map);
 }
 }
