@@ -33,47 +33,6 @@
       </div>
   </div>
 </div>
-  <!--<div class="modal-container" *ngIf="showAddDialog">
-    <div class="modal-header">
-        <h2>Ajouter une maison</h2>
-    </div>
-    <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
-        <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
-            <div class="form-group">
-                <label for="adresse">Adresse :</label>
-                <input type="text" id="adresse" [(ngModel)]="newMaison.adresse" name="adresse" class="form-control" required minlength="5">
-                <div *ngIf="taskForm.controls['adresse'].invalid && (taskForm.controls['adresse'].dirty || taskForm.controls['adresse'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['adresse'].errors?.['required']">Veuillez insérer l'adresse.</div>
-                </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="description">Description :</label>
-                <input type="text" id="description" [(ngModel)]="newMaison.description" name="description" class="form-control" required minlength="5">
-                <div *ngIf="taskForm.controls['description'].invalid && (taskForm.controls['description'].dirty || taskForm.controls['description'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['required']">Veuillez insérer la description.</div>
-                    <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['minlength']">La description doit contenir au moins 5 caractères.</div>
-                </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="prix">Prix :</label>
-                <input type="text" id="prix" [(ngModel)]="newMaison.prix" name="prix" class="form-control" required pattern="[0-9]+(\.[0-9]+)?">
-                <div *ngIf="taskForm.controls['prix'].invalid && (taskForm.controls['prix'].dirty || taskForm.controls['prix'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['required']">Veuillez insérer le prix.</div>
-                    <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['pattern']">Le prix doit être un nombre valide.</div>
-                </div>
-            </div>
-            <br>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Ajouter cette maison</button>
-                <button type="button" class="btn btn-secondary" (click)="closeAddDialog()">Annuler</button>
-            </div>
-        </form>
-    </div>
-</div>
-
--->
 
 <!-- Pop-Up pour ajouter une maison -->
 <div class="modal fade" id="myModal" role="dialog" *ngIf="showAddDialog">
@@ -116,17 +75,17 @@
             <div class="form-group">
                 <label for="nbrplacedispo">Nombre de place :</label>
                 <input type="text" id="nbrplacedispo" [(ngModel)]="newMaison.nbrplacedispo" name="nbrplacedispo" class="form-control" required pattern="[0-9]+(\.[0-9]+)?">
-                <div *ngIf="taskForm.controls['prix'].invalid && (taskForm.controls['prix'].dirty || taskForm.controls['prix'].touched)">
-                    <div class="text-danger" *ngIf="taskForm.controls['nbrplacedispo'].errors?.['required']">Veuillez insérer le prix.</div>
-                    <div class="text-danger" *ngIf="taskForm.controls['nbrplacedispo'].errors?.['pattern']">Le prix doit être un nombre valide.</div>
+                <div *ngIf="taskForm.controls['nbrplacedispo'].invalid && (taskForm.controls['nbrplacedispo'].dirty || taskForm.controls['nbrplacedispo'].touched)">
+                    <div class="text-danger" *ngIf="taskForm.controls['nbrplacedispo'].errors?.['required']">Veuillez insérer le nombre des places disponibles.</div>
+                    <div class="text-danger" *ngIf="taskForm.controls['nbrplacedispo'].errors?.['pattern']">Le nombre des places doit être un nombre valide.</div>
                 </div>
             </div>
             <br>
             <div class="form-group">
-              <label for="username">Username :</label>
-              <input type="text" id="username" [(ngModel)]="newMaison.user.userName" name="username" class="form-control" required >
-              <div *ngIf="taskForm.controls['username'].invalid && (taskForm.controls['username'].dirty || taskForm.controls['username'].touched)">
-                  <div class="text-danger" *ngIf="taskForm.controls['username'].errors?.['required']">Veuillez insérer le nom de l'utilisateur.</div>
+              <label for="name">Nom : :</label>
+              <input type="text" id="name" [(ngModel)]="newMaison.user.name" name="name" class="form-control" required >
+              <div *ngIf="taskForm.controls['name'].invalid && (taskForm.controls['name'].dirty || taskForm.controls['name'].touched)">
+                  <div class="text-danger" *ngIf="taskForm.controls['name'].errors?.['required']">Veuillez insérer le nom de l'utilisateur.</div>
               </div>
           </div>
           <br>
@@ -137,7 +96,6 @@
             </div>      
         </form>
         </div>
-        <div #mapContainer style="height: 1000px;"></div>
       </div>
       
     </div>
@@ -182,10 +140,19 @@
           </div>
           <br>
           <div class="form-group">
-            <label for="username">Username :</label>
-            <input type="text" id="username" [(ngModel)]="newMaison.user.userName" name="username" class="form-control" required readonly >
-            <div *ngIf="taskForm.controls['username'].invalid && (taskForm.controls['username'].dirty || taskForm.controls['username'].touched)">
-                <div class="text-danger" *ngIf="taskForm.controls['prix'].errors?.['required']">Veuillez insérer le nom de l'utilisateur.</div>
+            <label for="nbrplacedispo">Nombre de place :</label>
+            <input type="text" id="nbrplacedispo" [(ngModel)]="newMaison.nbrplacedispo" name="nbrplacedispo" class="form-control" required pattern="[0-9]+(\.[0-9]+)?">
+            <div *ngIf="taskForm.controls['nbrplacedispo'].invalid && (taskForm.controls['nbrplacedispo'].dirty || taskForm.controls['nbrplacedispo'].touched)">
+                <div class="text-danger" *ngIf="taskForm.controls['nbrplacedispo'].errors?.['required']">Veuillez insérer le nombre des places disponibles.</div>
+                <div class="text-danger" *ngIf="taskForm.controls['nbrplacedispo'].errors?.['pattern']">Le nombre des places doit être un nombre valide.</div>
+            </div>
+        </div>
+        <br>
+          <div class="form-group">
+            <label for="name">Username :</label>
+            <input type="text" id="name" [(ngModel)]="newMaison.user.name" name="name" class="form-control" required readonly >
+            <div *ngIf="taskForm.controls['name'].invalid && (taskForm.controls['name'].dirty || taskForm.controls['name'].touched)">
+                <div class="text-danger" *ngIf="taskForm.controls['name'].errors?.['required']">Veuillez insérer le nom de l'utilisateur.</div>
             </div>
         </div>
         <br>

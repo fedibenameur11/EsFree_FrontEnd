@@ -11,7 +11,7 @@
   <h2>{{ maison.adresse }}</h2>
   <p>Description: {{ maison.description }}</p>
   <p>Prix: {{ maison.prix }}</p>
-  <p>Ajouté par : {{ maison.user.userName }}</p>
+  <p>Ajouté par : {{ maison.user.name }}</p>
   <div class="thumbnails">
     <div *ngFor="let image of maison.images; let i = index" class="thumbnail" [class.active]="i === currentImageIndex" (click)="showImage(i)">
       <img [src]="image" alt="Thumbnail de la maison">
@@ -28,21 +28,21 @@
   <table class="table">
       <thead>
           <tr>
-              <th scope="col">Username</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">First Name</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Email</th>
+              <th scope="col">Num telephone</th>
               <th scope="col">Action</th>
           </tr>
       </thead>
       <tbody>
           <tr *ngFor="let demandeur of maison.demandeurs">
-              <td>{{ demandeur.userName }}</td>
-              <td>{{ demandeur.userLastName }}</td>
-              <td>{{ demandeur.userFirstName }}</td>
+              <td>{{ demandeur.name }}</td>
+              <td>{{ demandeur.email }}</td>
+              <td>{{ demandeur.phoneNumber }}</td>
               <td>
                   <div class="btn-group" role="group" aria-label="Actions">
-                      <button type="button" class="btn btn-success" (click)="openAddContratDialog(demandeur.userName,maison.id_maison);" data-toggle="modal" data-toggle="modal" data-target="#Modaladdcontrat">Accepter</button>
-                      <button type="button" class="btn btn-danger" (click)="refuserDemandeur(maison.id_maison, demandeur.userName)">Refuser</button>
+                      <button type="button" class="btn btn-success" (click)="openAddContratDialog(demandeur.name,maison.id_maison);" data-toggle="modal" data-toggle="modal" data-target="#Modaladdcontrat">Accepter</button>
+                      <button type="button" class="btn btn-danger" (click)="refuserDemandeur(maison.id_maison, demandeur.id)">Refuser</button>
                   </div>
               </td>
           </tr>

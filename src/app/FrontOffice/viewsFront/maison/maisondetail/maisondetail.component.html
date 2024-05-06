@@ -11,7 +11,7 @@
   <h2>{{ maison.adresse }}</h2>
   <p>Description: {{ maison.description }}</p>
   <p>Prix: {{ maison.prix }}</p>
-  <p>Ajouté par : {{ maison.user.userName }}</p>
+  <p>Ajouté par : {{ maison.user.name }}</p>
   
   <div class="thumbnails">
     <div *ngFor="let image of maison.images; let i = index" class="thumbnail" [class.active]="i === currentImageIndex" (click)="showImage(i)">

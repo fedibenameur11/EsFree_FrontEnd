@@ -40,7 +40,7 @@ export class MaisondetailbackComponent {
       this.maisonservice.getMaisonById(maisonId).subscribe((maison: Maison) => {
         this.maison = maison; // Affecter les détails de la maison à la variable maison
         if (this.maison.user) {
-          console.log(this.maison.user.userName); // Accès à la propriété userName
+          console.log(this.maison.user.name); // Accès à la propriété userName
         }
       });
     });
@@ -91,12 +91,14 @@ export class MaisondetailbackComponent {
   ngOnDestroy(): void {
     clearInterval(this.autoChangeInterval); // Arrêter l'intervalle lorsque le composant est détruit
   }
-  refuserDemandeur(maisonId: number, nom_demandeur: String): void {
-    this.maisonservice.supprimerDemandeur(maisonId, nom_demandeur)
+  refuserDemandeur(maisonId: number, iduser: number): void {
+    this.maisonservice.supprimerDemandeur(maisonId, iduser)
       .subscribe(() => {
         console.log('Demandeur supprimé avec succès.');
+        console.log(iduser)
+        
         // Après la suppression, mettez à jour la liste des demandeurs localement
-        this.maison.demandeurs = this.maison.demandeurs.filter(demandeur => demandeur.userName !== nom_demandeur);
+        this.maison.demandeurs = this.maison.demandeurs.filter(demandeur => demandeur.id !== iduser);
       }, (error) => {
         console.error('Erreur lors de la suppression du demandeur : ', error);
       });
@@ -104,7 +106,7 @@ export class MaisondetailbackComponent {
 
   onSubmitContrat()
   {
-    this.contratservice.addContratByUserAndMaison(this.newContrat, this.Username, this.maison.id_maison)
+    this.contratservice.addContratByUserAndMaison(this.newContrat, this.idM, this.maison.id_maison)
     .subscribe(
       () => {
 
@@ -127,7 +129,7 @@ export class MaisondetailbackComponent {
     console.error('Erreur lors de la mise à jour du nombre de places disponibles : ', error);
   });
     console.log(this.newContrat);
-    this.refuserDemandeur(this.maison.id_maison, this.Username);
+    this.refuserDemandeur(this.maison.id_maison, this.idM);
     this.generatePDF();
   }
 

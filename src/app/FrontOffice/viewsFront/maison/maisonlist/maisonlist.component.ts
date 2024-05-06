@@ -8,7 +8,8 @@ import { User } from 'src/app/Models/user';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
-
+import { CoordinatesMapService } from 'src/app/Services/coordinates-map.service';
+import 'leaflet-routing-machine'
 @Component({
   selector: 'app-maisonlist',
   templateUrl: './maisonlist.component.html',
@@ -33,6 +34,7 @@ export class MaisonlistComponent {
   pageNumber: number = 0;
   pageSize: number = 6; 
   map: any;
+  loc!:string
 
 
   openAddDialog() {
@@ -48,20 +50,24 @@ export class MaisonlistComponent {
     this.showUpdateDialog = false;
   }
 
-  constructor(private maisonService: MaisonService, private router: Router,private dialog :MatDialog,private http: HttpClient) {
+  constructor(private maisonService: MaisonService, private router: Router,private dialog :MatDialog,private http: HttpClient,private MapService:CoordinatesMapService) {
     this.newMaison.user = {
-      userName: 'fedi',
-      userFirstName: 'fedi',
-      userLastName: 'fedi',
-      userPassword: 'fedi',
-      roles :[]
+      id: 1,
+      name: 'fedi',
+      email: 'fedi.benameur@esprit.tn',
+      password: 'fedi',
+      image :'',
+      phoneNumber : 93661180,
+      role :'colocataire'
     };
     this.demandeur ={
-      userName: 'fedi4',
-      userFirstName: 'fedibbbbbbbbbbbb',
-      userLastName: 'fedi',
-      userPassword: 'fedi',
-      roles :[]
+      id: 2,
+      name: 'fedi2',
+      email: 'fedi2.benameur@esprit.tn',
+      password: 'fedi2',
+      image :'',
+      phoneNumber : 93661180,
+      role :'colocataire'
 
     }
   }
@@ -90,44 +96,25 @@ export class MaisonlistComponent {
   
         // Sélectionner la page spécifique
         this.maisonsDisponibles = chunkedMaisons[pageNumber];
+        console.log(this.maisonsDisponibles)
       },
       error => {
         console.error('Error loading houses:', error);
       }
     );
   }
-
-  
   
   onSubmit(): void {
     console.log('Nouvelle maison a été ajouté', this.newMaison);
 
-    this.maisonService.addMaisonByUser(this.newMaison,this.newMaison.user.userName).subscribe(() => {
+    this.maisonService.addMaisonByUser(this.newMaison,this.newMaison.user.id).subscribe(() => {
       console.log('Nouvelle maison a été ajouté', this.newMaison);
       this.showAddDialog = false;
       window.location.reload();
       
     });
   }
-
-  onModalUpdateOpen(maisonId: number): void {
-    this.openUpdateDialog();
-    this.maisonService.getMaisonById(maisonId).subscribe((maison: Maison) => {
-      // Affecter les valeurs récupérées aux champs de formulaire
-      this.newMaison = maison;
-      
-      
-    });
-  }
-  onSubmitUpdate(): void { 
-    this.maisonService.updateMaison(this.newMaison).subscribe(() => {
-      console.log('Nouvelle maison a été ajouté', this.newMaison);
-      this.closeUpdateDialog();
-      //this.dialogRef.close(true); 
-    });
-    console.log('La maison a été modifié', this.newMaison);
-    window.location.reload();
-  }
+  
 
   deleteMaison(idMaison: number): void {
     this.maisonService.deleteMaison(idMaison).subscribe(() => {
@@ -149,7 +136,7 @@ export class MaisonlistComponent {
         // Affichez une alerte d'erreur en cas d'échec de l'ajout du demandeur
         Swal.fire('Error!', 'Erreur dans l\'Envoie de cette demande.', 'error');
       });
-      this.http.post<any>('http://localhost:8079/send-sms', {}).subscribe(
+      this.http.post<any>('http://localhost:8082/send-sms', {}).subscribe(
       response => {
         console.log('SMS envoyé avec succès');
       },
@@ -194,5 +181,30 @@ export class MaisonlistComponent {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(this.map);
+  }
+
+  addMarker(latitude: number, longitude: number): void {
+    L.marker([latitude, longitude]).addTo(this.map);
+  }
+
+
+  getLocationCoordinates(): void {
+    this.MapService.getCoordinates(this.loc)
+      .then(coordinates => {
+        console.log('Latitude:', coordinates.latitude);
+        console.log('Longitude:',coordinates.longitude);
+        this.addMarker(coordinates.latitude, coordinates.longitude);
+        L.Routing.control({
+          waypoints: [
+            L.latLng(36.8990424,10.187917573856005),
+            L.latLng(coordinates.latitude,coordinates.longitude)
+
+          ]
+        }).addTo(this.map)
+        // Now you can use these coordinates as needed 36.8990424,10.187917573856005
+      })
+      .catch(error => {
+        console.error('Error fetching coordinates:', error);
+      });
   }
   }

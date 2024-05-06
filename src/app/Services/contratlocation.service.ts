@@ -28,12 +28,12 @@ export class ContratlocationService {
   deleteContrat(contrat_id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/deleteContratLocation/${contrat_id}`);
   }
-  addContratByUserAndMaison(contratLocation :Contratlocation, nom: String, idMmaison: number): Observable<Contratlocation>{
-    return this.http.post<Contratlocation>(`${this.baseUrl}/addContratMaisonColocataire?nom=${nom}&idMmaison=${idMmaison}`,contratLocation);
+  addContratByUserAndMaison(contratLocation :Contratlocation, id: number, idMmaison: number): Observable<Contratlocation>{
+    return this.http.post<Contratlocation>(`${this.baseUrl}/addContratMaisonColocataire?id=${id}&idMmaison=${idMmaison}`,contratLocation);
     
   }
 
-  getContratsByUser(nom: string): Observable<Contratlocation[]> {
-    return this.http.get<Contratlocation[]>(`${this.baseUrl}/contrats?nom=${nom}`);
+  getContratsByUser(id: number): Observable<Contratlocation[]> {
+    return this.http.get<Contratlocation[]>(`${this.baseUrl}/contrats?id=${id}`);
   }
 }

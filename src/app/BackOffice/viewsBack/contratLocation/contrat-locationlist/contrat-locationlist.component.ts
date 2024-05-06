@@ -9,7 +9,7 @@ import { ContratlocationService } from 'src/app/Services/contratlocation.service
 })
 export class ContratLocationlistComponent implements OnInit {
   contrats: Contratlocation[] = [];
-  nomUtilisateur: string = 'fedi'; // Utilisateur par défaut, à remplacer par votre logique
+  idUser: number =1; // Utilisateur par défaut, à remplacer par votre logique
 
   constructor(private contratLocationService: ContratlocationService) { }
 
@@ -18,7 +18,7 @@ export class ContratLocationlistComponent implements OnInit {
   }
 
   rechercherContrats(): void {
-    this.contratLocationService.getContratsByUser(this.nomUtilisateur)
+    this.contratLocationService.getContratsByUser(this.idUser)
       .subscribe(
         data => {
           this.contrats = data;

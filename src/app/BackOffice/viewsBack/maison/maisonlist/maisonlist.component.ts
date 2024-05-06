@@ -6,6 +6,7 @@ import { MaisonService } from 'src/app/Services/maison.service';
 import { MatDialog } from '@angular/material/dialog';
 
 import * as L from 'leaflet';
+import { CoordinatesMapService } from 'src/app/Services/coordinates-map.service';
 
 @Component({
   selector: 'app-maisonlist',
@@ -24,6 +25,7 @@ export class MaisonlistbackComponent {
   DEFAULT_LATITUDE = 36.8065; // Coordonnées approximatives de Tunis, Tunisie
   DEFAULT_LONGITUDE = 10.1815;
   map: any;
+  loc!:string;
   openAddDialog() {
     this.showAddDialog = true;
     this.initMap();
@@ -41,20 +43,22 @@ export class MaisonlistbackComponent {
   closeUpdateDialog() {
     this.showUpdateDialog = false;
   }
-  constructor(private maisonService: MaisonService, private router: Router,private dialog :MatDialog) {
+  constructor(private maisonService: MaisonService, private router: Router,private dialog :MatDialog,private MapService:CoordinatesMapService) {
     this.newMaison.user = {
-      userName: 'fedi',
-      userFirstName: 'fedi',
-      userLastName: 'fedi',
-      userPassword: 'fedi',
-      roles :[]
+      id: 1,
+      name: 'fedi',
+      email: 'fedi.benameur@esprit.tn',
+      password: 'fedi',
+      image :'',
+      phoneNumber : 93661180,
+      role :'colocataire'
     };
   }
   ngOnInit() {
-    this.getMaisonsByUtilisateur('fedi');
+    this.getMaisonsByUtilisateur(1);
   }
-  getMaisonsByUtilisateur(userName: string) {
-    this.maisonService.getMaisonsByUtilisateur(userName)
+  getMaisonsByUtilisateur(iduser: number) {
+    this.maisonService.getMaisonsByUtilisateur(iduser)
       .subscribe(maison => this.maison = maison);
   }
   
@@ -66,7 +70,7 @@ export class MaisonlistbackComponent {
     );
   }
   onSubmit(): void {
-    this.maisonService.addMaisonByUser(this.newMaison,this.newMaison.user.userName).subscribe(() => {
+    this.maisonService.addMaisonByUser(this.newMaison,this.newMaison.user.id).subscribe(() => {
       console.log('Nouvelle maison a été ajouté', this.newMaison);
       this.showAddDialog = false;
       
@@ -85,10 +89,10 @@ export class MaisonlistbackComponent {
     
     this.maisonService.updateMaison(this.newMaison).subscribe(() => {
       console.log('Nouvelle maison a été ajouté', this.newMaison);
-      this.closeUpdateDialog();
+
     });
     console.log('La maison a été modifié', this.newMaison);
-    window.location.reload();
+    //window.location.reload();
   }
 
   deleteMaison(idMaison: number): void {
@@ -107,6 +111,6 @@ export class MaisonlistbackComponent {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(this.map);
   }
-  
+
   
 }

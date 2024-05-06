@@ -31,11 +31,11 @@ export class MaisonService {
   addMaison(maison : Maison): Observable<Maison>{
     return this.http.post<Maison>(this.baseUrl + '/addMaison',maison);
   }
-  addMaisonByUser(maison: Maison, nom: string): Observable<Maison> {
-    return this.http.post<Maison>(`${this.baseUrl}/addMaisonbyuser?nom=${nom}`, maison);
+  addMaisonByUser(maison: Maison, id: number): Observable<Maison> {
+    return this.http.post<Maison>(`${this.baseUrl}/addMaisonbyuser?id=${id}`, maison);
   }
   
-  updateMaison(maison : Maison,): Observable<Maison>{
+  updateMaison(maison : Maison): Observable<Maison>{
     return this.http.put<Maison>(`${this.baseUrl}/updateMaison/${maison.id_maison}`, maison);
 
   }
@@ -46,15 +46,15 @@ export class MaisonService {
   deleteMaison(maison_id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/deleteMaison/${maison_id}`);   
   }
-  getMaisonsByUtilisateur(utilisateurnom: String): Observable<Maison[]> {
-    return this.http.get<Maison[]>(`${this.baseUrl}/utilisateurs/${utilisateurnom}/maisons`);
+  getMaisonsByUtilisateur(id: number): Observable<Maison[]> {
+    return this.http.get<Maison[]>(`${this.baseUrl}/utilisateurs/${id}/maisons`);
   }
 
   ajouterDemandeur(maisonId: number, demandeur: User): Observable<Maison> {
     return this.http.post<Maison>(`${this.baseUrl}/${maisonId}/demandeur`, demandeur);
   }
-  supprimerDemandeur(maisonId: number, nom_demandeur: String): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${maisonId}/demandeurs/${nom_demandeur}`);
+  supprimerDemandeur(maisonId: number, id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${maisonId}/demandeurs/${id}`);
   }
 
   findAllMaisonsPage(pageNumber: number, pageSize: number): Observable<Page<Maison>> {
