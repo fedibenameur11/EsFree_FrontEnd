@@ -16,7 +16,8 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators }
 export class EventAddFrontComponent implements OnInit {
   event: Event = {} as Event; // Initialisation de l'objet eventData
   eventForm!: FormGroup;
-  
+  imageURL: string = '';
+
   constructor(private eventService: EventService, private fireStorage:AngularFireStorage, private router:Router, private formBuilder: FormBuilder) {} // Injection du service EventService
   ngOnInit(): void {
     this.eventForm = this.formBuilder.group({
@@ -32,16 +33,6 @@ export class EventAddFrontComponent implements OnInit {
     });
   }
 
-  async onFileSelected(event:any){
-    const file = event.target.files[0]
-    if(file){
-      const path = `yt/${file.name}`
-      const uploadTask =await this.fireStorage.upload(path,file)
-      const url = await uploadTask.ref.getDownloadURL()
-      console.log(url)
-      this.event.imageEvent=url;
-    }
-  }
   validateStartDate(control: AbstractControl): ValidationErrors | null {
     const startDate = new Date(control.value);
     const today = new Date();
@@ -61,13 +52,35 @@ export class EventAddFrontComponent implements OnInit {
     return endDate >= startDate ? null : { endDateInvalid: true };
   }
   
-  async submitEvent() {
-    // Vérifier si le formulaire est valide
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.uploadImage(file);
+    }
+  }
+
+  async uploadImage(file: File) {
+    const filePath = `yt/${new Date().getTime()}_${file.name}`;
+    const uploadTask = this.fireStorage.upload(filePath, file);
+
+    uploadTask.percentageChanges().subscribe(percent => {
+      console.log(percent);
+    });
+
+    uploadTask.snapshotChanges().subscribe(() => {
+      this.fireStorage.ref(filePath).getDownloadURL().subscribe(url => {
+        console.log(url); // Affichez l'URL de téléchargement dans la console
+        this.imageURL = url; // Stockez l'URL de téléchargement dans la variable imageURL
+      });
+    });
+  }
+
+  submitEvent() {
     if (this.eventForm.valid) {
-      // Si le formulaire est valide, récupérer les valeurs du formulaire
       const formData = this.eventForm.value;
-      // Soumettre les données
-      await this.eventService.addEvent(formData, 1).subscribe(
+      formData.imageEvent = this.imageURL; // Utilisez l'URL de l'image dans les données du formulaire
+      
+      this.eventService.addEvent(formData, 1).subscribe(
         () => {
           Swal.fire({
             position: 'center',
@@ -83,11 +96,10 @@ export class EventAddFrontComponent implements OnInit {
         }
       );
     } else {
-      // Si le formulaire est invalide, affichez un message d'erreur ou effectuez d'autres actions nécessaires
       console.log('Form is invalid');
     }
   }
+}
   
   
  
-}

@@ -13,7 +13,7 @@ export class EventService {
 
   getApprovedListEvents(): Observable<Event[]> 
   {
-    return this.httpClient.get<Event[]>(this.baseUrl +'/approvedEvents')
+    return this.httpClient.get<Event[]>(`${this.baseUrl}/approvedEvents`)
       
   }
   

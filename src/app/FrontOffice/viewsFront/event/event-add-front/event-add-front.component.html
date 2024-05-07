@@ -66,10 +66,10 @@
       </div>
   
       <div class="col-md-12">
-        <input type="file" (change)="onFileSelected($event)" formControlName="imageEvent" class="form-control" required accept=".png">
+        <input #fileInput type="file" (change)="onFileSelected($event)" formControlName="imageEvent" class="form-control" required accept=".png">
         <div *ngIf="eventForm.get('imageEvent')?.invalid && eventForm.get('imageEvent')?.touched" class="text-danger">The field is required.</div>
       </div>
-  
+
       <div class="col-md-12 text-center">
         <button type="submit" [disabled]="eventForm.invalid" class="btn btn-primary">Create Event</button>
       </div>

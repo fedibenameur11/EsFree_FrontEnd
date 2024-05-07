@@ -16,50 +16,52 @@ export class EventListFrontComponent implements OnInit  {
   constructor(private eventService: EventService, private router: Router) {}
 
   ngOnInit(): void {
+    this.loadApprovedEvents();
+  }
+
+  loadApprovedEvents(): void {
     this.eventService.getApprovedListEvents().subscribe(events => {
       this.events = events;
       this.filteredEvents = events;
     });
   }
+
   searchEvents(): void {
     if (this.searchTerm.trim()) {
       this.eventService.searchEventsByOrganisateur(this.searchTerm).subscribe(events => {
-        this.events = events;
+        // Filtrer les événements approuvés uniquement
+        this.events = events.filter(event => event.statut === 'Approuvé');
+        this.filteredEvents = this.events;
       });
     } else {
-      // Si le champ de recherche est vide, rechargez la liste complète des événements approuvés
-      this.eventService.getApprovedListEvents().subscribe(events => {
-        this.events = events;
-      });
+      this.loadApprovedEvents();
     }
   }
+
   filterEventsByDate(): void {
     if (this.searchDate) {
       const searchDateObj = new Date(this.searchDate);
       const formattedDate = searchDateObj.toISOString().split('T')[0];
       this.eventService.findByDateDebutEvent(formattedDate).subscribe(events => {
-        // Mettez à jour this.events avec les événements filtrés par date
-        this.events = events;
-        this.filteredEvents = events;
+        // Filtrer les événements approuvés uniquement
+        this.events = events.filter(event => event.statut === 'Approuvé');
+        this.filteredEvents = this.events;
       });
     } else {
-      // Si aucune date n'est saisie, réinitialisez les événements filtrés avec tous les événements
-      this.filteredEvents = this.events;
+      this.loadApprovedEvents();
     }
   }
+
   resetFilters(): void {
-    this.eventService.getApprovedListEvents().subscribe(events => {
-      this.events = events;
-      this.filteredEvents = events;
-    });
-}
-  navigateToEventDetail(idEvent: number) {
-    this.router.navigate(['/eventdetail', idEvent]); // Redirige vers la page event-detail avec l'ID de l'événement en tant que paramètre
+    this.loadApprovedEvents();
   }
+
+  navigateToEventDetail(idEvent: number) {
+    this.router.navigate(['/eventdetail', idEvent]);
+  }
+
   addevent(): void {
     this.router.navigateByUrl('/addevent');
   }
-
- 
 
 }
