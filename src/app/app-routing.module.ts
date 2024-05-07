@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllTemplatesFrontComponent } from './FrontOffice/all-templates-front/all-templates-front.component';
 import { AllTemplatesBackComponent } from './BackOffice/all-templates-back/all-templates-back.component';
-import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
-import { CollocationAddComponent } from './FrontOffice/viewsFront/colocation/collocation-add/collocation-add.component';
 import { EventListComponent } from './BackOffice/viewsBack/event/event-list/event-list.component';
 import { EventListFrontComponent } from './FrontOffice/viewsFront/event/event-list-front/event-list-front.component';
 import { EventAddFrontComponent } from './FrontOffice/viewsFront/event/event-add-front/event-add-front.component';
@@ -28,6 +26,12 @@ import { MaisondetailbackComponent } from './BackOffice/viewsBack/maison/maisond
 
 //import { ContratLocationAddComponent } from './FrontOffice/viewsFront/colocation/contratLocation/contrat-location-add/contrat-location-add.component';
 //import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
+import { CovoiturageComponent } from './BackOffice/viewsBack/covoiturage/covoiturage.component';
+import { AddCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/add-covoiturage/add-covoiturage.component';
+import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/list-covoiturage/list-covoiturage.component';
+import { AvisComponent } from './BackOffice/viewsBack/avis/avis.component'; 
+import { DetailCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/detail-covoiturage/detail-covoiturage.component';
+import { MyCovoituragesComponent } from './FrontOffice/viewsFront/covoiturage/my-covoiturages/my-covoiturages.component';
 
 
 
@@ -37,8 +41,7 @@ const routes: Routes = [
     component : AllTemplatesFrontComponent,
     children:[
 
-      {path:"collocationList", component:CollocationListComponent},
-      {path:"collocationadd", component:CollocationAddComponent},
+   
       {path:"eventlist", component:EventListFrontComponent},
       { path: "addevent", component: EventAddFrontComponent },
       { path: "eventdetail/:idEvent", component: EventDetailFrontComponent },
@@ -46,6 +49,12 @@ const routes: Routes = [
       { path: "listparticipationuser", component: ParticipationListComponent },
       { path: "myevents", component: EventListUserComponent },
       { path: "myparticipations", component: ParticipationListFrontComponent },
+      {path:"listCovoiturage",component:ListCovoiturageComponent},
+      {path:"addCovoiturage",component:AddCovoiturageComponent},
+      {path:"DetailCov/:id_cov",component:DetailCovoiturageComponent},
+      {path:"Mycov",component:MyCovoituragesComponent},
+      // {path:"collocationList", component:CollocationListComponent},
+     // {path:"collocationadd", component:CollocationAddComponent}
 
       // hné l components mta3 l frontOffice lkol
       {path:"market", component:MarketComponent},
@@ -78,12 +87,14 @@ const routes: Routes = [
 
       {path:"maisonlist", component:MaisonlistbackComponent},
       { path: 'afficherMaison/:id', component: MaisondetailbackComponent },
-      {path:"contrats", component:ContratLocationlistComponent}
+      {path:"contrats", component:ContratLocationlistComponent},
       
     
 
       // hné l components mta3 l backOffice lkol 
 
+    {path:"covoiturage",component:CovoiturageComponent},
+    {path:"avisBack",component:AvisComponent}
    
    ]
    }

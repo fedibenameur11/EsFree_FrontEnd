@@ -10,7 +10,7 @@ import { HeaderFrontComponent } from './FrontOffice/header-front/header-front.co
 import { NavbarBackComponent } from './BackOffice/navbar-back/navbar-back.component';
 import { SidebarBackComponent } from './BackOffice/sidebar-back/sidebar-back.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
+//import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
 
 import { EventListComponent } from './BackOffice/viewsBack/event/event-list/event-list.component';
 import { EventListFrontComponent } from './FrontOffice/viewsFront/event/event-list-front/event-list-front.component';
@@ -44,9 +44,9 @@ import { ChartpubComponent } from './BackOffice/viewsBack/marketplace/chartpub/c
 
 import { MaisonlistComponent } from './FrontOffice/viewsFront/maison/maisonlist/maisonlist.component';
 import { ContratLocationlistComponent } from './BackOffice/viewsBack/contratLocation/contrat-locationlist/contrat-locationlist.component';
-import { HttpClientModule } from '@angular/common/http';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
+
 import { CommonModule } from '@angular/common';
 import { MaisonlistbackComponent } from './BackOffice/viewsBack/maison/maisonlist/maisonlist.component';
 import { MaisondetailComponent } from './FrontOffice/viewsFront/maison/maisondetail/maisondetail.component';
@@ -55,6 +55,17 @@ import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
 
 
 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { CovoiturageComponent } from './BackOffice/viewsBack/covoiturage/covoiturage.component';
+import { AddCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/add-covoiturage/add-covoiturage.component';
+import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/list-covoiturage/list-covoiturage.component';
+import { AvisComponent } from './BackOffice/viewsBack/avis/avis.component'; 
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MapComponent } from './FrontOffice/viewsFront/covoiturage/map/map.component';
+import { DetailCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/detail-covoiturage/detail-covoiturage.component';  
+import { ReactiveFormsModule } from '@angular/forms';
+import { MyCovoituragesComponent } from './FrontOffice/viewsFront/covoiturage/my-covoiturages/my-covoiturages.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +96,17 @@ import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
     MaisonlistbackComponent,
     MaisondetailComponent,
     MaisondetailbackComponent,
-    ContratLocationlistComponent
+    ContratLocationlistComponent,
+    CovoiturageComponent,
+    AddCovoiturageComponent,
+    ListCovoiturageComponent,
+
+    
+    AvisComponent,
+          MapComponent,
+          DetailCovoiturageComponent,
+          MyCovoituragesComponent
+    
     
   ],
   imports: [
@@ -115,6 +136,11 @@ import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
     ReactiveFormsModule,
     CommonModule,
       
+    FormsModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
