@@ -35,9 +35,9 @@ export class MaisonService {
     return this.http.post<Maison>(`${this.baseUrl}/addMaisonbyuser?id=${id}`, maison);
   }
   
-  updateMaison(maison : Maison): Observable<Maison>{
+  updateMaison(maison: Maison): Observable<Maison> {
+    console.log("maison : ",maison)
     return this.http.put<Maison>(`${this.baseUrl}/updateMaison/${maison.id_maison}`, maison);
-
   }
 
   getMaisonById(maison_id: number): Observable<Maison> {

@@ -35,12 +35,11 @@ export class MaisondetailbackComponent {
   constructor(private route: ActivatedRoute, private maisonservice: MaisonService,private contratservice: ContratlocationService){}
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const maisonId = params['id']; // Récupérer l'ID de la maison depuis les paramètres de l'URL
-      // Utiliser le service pour récupérer les détails de la maison en fonction de l'ID
+      const maisonId = params['id']; 
       this.maisonservice.getMaisonById(maisonId).subscribe((maison: Maison) => {
-        this.maison = maison; // Affecter les détails de la maison à la variable maison
+        this.maison = maison; 
         if (this.maison.user) {
-          console.log(this.maison.user.name); // Accès à la propriété userName
+          console.log(this.maison.user.name); 
         }
       });
     });
@@ -88,9 +87,6 @@ export class MaisondetailbackComponent {
     this.currentImageIndex = index;
     clearInterval(this.autoChangeInterval); // Arrêter l'intervalle lorsque vous cliquez sur une image floue
   }
-  ngOnDestroy(): void {
-    clearInterval(this.autoChangeInterval); // Arrêter l'intervalle lorsque le composant est détruit
-  }
   refuserDemandeur(maisonId: number, iduser: number): void {
     this.maisonservice.supprimerDemandeur(maisonId, iduser)
       .subscribe(() => {
@@ -104,13 +100,26 @@ export class MaisondetailbackComponent {
       });
   }
 
-  onSubmitContrat()
-  {
-    this.contratservice.addContratByUserAndMaison(this.newContrat, this.idM, this.maison.id_maison)
-    .subscribe(
+  onSubmitContrat() {
+    this.contratservice.addContratByUserAndMaison(this.newContrat, this.idM, this.maison.id_maison).subscribe(
       () => {
-
         Swal.fire('Success!', 'Contrat de colocation ajouté avec succès', 'success');
+  
+        // Call the function to remove the user after successfully adding the contract
+        this.refuserDemandeur(this.maison.id_maison, this.idM);
+  
+        // Decrement the number of available spots
+        this.maison.nbrplacedispo--;
+  
+        // Update the maison in the database
+        /*this.maisonservice.updateMaison(this.maison).subscribe(() => {
+          console.log('Nombre de places disponibles mis à jour avec succès.');
+        }, (error) => {
+          console.error('Erreur lors de la mise à jour du nombre de places disponibles : ', error);
+        });*/
+  
+        this.generatePDF();
+        //window.location.reload();
       },
       (error) => {
         Swal.fire({
@@ -120,18 +129,12 @@ export class MaisondetailbackComponent {
         });
       }
     );
-    this.maison.nbrplacedispo--; // Décrémente le nombre de places disponibles de 1
-
-  // Met à jour la maison dans la base de données pour refléter le changement
-  this.maisonservice.updateMaison(this.maison).subscribe(() => {
-    console.log('Nombre de places disponibles mis à jour avec succès.');
-  }, (error) => {
-    console.error('Erreur lors de la mise à jour du nombre de places disponibles : ', error);
-  });
+  
     console.log(this.newContrat);
-    this.refuserDemandeur(this.maison.id_maison, this.idM);
-    this.generatePDF();
   }
+  
+  
+  
 
   generatePDF() {
     const doc = new jsPDF();

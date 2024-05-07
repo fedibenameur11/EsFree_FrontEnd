@@ -1,11 +1,8 @@
-import { Component,ElementRef, ViewChild  } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Maison } from 'src/app/Models/maison';
 import { MaisonService } from 'src/app/Services/maison.service';
 import { MatDialog } from '@angular/material/dialog';
-
-import * as L from 'leaflet';
 import { CoordinatesMapService } from 'src/app/Services/coordinates-map.service';
 
 @Component({
@@ -21,14 +18,8 @@ export class MaisonlistbackComponent {
   showAddDialog: boolean = false;
   showUpdateDialog: boolean = false;
   showAddContratDialog: boolean = false;
-  @ViewChild('mapContainer', { static: false }) mapContainer!: ElementRef;
-  DEFAULT_LATITUDE = 36.8065; // Coordonnées approximatives de Tunis, Tunisie
-  DEFAULT_LONGITUDE = 10.1815;
-  map: any;
-  loc!:string;
   openAddDialog() {
     this.showAddDialog = true;
-    this.initMap();
   }
   openAddContratDialog() {
     this.showAddContratDialog = true;
@@ -78,22 +69,22 @@ export class MaisonlistbackComponent {
     window.location.reload();
   }
 
-  onModalUpdateOpen(maisonId: number): void {
+  onModalUpdateOpen(maison: Maison): void {
     this.openUpdateDialog();
-    this.maisonService.getMaisonById(maisonId).subscribe((maison: Maison) => {
-      this.newMaison = maison;   
-      
-    });
+    this.newMaison = { ...maison };
   }
   onSubmitUpdate(): void {
-    
-    this.maisonService.updateMaison(this.newMaison).subscribe(() => {
-      console.log('Nouvelle maison a été ajouté', this.newMaison);
-
-    });
-    console.log('La maison a été modifié', this.newMaison);
-    //window.location.reload();
+    this.maisonService.updateMaison(this.newMaison).subscribe(
+      (response) => {
+        console.log('Maison mise à jour avec succès', response);
+      },
+      (error) => {
+        console.error('Erreur lors de la mise à jour de la maison :', error);
+      }
+    );
+    window.location.reload();
   }
+  
 
   deleteMaison(idMaison: number): void {
     this.maisonService.deleteMaison(idMaison).subscribe(() => {
@@ -104,13 +95,6 @@ export class MaisonlistbackComponent {
     window.location.reload();
   }
 
-  initMap(): void {
-    this.map = L.map('map').setView([51.505, -0.09], 13);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(this.map);
-  }
 
   
 }

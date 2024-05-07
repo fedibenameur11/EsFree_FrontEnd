@@ -28,7 +28,6 @@ export class MaisonlistComponent {
   priceRange: number = 0;
   minPrice: number = 0;
   maxPrice: number = 2000;
-  sortDirection: string = 'asc';
   sortOrder: string = 'asc'; 
   totalPages: number = 0;
   pageNumber: number = 0;
