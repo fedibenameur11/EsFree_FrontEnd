@@ -13,6 +13,14 @@ import { ParticipationListComponent } from './BackOffice/viewsBack/event/partici
 import { EventListUserComponent } from './FrontOffice/viewsFront/event/event-list-user/event-list-user.component';
 import { ParticipationListFrontComponent } from './FrontOffice/viewsFront/event/participation-list-front/participation-list-front.component';
 import { StatEventComponent } from './BackOffice/viewsBack/event/stat-event/stat-event.component';
+import { PubitemComponent } from './BackOffice/viewsBack/marketplace/pubitem/pubitem.component';
+import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
+import { MarketComponent } from './FrontOffice/viewsFront/marketplace/market/market.component';
+import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemdetail/itemdetail.component';
+import { MyitemsComponent } from './FrontOffice/viewsFront/marketplace/myitems/myitems.component';
+import { CartfComponent } from './FrontOffice/viewsFront/marketplace/cartf/cartf.component';
+import { ChartpubComponent } from './BackOffice/viewsBack/marketplace/chartpub/chartpub.component';
+
 
 
 const routes: Routes = [
@@ -29,9 +37,13 @@ const routes: Routes = [
       { path: "eventcalendar", component: EventCalendarComponent },
       { path: "listparticipationuser", component: ParticipationListComponent },
       { path: "myevents", component: EventListUserComponent },
-      { path: "myparticipations", component: ParticipationListFrontComponent }
+      { path: "myparticipations", component: ParticipationListFrontComponent },
 
       // hné l components mta3 l frontOffice lkol
+      {path:"market", component:MarketComponent},
+      {path:"itemdetail/:id_pub", component:ItemdetailComponent},
+      {path:"myitems", component:MyitemsComponent},
+      {path:"cartf", component: CartfComponent}
    
    ]
    },
@@ -45,7 +57,13 @@ const routes: Routes = [
       // hné l components mta3 l backOffice lkol 
      { path:"eventlist", component:EventListComponent},
      { path: "participationlist", component: ParticipationListComponent },
-     { path: "statevents", component: StatEventComponent }
+     { path: "statevents", component: StatEventComponent },
+      {path:"Pubitem",component:PubitemComponent},
+      {path:"Cart",component:CartComponent},
+      {path:"chart",component:ChartpubComponent}
+
+
+      // hné l components mta3 l backOffice lkol 
 
    
    ]

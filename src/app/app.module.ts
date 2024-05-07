@@ -14,11 +14,11 @@ import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/co
 
 import { EventListComponent } from './BackOffice/viewsBack/event/event-list/event-list.component';
 import { EventListFrontComponent } from './FrontOffice/viewsFront/event/event-list-front/event-list-front.component';
-import { HttpClientModule } from '@angular/common/http';
+
 import { EventAddFrontComponent } from './FrontOffice/viewsFront/event/event-add-front/event-add-front.component';
 import { EventDetailFrontComponent } from './FrontOffice/viewsFront/event/event-detail-front/event-detail-front.component';
 import { ReactiveFormsModule  } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
+
 import { EventCalendarComponent } from './FrontOffice/viewsFront/event/event-calendar/event-calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ParticipationListFrontComponent } from './FrontOffice/viewsFront/event/participation-list-front/participation-list-front.component';
@@ -28,6 +28,24 @@ import { StatEventComponent } from './BackOffice/viewsBack/event/stat-event/stat
 import { environment } from './environnement/environnement';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import { PubitemComponent } from './BackOffice/viewsBack/marketplace/pubitem/pubitem.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
+import { MarketComponent } from './FrontOffice/viewsFront/marketplace/market/market.component';
+import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemdetail/itemdetail.component';
+import { MyitemsComponent } from './FrontOffice/viewsFront/marketplace/myitems/myitems.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { CartfComponent } from './FrontOffice/viewsFront/marketplace/cartf/cartf.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ChartpubComponent } from './BackOffice/viewsBack/marketplace/chartpub/chartpub.component';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -46,7 +64,15 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     ParticipationListFrontComponent,
     ParticipationListComponent,
     EventListUserComponent,
-    StatEventComponent
+    StatEventComponent,
+    PubitemComponent,
+    CartComponent,
+    MarketComponent,
+    ItemdetailComponent,
+    MyitemsComponent,
+  CartfComponent,
+  ChartpubComponent
+
     
     
   ],
@@ -59,7 +85,17 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     FormsModule,
     FullCalendarModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatPaginatorModule,
+    NgbModule,
+    MatSliderModule,
+    BrowserAnimationsModule, // Add BrowserAnimationsModule to imports
+    MatSnackBarModule,
+ 
+
   ],
   providers: [],
   bootstrap: [AppComponent]
