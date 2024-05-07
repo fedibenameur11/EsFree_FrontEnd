@@ -18,6 +18,13 @@ import { EventListFrontComponent } from './FrontOffice/viewsFront/event/event-li
 import { EventAddFrontComponent } from './FrontOffice/viewsFront/event/event-add-front/event-add-front.component';
 import { EventDetailFrontComponent } from './FrontOffice/viewsFront/event/event-detail-front/event-detail-front.component';
 
+import { ItemListComponent } from './BackOffice/viewsBack/lostandfound/item-list/item-list.component';
+
+import { ItemListUsersComponent } from './FrontOffice/viewsFront/lostandfound/item-list-users/item-list-users.component';
+
+import { PubDiscussComponent } from './FrontOffice/viewsFront/lostandfound/pub-discuss/pub-discuss.component';
+import { MyitemsComponent } from './FrontOffice/viewsFront/lostandfound/myitems/myitems.component';
+
 
 import { EventCalendarComponent } from './FrontOffice/viewsFront/event/event-calendar/event-calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -34,7 +41,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
 import { MarketComponent } from './FrontOffice/viewsFront/marketplace/market/market.component';
 import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemdetail/itemdetail.component';
-import { MyitemsComponent } from './FrontOffice/viewsFront/marketplace/myitems/myitems.component';
+import { MyitemspComponent } from './FrontOffice/viewsFront/marketplace/myitems/myitemp.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { CartfComponent } from './FrontOffice/viewsFront/marketplace/cartf/cartf.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
@@ -88,7 +95,7 @@ import { MyCovoituragesComponent } from './FrontOffice/viewsFront/covoiturage/my
     CartComponent,
     MarketComponent,
     ItemdetailComponent,
-    MyitemsComponent,
+    MyitemspComponent,
   CartfComponent,
   ChartpubComponent,
  MaisonlistComponent,
@@ -105,7 +112,11 @@ import { MyCovoituragesComponent } from './FrontOffice/viewsFront/covoiturage/my
     AvisComponent,
           MapComponent,
           DetailCovoiturageComponent,
-          MyCovoituragesComponent
+          MyCovoituragesComponent,
+    ItemListComponent,
+    ItemListUsersComponent,
+    PubDiscussComponent,
+    MyitemsComponent,
     
     
   ],
@@ -141,6 +152,8 @@ import { MyCovoituragesComponent } from './FrontOffice/viewsFront/covoiturage/my
     ReactiveFormsModule,
     
    
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

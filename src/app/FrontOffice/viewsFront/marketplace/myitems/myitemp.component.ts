@@ -6,10 +6,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-myitems',
-  templateUrl: './myitems.component.html',
-  styleUrls: ['./myitems.component.css']
+  templateUrl: './myitemsp.component.html',
+  styleUrls: ['./myitemsp.component.css']
 })
-export class MyitemsComponent implements OnInit  {
+export class MyitemspComponent implements OnInit  {
 
   pubItems!: PubItem[];
   pubItem: PubItem = new PubItem();
