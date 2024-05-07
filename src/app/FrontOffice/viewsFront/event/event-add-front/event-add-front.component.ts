@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/Services/event.service'; // Assurez-vous d'importer le service EventService
-import { Event } from 'src/app/Models/event/event.model'; // Assurez-vous d'importer le modèle Event
+import { Event } from 'src/app/Models/event/event'; // Assurez-vous d'importer le modèle Event
 import {HttpErrorResponse} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { finalize } from 'rxjs';

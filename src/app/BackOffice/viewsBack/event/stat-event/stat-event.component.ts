@@ -3,7 +3,7 @@ import { Chart } from 'chart.js/auto';
 import { forkJoin, map } from 'rxjs';
 import { ParticipationService } from 'src/app/Services/participation.service';
 import { EventService } from 'src/app/Services/event.service';
-import { EventStatistics } from 'src/app/Models/event/EventStatistics.model';
+import { EventStatistics } from 'src/app/Models/event/EventStatistics';
 @Component({
   selector: 'app-stat-event',
   templateUrl: './stat-event.component.html',
