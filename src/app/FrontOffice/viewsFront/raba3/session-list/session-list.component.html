@@ -59,19 +59,20 @@
                      <div class="iq-card-header-toolbar d-flex align-items-center">
                         <div class="dropdown">
                           <span class="dropdown-toggle text-primary" id="dropdownMenuButton52" data-toggle="dropdown">
+                            <ng-container *ngIf="getTimeUntilStart(session.dateDebut).minutes <= 0">
+                              <span class="badge iq-bg-danger">Game Started</span> 
+                            </ng-container>
+                            <ng-container *ngIf="getTimeUntilStart(session.dateDebut).minutes > 0">
                               <ng-container *ngIf="getTimeUntilStart(session.dateDebut).hours > 0">
                                 <span class="badge iq-bg-success">Starts in {{ getTimeUntilStart(session.dateDebut).hours }}h {{ getTimeUntilStart(session.dateDebut).minutes }}m </span>          
                               </ng-container>
                               <ng-container *ngIf="getTimeUntilStart(session.dateDebut).hours <= 0">       
                                 <span class="badge iq-bg-success">Starts in {{ getTimeUntilStart(session.dateDebut).minutes }}m </span>
-
                               </ng-container>
-                              <ng-container *ngIf="getTimeUntilStart(session.dateDebut).minutes <= 0">
-                                <span class="badge iq-bg-danger">Game Started</span> 
-                              </ng-container>
+                            </ng-container>
                             <i class="ri-more-2-line ml-3"></i>
-                          
-                        </span>
+                          </span>
+
                            <div class="dropdown-menu dropdown-menu-right p-0">
                               <a class="dropdown-item" (click)="shareOnFacebook()"><i class="ri-share-forward-line mr-2"></i>Share</a>
                            </div>
@@ -85,11 +86,16 @@
                       <i class="bi bi-quote quote-icon-right"></i>
                     </p>
                      
+                    <button class="btn btn-primary" data-toggle="modal" data-toggle="modal" data-target="#myModalshowContrat" 
+        (click)="join(session.idRaba3)" [disabled]="disableJoinButton || getTimeUntilStart(session.dateDebut).minutes <= 0">
+  <i class="bi bi-plus"></i> Join Lobby
+</button>
 
-
-                    <button class="btn btn-primary" data-toggle="modal" data-toggle="modal" data-target="#myModalshowContrat">
-                      <i class="bi bi-plus"></i> Join Lobby
-                  </button>
+            <button class="btn btn-outline-danger rounded-pill " data-toggle="modal" data-toggle="modal" data-target="#myModalshowContrat" 
+                    (click)="leave(session.idRaba3)" [disabled]="disableJoinButton2" style="margin-left: 10px;">Leave
+            </button>
+    
+            
                   
                   </div>
                 </div><!-- End testimonial item --> 

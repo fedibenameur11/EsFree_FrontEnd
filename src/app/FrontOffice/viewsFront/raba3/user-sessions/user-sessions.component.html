@@ -58,9 +58,8 @@
 </section><!-- End Testimonials Section -->
 
 
-<div class="modal fade" id="myModalUpdate" role="dialog" *ngIf="showUpdateDialog" >
+<div class="modal fade" id="myModalUpdate" role="dialog" *ngIf="showUpdateDialog">
   <div class="modal-dialog">
-  
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -69,48 +68,39 @@
       <div class="modal-body">
         <form (ngSubmit)="onSubmitUpdate()" #taskForm="ngForm">
           <br>
-              <div class="form-group">
-                  <label for="description">Description :</label>
-                  <input type="text" id="description" [(ngModel)]="newSession.description" name="description" class="form-control" required minlength="5">
-                  <div *ngIf="taskForm.controls['description'].invalid && (taskForm.controls['description'].dirty || taskForm.controls['description'].touched)">
-                      <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['required']">Please insert description</div>
-                      <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['minlength']">description should contain at least 5 characters</div>
-                  </div>
-              </div>
-              <br>
-              <div class="form-group">
-                <label for="exampleInputNumber1">Number Of Free Places :</label>
-                <input type="number" [(ngModel)]="newSession.nombrePlaces" name="nombrePlaces" class="form-control" id="exampleInputNumber1" value="2">
-                <div *ngIf="taskForm.controls['nombrePlaces'].invalid && (taskForm.controls['nombrePlaces'].dirty || taskForm.controls['nombrePlaces'].touched)">
-                  <div class="text-danger" *ngIf="taskForm.controls['nombrePlaces'].errors?.['required']">Please insert value</div>
-              </div>
-             </div>
+          <div class="form-group">
+            <label for="description">Description :</label>
+            <input type="text" id="description" [(ngModel)]="selectedGame && selectedGame.description" name="description" class="form-control" required minlength="5">
+            <div *ngIf="taskForm.controls['description'].invalid && (taskForm.controls['description'].dirty || taskForm.controls['description'].touched)">
+              <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['required']">Please insert description</div>
+              <div class="text-danger" *ngIf="taskForm.controls['description'].errors?.['minlength']">Description should contain at least 5 characters</div>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="exampleInputNumber1">Number Of Free Places :</label>
+            <input type="number" [(ngModel)]="selectedGame && selectedGame.nombrePlaces" name="nombrePlaces" class="form-control" id="exampleInputNumber1" value="2">
+            <div *ngIf="taskForm.controls['nombrePlaces'].invalid && (taskForm.controls['nombrePlaces'].dirty || taskForm.controls['nombrePlaces'].touched)">
+              <div class="text-danger" *ngIf="taskForm.controls['nombrePlaces'].errors?.['required']">Please insert value</div>
+            </div>
+          </div>
           <br>
           <div class="form-group">
             <label for="exampleInputdatetime">Start Date :</label>
-            <input type="datetime-local" [(ngModel)]="newSession.dateDebut" name="dateDebut" class="form-control" id="exampleInputdatetime" value="2019-12-19T13:45:00">
-         </div>
+            <input type="datetime-local" [(ngModel)]="selectedGame && selectedGame.dateDebut" name="dateDebut" class="form-control" id="exampleInputdatetime" value="2019-12-19T13:45:00">
+          </div>
           <br>
           <div class="form-group">
             <label for="exampleInputdatetime">Finish Date :</label>
-            <input type="datetime-local" [(ngModel)]="newSession.dateFin" name="dateFin" class="form-control" id="exampleInputdatetime" value="2019-12-19T13:45:00">
-         </div>
-        <br>  
-          
-          <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Update Game Session</button>
-              <button type="button" class="btn btn-secondary btn-default" data-dismiss="modal">Cancel</button>
+            <input type="datetime-local" [(ngModel)]="selectedGame && selectedGame.dateFin" name="dateFin" class="form-control" id="exampleInputdatetime" value="2019-12-19T13:45:00">
           </div>
-      </form>
+          <br>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Update Game Session</button>
+            <button type="button" class="btn btn-secondary btn-default" data-dismiss="modal" (click)="closeUpdateDialog()">Cancel</button>
+          </div>
+        </form>
       </div>
     </div>
-    
   </div>
 </div>
-
-
-
-
-
-
-

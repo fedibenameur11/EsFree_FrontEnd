@@ -6,8 +6,8 @@ import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs';
-
-
+import { environment } from "src/environements/environement";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 @Component({
   selector: 'app-session-list',
@@ -19,6 +19,12 @@ export class SessionListComponent implements OnInit{
   newSession: Raba3 = new Raba3(); 
   showAddDialog: boolean = false;
   raba3: Raba3 = new Raba3();
+  title = 'af-notification';
+  message:any = null;
+  disableJoinButton: boolean = false; // Flag to disable the join button
+  disableJoinButton2: boolean = true; // Flag to disable the join button
+
+
 
   openAddDialog() {
     this.showAddDialog = true;
@@ -38,7 +44,8 @@ export class SessionListComponent implements OnInit{
     });
 
     this.getListSessions(this.idJeux);
-    
+    this.requestPermission();
+    this.listen();
   }
 
 
@@ -64,7 +71,7 @@ export class SessionListComponent implements OnInit{
     
 
     addGameSessionAndAssignToGame(): void {
-      const staticUserId = 4; // Static user ID value
+      const staticUserId = 1; // Static user ID value
 
       this.raba3Service.addGameSessionAndAssignToGameAndUser(this.newSession, this.idJeux, staticUserId)
         .subscribe(response => {
@@ -103,5 +110,138 @@ export class SessionListComponent implements OnInit{
       // Return an object containing the hours and minutes
       return { hours, minutes: remainingMinutes };
     }
-  }
+
+    requestPermission() {
+      const messaging = getMessaging();
+      getToken(messaging, 
+       { vapidKey: environment.firebase.vpaidKey}).then(
+         (currentToken) => {
+           if (currentToken) {
+             console.log("Hurraaa!!! we got the token.....");
+             console.log(currentToken);
+           } else {
+             console.log('No registration token available. Request permission to generate one.');
+           }
+       }).catch((err) => {
+          console.log('An error occurred while retrieving token. ', err);
+      });
+    }
+    listen() {
+      const messaging = getMessaging();
+      onMessage(messaging, (payload) => {
+        console.log('Message received. ', payload);
+        this.message=payload;
+      });
+    }
+
+    join(idRaba3: number): void {
+      this.disableJoinButton = true;
+      this.disableJoinButton2 = false;
+
+      this.raba3Service.addUserToSession(idRaba3).subscribe(() => {
+        console.log('User added to session successfully.');
+         // Update the number of players attribute in the session object
+    const session = this.sessions.find(s => s.idRaba3 === idRaba3);
+    if (session) {
+      session.nombrePlaces++; // Increment number of players
+      // Update session on the server
+      this.raba3Service.updateGameSession(session.idRaba3, session).subscribe(
+        updatedSession => {
+          console.log('Session updated:', updatedSession);
+          // Refresh the session list after successful update
+          this.getListSessions(this.idJeux);
+        },
+        error => {
+          console.error('Failed to update session:', error);
+        }
+      );
+    }
+        this.sendNotification();
+      }, error => {
+        console.error('Failed to add user to session:', error);
+      });
+
+      Swal.fire({
+        title: "You Joined The Session Successfully !",
+        width: 600,
+        padding: "3em",
+        color: "#716add",
+        background: "#fff url(/images/trees.png)",
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url("assets/FrontOffice/img/cat.gif")
+          left top
+          no-repeat
+        `
+      });
+      this.getListSessions(this.idJeux);
+    }
+  
+
+    leave(idRaba3: number): void {
+      this.disableJoinButton2 = false;
+
+      this.raba3Service.removeUserFromSession(idRaba3).subscribe(() => {
+        console.log('User removed successfully.');
+        const session = this.sessions.find(s => s.idRaba3 === idRaba3);
+        if (session) {
+          session.nombrePlaces--; // Decrement number of players
+          // Update session on the server
+          this.raba3Service.updateGameSession(session.idRaba3, session).subscribe(
+            updatedSession => {
+              console.log('Session updated:', updatedSession);
+              // Refresh the session list after successful update
+              this.getListSessions(this.idJeux);
+            },
+            error => {
+              console.error('Failed to update session:', error);
+            }
+          );
+        }
     
+      }, error => {
+        console.error('Failed to remove user from session:', error);
+      });
+
+
+      Swal.fire({
+        title: "You Left The Session Successfully !",
+        width: 600,
+        padding: "3em",
+        color: "#716add",
+        background: "#fff url(/images/trees.png)",
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url("assets/FrontOffice/img/sad.gif")
+          left top
+          no-repeat
+        `
+      });
+      this.getListSessions(this.idJeux);
+      window.location.reload();
+    }
+
+    sendNotification(): void {
+      const notificationData = {
+        method: 'POST',
+        to : "eIpYA7Puv0NqXUTIKlKwcf:APA91bFfj5CbK_eEbIH7Xplnz8qPtLjt8k_f3tlgt4m2c-0OMzrlnJAbuwIIZLJzBpbi4r8zTKYwFJZsC0NyU2B1EqxL-yeS-3yvVQv0Bm9Wx1R8WNQU_zu7Y3MKUR4G8z2iE9gXsBZQ",
+        notification : {
+            title : "Game Session",
+            body : "A user joined your session",
+            icon : "https://i.ibb.co/zWgfqtD/430112506-957916262375552-2785303533872510482-n.jpg"
+        }
+    }
+      this.raba3Service.sendNotification(notificationData)
+        .subscribe(
+          response => {
+            console.log('Notification sent successfully:', response);
+            // Handle success response
+          },
+          error => {
+            console.error('Failed to send notification:', error);
+            // Handle error response
+          }
+        );
+    }
+
+  }

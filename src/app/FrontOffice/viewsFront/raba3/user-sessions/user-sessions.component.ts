@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Raba3 } from 'src/app/Models/raba3';
 import { Raba3Service } from 'src/app/Services/raba3.service';
 import Swal from 'sweetalert2';
+declare var $: any;
+
 
 @Component({
   selector: 'app-user-sessions',
@@ -14,23 +15,17 @@ export class UserSessionsComponent implements OnInit {
   name: string = "rechpa";
   sessions: Raba3[] = [];
   newSession: Raba3 = new Raba3();
-
   showUpdateDialog: boolean = false;
+  selectedGameId!: number;
+  selectedGame: Raba3 | undefined;
 
-  constructor(private act: ActivatedRoute, private raba3Service: Raba3Service, private router: Router, private dialog: MatDialog) { }
+  constructor(private act: ActivatedRoute, private raba3Service: Raba3Service, private router: Router) { }
 
   ngOnInit(): void {
     this.act.paramMap.subscribe(params => {
       this.name = params.get('name') || "rechpa";
     });
     this.retrieveGameSessions();
-
-    this.act.paramMap.subscribe(params => {
-      const idRaba3 = parseInt(params.get('idRaba3') || '0');
-      if (idRaba3) {
-        this.openUpdateDialog(idRaba3);
-      }
-    });
   }
 
   retrieveGameSessions(): void {
@@ -43,10 +38,18 @@ export class UserSessionsComponent implements OnInit {
       }
     );
   }
+  closeUpdateDialog(): void {
+    this.showUpdateDialog = false;
+    window.location.reload();
+  }
+
 
   openUpdateDialog(idRaba3: number): void {
+    this.selectedGameId = idRaba3;
+    this.selectedGame = this.sessions.find(session => session.idRaba3 == idRaba3)
+    $('#myModalUpdate').modal('show');
     this.showUpdateDialog = true;
-    this.raba3Service.retieveGameSessionSpecificUser(idRaba3, this.name).subscribe(
+    this.raba3Service.retieveGameSessionSpecificUser(idRaba3).subscribe(
       (session: Raba3) => {
         this.newSession = session;
       },
@@ -55,23 +58,30 @@ export class UserSessionsComponent implements OnInit {
       }
     );
   }
-
-  closeUpdateDialog(): void {
-    this.showUpdateDialog = false;
-  }
-
+  
   onSubmitUpdate(): void {
-    this.raba3Service.updateGameSession(this.newSession.idRaba3, this.newSession).subscribe(
-      () => {
-        console.log('Game session updated', this.newSession);
+    if (this.selectedGameId && this.selectedGame) { 
+  
+    this.raba3Service.updateGameSession(this.selectedGameId, this.selectedGame).subscribe(
+      (updatedSession : Raba3) => {
+        console.log('Game session updated:', updatedSession);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Game updated Successfully !',
+          showConfirmButton: false,
+          timer: 2000
+        });
         this.closeUpdateDialog();
-        this.retrieveGameSessions(); // Refresh the list after update
+        // Handle successful update here
       },
       (error) => {
         console.error('Failed to update game session:', error);
+        // Handle error here
       }
     );
   }
+}
 
   deleteGameSession(idRaba3: number): void {
     Swal.fire({
