@@ -39,7 +39,14 @@ export class LoginComponent {
        localStorage.setItem('token', JSON.stringify(res.token));
          localStorage.setItem('angular17TokenUserId', res.id);
          localStorage.setItem('angular17TokenEmail', res.email);
+         localStorage.setItem('name', res.name);
+         localStorage.setItem('image', res.image);
+
+         console.log("connected");
+         
+         
          console.log( localStorage.getItem('angular17TokenUserId'));
+
 
          if(res.role=="ADMIN"){
           this.router.navigate(['/admin/users']);

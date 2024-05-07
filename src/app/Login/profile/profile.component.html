@@ -1,0 +1,23 @@
+<body>
+  <div class="profile-container">
+    <div class="profile-header" >
+      <h1>User Profile</h1>
+      <button class="logout-button" (click)="logout()" hidden>Logout</button>
+      <button class="logout-button"  >update</button>
+      
+    </div>
+    <div class="profile-info">
+      <div class="profile-image" >
+        <img [src]="user?.image" alt="user Image" >
+        <input type="file" (change)="onFileSelected($event)" accept="image/*">
+      </div>
+      <div class="user-details">
+        <h2>{{user?.name}}</h2>
+        <p>Email: {{user?.email}}</p>
+        <p>PhoneNumber : {{user?.phoneNumber}}</p>
+        <p>PhoneNumber : {{user?.role}}</p>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</body>

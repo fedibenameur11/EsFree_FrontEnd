@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'src/app/Modal/user';
 
 @Component({
   selector: 'app-navbar-back',
@@ -6,5 +8,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar-back.component.css']
 })
 export class NavbarBackComponent {
+  user: User | undefined ;
+
+
+
+  constructor(private router :Router){}
+   name = localStorage.getItem('name');
+   image = localStorage.getItem('image');
+logout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('angular17TokenUserId');
+  localStorage.removeItem('angular17TokenEmail');
+  localStorage.removeItem('name');
+  localStorage.removeItem('image');
+
+  // Redirect to login page
+  this.router.navigate(['/login']);
+}
 
 }

@@ -13,11 +13,25 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
 import { LoginComponent } from './Login/login/login.component';
 import { JwtModule } from "@auth0/angular-jwt";
+import { CommonModule } from '@angular/common';
 
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { SignupComponent } from './signup/signup/signup.component';
+
 import { CustomInterceptor } from './Service/custom.interceptor';
+import { GUserComponent } from './BackOffice/viewsBack/user/g-user/g-user.component';
+import { SignuppComponent } from './Login/signupp/signupp.component';
+
+
+import { ProfileComponent } from './Login/profile/profile.component';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 
 @NgModule({
   declarations: [
@@ -29,8 +43,10 @@ import { CustomInterceptor } from './Service/custom.interceptor';
     NavbarBackComponent,
     SidebarBackComponent,
     LoginComponent,
-    SignupComponent,
-    
+    GUserComponent,
+    SignuppComponent,
+    ProfileComponent,
+   
     
   ],
   imports: [
@@ -38,14 +54,19 @@ import { CustomInterceptor } from './Service/custom.interceptor';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    BrowserAnimationsModule, 
+    MatDialogModule,
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
   providers: [ 
-  { 
-    provide : HTTP_INTERCEPTORS ,
-   useClass : CustomInterceptor ,
-    multi : true
-  } 
+//{ 
+//provide : HTTP_INTERCEPTORS ,
+ // useClass : CustomInterceptor ,
+  //  multi : true
+// } 
 ],
   bootstrap: [AppComponent]
 })
