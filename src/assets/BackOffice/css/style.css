@@ -195,19 +195,19 @@ a:hover { text-decoration: none; }
 .tasks-card:last-child { border: none; margin: 0; padding: 0; }
 
 /*---------------------------------------------------------------------
-                               Sign In
+                               Sign Ins
 -----------------------------------------------------------------------*/
-.sign-in-detail { color: var(--iq-white); background: rgba(130, 122, 243, 1) !important; }
-.sign-in-page { height: 100vh; }
-.sign-in-detail { padding: 100px; height: 100vh; }
-.sign-in-logo { display: inline-block; width: 100%; }
-.sign-in-logo img { height: 50px; }
+.sign-in-detail { color: var(--iq-white); background: rgb(255, 236, 236) !important;  }
+.sign-in-page { height: 200px; }
+.sign-in-detail { padding: 100px; height: 200px; }
+.sign-in-logo { display: inline-block; width: 100%; margin-left: 50px;  }
+.sign-in-logo img { height: 250px; margin-left: 50px; }
 .sign-in-from { padding: 0 60px; }
 .sign-info { border-top: 1px solid var(--iq-dark-border); margin-top: 30px; padding-top: 20px; }
 .iq-social-media { margin: 0; padding: 0; float: right; }
 .iq-social-media li { list-style: none; float: left; margin-right: 10px; }
 .iq-social-media li:last-child { margin-right: 0; }
-.iq-social-media li a { height: 30px; width: 30px; text-align: center; font-size: 18px; line-height: 30px; display: inline-block; -webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px; background: rgba(130, 122, 243, 0.2); color: var(--iq-primary) !important; }
+.iq-social-media li a { height: 30px; width: 30px; text-align: center; font-size: 18px; line-height: 30px; display: inline-block; -webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px; background: rgba(65, 64, 80, 0.2); color: var(--iq-primary) !important; }
 .iq-social-media li a:hover { text-decoration: none; }
 
 /*---------------------------------------------------------------------

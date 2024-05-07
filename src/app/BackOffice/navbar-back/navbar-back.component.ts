@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Modal/user';
 
@@ -7,12 +7,15 @@ import { User } from 'src/app/Modal/user';
   templateUrl: './navbar-back.component.html',
   styleUrls: ['./navbar-back.component.css']
 })
-export class NavbarBackComponent {
+export class NavbarBackComponent implements OnInit{
   user: User | undefined ;
 
 
 
-  constructor(private router :Router){}
+  constructor(private router :Router ){}
+  ngOnInit(): void {
+
+  }
    name = localStorage.getItem('name');
    image = localStorage.getItem('image');
 logout() {
@@ -23,7 +26,7 @@ logout() {
   localStorage.removeItem('image');
 
   // Redirect to login page
-  this.router.navigate(['/login']);
+  this.router.navigate(['']);
 }
 
 }

@@ -46,7 +46,7 @@ export class UserService {
     const formData: FormData = new FormData();
     formData.append('image', image, image.name);
     formData.append('user', JSON.stringify(user));
-    return this.http.post<any>(`http://localhost:8082/public/adduser`, formData);
+    return this.http.post<any>(`http://localhost:8082/public/addUser`, formData);
   }
 
   updateUser(user: any, image: File): Observable<any> {
@@ -71,7 +71,16 @@ export class UserService {
     return this.http.post<any>('http://localhost:8082/public/addimage', formData);
   }
 
-  
+  forgotPassword(email: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('email', email);
+    return this.http.post<any>(`http://localhost:8082/auth/forgotPassword`, formData);
+  }
+
+
+
+
+
   getRefreshToken()   {
     debugger;
     let loggedUserData : any;

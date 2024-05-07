@@ -30,6 +30,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ForgetpwdComponent } from './Login/forgetpwd/forgetpwd.component';
+
 
 
 
@@ -46,6 +48,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     GUserComponent,
     SignuppComponent,
     ProfileComponent,
+    ForgetpwdComponent,
    
     
   ],
@@ -59,7 +62,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     BrowserAnimationsModule, 
     MatDialogModule,
     MatSnackBarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+   
   ],
   providers: [ 
 //{ 

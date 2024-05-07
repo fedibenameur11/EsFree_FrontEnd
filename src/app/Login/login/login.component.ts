@@ -41,6 +41,7 @@ export class LoginComponent {
          localStorage.setItem('angular17TokenEmail', res.email);
          localStorage.setItem('name', res.name);
          localStorage.setItem('image', res.image);
+         localStorage.setItem('role', res.role);
 
          console.log("connected");
          
@@ -49,7 +50,7 @@ export class LoginComponent {
 
 
          if(res.role=="ADMIN"){
-          this.router.navigate(['/admin/users']);
+          this.router.navigate(['/admin']);
 
          } else if (res.role=="USER"){
           this.router.navigate(['/user']);

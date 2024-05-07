@@ -10,15 +10,18 @@ import { GUserComponent } from './BackOffice/viewsBack/user/g-user/g-user.compon
 import { SignuppComponent } from './Login/signupp/signupp.component';
 import { ProfileComponent } from './Login/profile/profile.component';
 import { authGuard } from './Service/auth.guard';
+import { ForgetpwdComponent } from './Login/forgetpwd/forgetpwd.component';
 
 const routes: Routes = [
-  {path:"login",
+  {path:"",
   component:LoginComponent
   },
   {path:"signup",
   component:SignuppComponent
   },
-
+  {path:"forgetpwd",
+  component:ForgetpwdComponent
+  },
    {      
      
     path:"user",
