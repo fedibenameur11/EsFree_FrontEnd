@@ -14,7 +14,7 @@
                                 <div id="user_list_datatable_info" class="dataTables_filter">
                                     <form class="mr-3 position-relative">
                                         <div class="form-group mb-0">
-                                            <input type="search" class="form-control" id="exampleInputSearch" placeholder="Search" aria-controls="user-list-table">
+                                            <input type="text"  [(ngModel)]="searchText" class="form-control" name="searchText" id="exampleInputSearch" placeholder="Search" aria-controls="user-list-table">
                                         </div>
                                     </form>
                                 </div>
@@ -24,17 +24,17 @@
                             <thead>
                                 <tr>
                                     <th>Description</th>
-                                    <th>Number Of Places</th>
+                                    <th>Number Of Players</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let session of sessions">
+                                <tr *ngFor="let session of sessions  | filter:searchText">
                                     <td>{{ session.description }}</td>
                                     <td>{{ session.nombrePlaces }}</td>
-                                    <td>{{ session.dateDebut | date:'yyyy-MM-dd'}}</td>
-                                    <td>{{ session.dateFin | date:'yyyy-MM-dd'}}</td>                            
+                                    <td>{{ session.dateDebut | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{ session.dateFin | date:'yyyy-MM-dd HH:mm'}}</td>                            
                                    
                                </tr>
                             </tbody>

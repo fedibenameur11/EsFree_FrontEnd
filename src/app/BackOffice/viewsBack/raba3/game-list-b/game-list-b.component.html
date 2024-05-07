@@ -16,7 +16,7 @@
                                <div id="user_list_datatable_info" class="dataTables_filter">
                                    <form class="mr-3 position-relative">
                                        <div class="form-group mb-0">
-                                           <input type="search" class="form-control" id="exampleInputSearch" placeholder="Search" aria-controls="user-list-table">
+                                           <input type="text"  [(ngModel)]="searchText" class="form-control" name="searchText" id="exampleInputSearch" placeholder="Search" aria-controls="user-list-table">
                                        </div>
                                    </form>
                                </div>
@@ -32,7 +32,7 @@
                                </tr>
                            </thead>
                            <tbody>
-                               <tr *ngFor="let game of games">
+                               <tr *ngFor="let game of games | filter:searchText">
                                    <td>{{ game.nom }}</td>
                                    <td>{{ game.typeJeux }}</td>
                                    <td>

@@ -8,7 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 declare var $: any;
 
 
-
 @Component({
   selector: 'app-game-list-b',
   templateUrl: './game-list-b.component.html',
@@ -23,6 +22,7 @@ export class GameListBComponent implements OnInit{
   affiche_modif : boolean = false;
   newGame: Jeux = new Jeux(); 
   showUpdateDialog: boolean = false;
+  searchText:any;
 
   openUpdateDialog() {
     this.showUpdateDialog = true;

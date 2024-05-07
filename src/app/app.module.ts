@@ -26,6 +26,9 @@ import { CommonModule } from '@angular/common'
 import { UserSessionsComponent } from './FrontOffice/viewsFront/raba3/user-sessions/user-sessions.component';
 import { environment } from 'src/environements/environement';
 import {initializeApp} from 'firebase/app';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { filter } from 'rxjs';
+
 
 initializeApp(environment.firebase);
 
@@ -45,7 +48,9 @@ initializeApp(environment.firebase);
     GameEditComponent,
     GameListBComponent,
     SessionListBComponent,
-    UserSessionsComponent
+    UserSessionsComponent,
+    
+    
     
   ],
   imports: [
@@ -58,7 +63,8 @@ initializeApp(environment.firebase);
     MatDialogModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CommonModule
+    CommonModule,
+    Ng2SearchPipeModule
 
   ],
 

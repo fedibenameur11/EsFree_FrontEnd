@@ -11,6 +11,8 @@ import { Raba3Service } from 'src/app/Services/raba3.service';
 export class SessionListBComponent implements OnInit{
 
   raba3: Raba3 = new Raba3();
+  searchText:any;
+
   constructor(private act:ActivatedRoute,private raba3Service:Raba3Service){ }
   public sessions: Array<Raba3> =[];
 

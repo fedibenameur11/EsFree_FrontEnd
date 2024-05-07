@@ -32,8 +32,8 @@ export class Raba3Service {
     return this.httpClient.delete<Raba3>(`${this.baseUrl}/removeGameSession/${idRaba3}`);
   }
 
-  updateGameSession(raba3 : Raba3,): Observable<Raba3>{
-    return this.httpClient.put<Raba3>(`${this.baseUrl}/updateGameSession`, raba3);
+  updateGameSession(idRaba3: number, updatedraba3: Raba3): Observable<Raba3>{
+    return this.httpClient.put<Raba3>(`${this.baseUrl}/updateGameSession/${idRaba3}`,updatedraba3);
 
   }
 
@@ -48,10 +48,11 @@ export class Raba3Service {
   retieveGameSessionSpecificUser(idRaba3: number, name: String): Observable<Raba3> {
     return this.httpClient.get<Raba3>(`${this.baseUrl}/retieveGameSessionSpecificUser/${idRaba3},${name}`);
   }
+
+  addGameSessionAndAssignToGameAndUser(raba3: Raba3, idJeux: number, id: number): Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}/addGameSessionAndAssignToGameAndUser/${idJeux}/${id}`, raba3);
+  }
   
-
   
-
-
 
 }
