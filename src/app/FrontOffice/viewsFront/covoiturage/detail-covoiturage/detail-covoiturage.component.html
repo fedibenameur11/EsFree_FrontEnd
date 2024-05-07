@@ -21,7 +21,8 @@
                        
 
             <h2 class="title">from {{covoiturage.lieu_depart}} to {{covoiturage.destination}}</h2>
-            <h2 class="title">Places : {{covoiturage.nombre_placecov}} remaining</h2>
+            <h2 class="title">Places : {{covoiturage.nombre_placecov}} remaining </h2>
+            <p>{{ tarif }}</p>
 
             <div class="meta-top">
               <ul>
@@ -38,7 +39,11 @@
                 <p> {{covoiturage.description}}</p>
               
            
-              
+                <div class="row justify-content-center">
+                  <div class="col-md-6 mb-3">
+                    <button style="margin-left:400px; width: 30%;" (click) =" sendMessage('+21658404108','',covoiturage.id_cov)"  class="btn btn-primary" type="submit">Reserve </button>
+                  </div>
+                </div>
 
              
               <img src="/assets/BackOffice/img/blog/blog-inside-post.jpg" class="img-fluid" alt="">
@@ -59,11 +64,15 @@
             <div id="comment-1" class="comment"  *ngFor="let aviss of listavisCov[covoiturage.id_cov]" >
               <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
+                  <img class="profile-pic img-fluid" src="/assets/BackOffice/images/user/01.jpg" alt="profile-pic">
+
                    <div class="iq-header-title">
+                    
                       <h4 class="card-title" style="color: red; ">Notice {{aviss.id_avis}}</h4>
                    </div>
                    <div class="meta-top" style="margin-right: 200px;">
                     <ul>
+                      
                       <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a >Username</a></li>
                       <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a><time datetime="2020-01-01">{{aviss.date_avis}}</time></a></li>
                     </ul>
@@ -71,22 +80,25 @@
                    
                 </div>
                 
-              <div class="iq-card-body">
-                <div class="about-info m-0 p-0">
-                  <div class="row">
-                    <div class="post-item">
-                         
-                          <div class="col-3">
-                            {{aviss.objet}}
+                <div class="iq-card-body">
+                  <div class="about-info m-0 p-0">
+                      <div class="row">
+                       
+
+
+                          <div class="post-item">
+                              <div class="col-3">
+                                 <h4 class="card-title">{{aviss.objet}}</h4> 
+                              </div>
+                              <div class="col-3">
+                                 <h5  class="card-title" >{{aviss.description}}</h5> 
+                              </div>
+                             
                           </div>
-                          <div class="col-3">
-                            {{aviss.description}}
-                          </div>
+                      </div>
                   </div>
-                    </div>
-                    </div>
-                  
-                </div>
+              </div>
+              
               </div>  
             </div>
 
@@ -106,33 +118,36 @@
              
             </div><!-- End sidebar search formn-->
             <div class="sidebar-item categories">
-                <form (ngSubmit)="addAvis(covoiturage.id_cov)">
-                <ul class="mt-3">
-                  <li>
-                    <div class="row justify-content-center">
-                      <div class="col-md-6 mb-3">
-                        <input type="text" class="form-control" [(ngModel)]="avis.objet" name="objet" placeholder="Object">
-                      </div>
+              <form (ngSubmit)="addAvis(covoiturage.id_cov)">
+                <div class="mt-3">
+                  <div class="row justify-content-center">
+                    <div class="col-md-6 mb-3">
+                      <div id="errorMessage" class="text-danger"></div>
+                      <input type="text" class="form-control" [(ngModel)]="avis.objet" name="objet" placeholder="Object">
                     </div>
-                  </li>
-                </ul>
-              
-                <ul class="mt-3">
-                  <li>
-                    <div class="row justify-content-center">
-                      <div class="col-md-6 mb-3">
-                        <textarea type="text" class="form-control" [(ngModel)]="avis.description" name="description" placeholder="Description"></textarea>
-                      </div>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-md-6 mb-3">
+                      <textarea type="text" class="form-control" [(ngModel)]="avis.description" name="description" placeholder="Description"></textarea>
                     </div>
-                  </li>
-                </ul>
-              
-                <div class="row justify-content-center"> <!-- Center the button -->
-                  <div class="col-md-6 mb-3">
-                    <button style="margin-left:200px; " class="btn btn-primary" type="submit">Submit</button> <!-- Add your button here -->
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-md-6 mb-3">
+                      <button style="margin-left:200px; " class="btn btn-primary" type="submit">Submit</button>
+                    </div>
                   </div>
                 </div>
-            </form>
+              </form>
+              
+              <!-- Modal -->
+              <div class="modal" *ngIf="showModal">
+                <div class="modal-content">
+                  <span class="close" (click)="closeModal()">&times;</span>
+                  <p>{{ errorMessage }}</p>
+                </div>
+              </div>
+              
+              
               </div>
               
           </div><!-- End Sidebar -->
@@ -144,3 +159,11 @@
     </div>
 
   </section>
+
+
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>

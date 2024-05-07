@@ -21,9 +21,17 @@ export class ListCovoiturageComponent implements OnInit{
   covoiturage: Covoiturage = new Covoiturage();
   avis : Avis = new Avis();
   listavisCov: { [id_cov: string]: Avis[] } = {};
-
+  searchTerm: string = '';
   showAddDialog: boolean = false;
   selectedCovoiturageId!: number;
+  currentPage: number = 1;
+  CovPerPage: number = 4;
+  totalCov: number = 0;
+  totalPages: number = 0;
+  pages: number[] = [];
+  startIndex: number = 0;
+  endIndex: number = 0;
+  
 
   //public listavisCov: Array<Avis> =[];
 
@@ -33,6 +41,21 @@ export class ListCovoiturageComponent implements OnInit{
    
    
   }
+
+
+  updateCovPerPage(): void {
+    this.startIndex = (this.currentPage - 1) * this.CovPerPage;
+    this.endIndex = Math.min(this.startIndex + this.CovPerPage, this.totalCov);
+   // this.filteredEvents = this.events.slice(this.startIndex, this.endIndex);
+  }
+  
+
+  changePage(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.updateCovPerPage();
+  }
+
+
   submitAvis() {
     if (!this.avis.description) {
       // Show error message if description is empty
@@ -123,7 +146,18 @@ export class ListCovoiturageComponent implements OnInit{
   navigateToCovDetail(id_cov:number) {
     this.router.navigate(['/DetailCov',id_cov]); // Redirige vers la page event-detail avec l'ID de l'événement en tant que paramètre
   }
- 
+  searchEvents(): void {
+    if (this.searchTerm.trim()) {
+      this.covoiturageService.retrieveCovByDest(this.searchTerm).subscribe(covoiturages => {
+        this.covoiturages = covoiturages;
+      });
+    } else {
+      // Si le champ de recherche est vide, rechargez la liste complète des événements approuvés
+      this.covoiturageService.getListCovoiturage().subscribe(covoiturages => {
+        this.covoiturages = covoiturages;
+      });
+    }
+  }
 
 }
 

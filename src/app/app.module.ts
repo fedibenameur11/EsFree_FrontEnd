@@ -20,6 +20,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MapComponent } from './FrontOffice/viewsFront/covoiturage/map/map.component';
 import { DetailCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/detail-covoiturage/detail-covoiturage.component';  
 import { ReactiveFormsModule } from '@angular/forms';
+import { MyCovoituragesComponent } from './FrontOffice/viewsFront/covoiturage/my-covoiturages/my-covoiturages.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     
     AvisComponent,
           MapComponent,
-          DetailCovoiturageComponent
+          DetailCovoiturageComponent,
+          MyCovoituragesComponent
     
     
   ],

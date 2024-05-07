@@ -158,7 +158,7 @@ Custom Background Color
 /*----------------------------------------------
 Background Color Opacity
 ------------------------------------------------*/
-.iq-bg-primary { background: rgba(130, 122, 243, 0.2);  color: var(--iq-primary) !important; }
+.iq-bg-primary { background: rgba(236, 21, 21, 0.2);  color: var(--iq-primary) !important; }
 .iq-bg-secondary { background: var(--iq-light-secondary) !important; color: var(--iq-secondary) !important; }
 .iq-bg-success { background: var(--iq-light-success) !important; color: var(--iq-success) !important; }
 .iq-bg-danger { background: var(--iq-light-danger) !important; color: var(--iq-danger) !important; }

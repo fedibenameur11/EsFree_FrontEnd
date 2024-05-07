@@ -5,8 +5,13 @@ export class Covoiturage {
     lieu_depart!: string;
     destination!: string;
     description!: string;
-    latitude!: number; // New latitude field
-    longitude!: number; // New longitude field
+   
+    departureLatitude!: number
+    departureLongitude!:number
+    destinationLatitude!:number
+    destinationLongitude!:number
+     departureCoords = [this.departureLatitude, this.departureLongitude];
+   destinationCoords= [this.destinationLatitude, this.destinationLongitude];
   }
   
   

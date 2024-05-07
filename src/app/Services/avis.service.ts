@@ -24,4 +24,11 @@ export class AvisService {
   {
   return this.httpClient.get<Avis[]>(this.baseUrl+'/FindByCovoiturage'+'/'+id_cov)
   }
+  retrieveAllAvisByUser(id: number): Observable<Avis[]> {
+    return this.httpClient.get<Avis[]>(this.baseUrl+`/retrieveAllAvisByUser/${id}`);
+  }
+  deleteAvis(id_avis: number): Observable<any> {
+    const url = `${this.baseUrl}/removeAvis/${id_avis}`;
+    return this.httpClient.delete(url);
+  }
 }

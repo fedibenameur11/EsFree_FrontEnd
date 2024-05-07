@@ -15,15 +15,47 @@ export class CovoiturageComponent implements OnInit {
   avis : Avis = new Avis();
   showAddDialog: boolean = false;
   selectedCovoiturageId!: number;
+  public covoiturages: Array<Covoiturage> =[];
+
+  currentPage: number = 1;
+CovPerPage: number = 4;
+totalCov: number = 0;
+totalPages: number = 0;
+pages: number[] = [];
+startIndex: number = 0;
+endIndex: number = 0;
 
   listavisCov: { [id_cov: string]: Avis[] } = {};
   constructor(private covoiturageService:CovoiturageService,public dialog: MatDialog,private avisService:AvisService){ }
 
-  public covoiturages: Array<Covoiturage> =[];
   ngOnInit(): void {
-    this.getListCovoiturage();
-    this.loadCovoiturages();
+    this.covoiturageService.getListCovoiturage().subscribe(covoiturages => {
+      this.covoiturages = covoiturages;
+      this.totalCov = covoiturages.length;
+      this.totalPages = Math.ceil(this.totalCov / this.CovPerPage);
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+      this.updateCovPerPage();
+      this.getListCovoiturage()
+    });
   }
+
+  updateCovPerPage(): void {
+    this.startIndex = (this.currentPage - 1) * this.CovPerPage;
+    this.endIndex = Math.min(this.startIndex + this.CovPerPage, this.totalCov);
+   // this.filteredEvents = this.events.slice(this.startIndex, this.endIndex);
+  }
+  
+
+  changePage(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.updateCovPerPage();
+  }
+
+
+
+
+
+
   getListCovoiturage()
   {
    this.covoiturageService.getListCovoiturage().subscribe(
@@ -53,6 +85,7 @@ export class CovoiturageComponent implements OnInit {
       .subscribe(
         (avisList: Avis[]) => {
           this.listavisCov[id_cov] = avisList;
+          console.log("ggggg")
         },
         (error) => {
           console.error(error);

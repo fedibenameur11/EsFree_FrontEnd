@@ -13,7 +13,7 @@ export class AddCovoiturageComponent implements OnInit{
   covoiturage: Covoiturage = new Covoiturage();
   form!: FormGroup; 
   tunisianCities: string[] = [
-    "Baron",
+    "Tunis",
     "Sfax",
     "Sousse",
     "Kairouan",
@@ -49,7 +49,7 @@ ngOnInit(): void {
     nombre_placecov: ['', [Validators.required, Validators.min(1), Validators.max(4)]],
     lieu_depart: ['', [Validators.required, Validators.pattern('[A-Za-z\s]+')]],
     destination: ['', [Validators.required, Validators.pattern('[A-Za-z\s]+')]],
-    // Ajoutez d'autres champs si nécessaire
+    date_depart: ['', Validators.required]    ,
     description: ['', Validators.required]
   });
 }

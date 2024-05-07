@@ -1,9 +1,6 @@
 
 <br>
-<br>
-<br>
-<br>
-<br>
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <main id="main">
@@ -22,18 +19,34 @@
           </div>
         </div>
       </div>
-
+      <div class="col-lg-8">
+      <div class="search-container mb-4 d-flex align-items-center">
+        <input type="text" [(ngModel)]="searchTerm" (input)="searchEvents()" placeholder="Search for your destination ..."  class="form-control col-4"> &nbsp;&nbsp;&nbsp;
+        <button class="btn btn-primary" (click)="loadCovoiturages()"> reset List</button>
+      </div>
+      </div>
 <section id="blog" class="blog">
 
-   <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+   <div class="container aos-init aos-animate" data-aos="faded-up" data-aos-delay="100">
 
      <div class="row gy-4 posts-list">
 
        <div class="col-xl-4 col-lg-6" *ngFor="let type of covoiturages">
          <article class="zoom">
+          <div class="d-flex align-items-center">
+            <div class="post-meta d-flex align-items-center">
+              <img class="profile-pic img-fluid" src="/assets/BackOffice/images/user/01.jpg" alt="profile-pic">
+              <div class="ml-3">
+                  <p class="post-author">Username</p>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a><time datetime="2020-01-01">{{type.date_depart}}</time></a></li>
 
+              </div>
+          </div>
+          
+            
+          </div>
            
-           <p class="post-category">{{type.date_depart}}</p>
+         
 
            <h2 class="title">
              <a >From {{type.lieu_depart}} to {{type.destination}}</a> 
@@ -44,13 +57,7 @@
            </div>
            --> 
 
-           <div class="d-flex align-items-center">
-             <div class="post-meta">
-               <p class="post-author">Username</p> 
-            
-             </div>
-             
-           </div>
+           
            <div class="post-meta">
             <button style="margin-left: 280px;" class="btn btn-primary btn-lg"  (click)="navigateToCovDetail(type.id_cov)">View Carpooling</button>
            </div>
@@ -91,14 +98,8 @@
        
       
      </div><!-- End blog posts list -->
-
-     <div class="pagination d-flex justify-content-center">
-       <ul>
-         <li><a href="#">1</a></li>
-         <li class="active"><a href="#">2</a></li>
-         <li><a href="#">3</a></li>
-       </ul>
-     </div><!-- End pagination -->
+     
+<!-- End pagination -->
 
    </div>
 
@@ -107,28 +108,6 @@
 
 
 
- <!--Map dialog-->
- <div class="modal fade" id="myModal" role="dialog" *ngIf="showAddDialog">
-   <div class="modal-dialog">
-   
-     <!-- Modal content-->
-     <div class="modal-content">
-       <div class="modal-header">
-         <h2 class="modal-title"> your departure location</h2>
-       </div>
-       <div class="modal-body">
-
-
-
-<!-- HTML structure for map -->
-
-
-<!-- Include Leaflet JavaScript -->
-
-       </div>
-     </div>
-     
-   </div>
- </div>
+ 
 
  
