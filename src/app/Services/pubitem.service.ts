@@ -73,4 +73,9 @@ export class PubitemService {
       const url = `${this.baseUrl}filterByPrice?minPrice=${minPrice}&maxPrice=${maxPrice}`;
       return this.httpClient.get<PubItem[]>(url);
     }
+
+
+    getPubItemsByPrice(price: number): Observable<PubItem[]> {
+      return this.httpClient.get<PubItem[]>(`${this.baseUrl}byPrice/${price}`);
+    }
 }

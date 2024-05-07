@@ -13,31 +13,44 @@ import { PubitemService } from 'src/app/Services/pubitem.service';
 export class ItemdetailComponent implements OnInit{
 
   pubItem!: PubItem;
-
+  samePriceItems!: PubItem[];
+  currentPubItemId: number | null = null;
   constructor(
     private route: ActivatedRoute,
     private pubitemService: PubitemService,
     private cartService: CartService,
     public snackBar: MatSnackBar
+    
   ) { }
   
   ngOnInit(): void {
- this.getPubItemById();
+    this.route.paramMap.subscribe(params => {
+      const id_pub = params.get('id_pub');
+      if (id_pub !== null) {
+        this.currentPubItemId = +id_pub;
+        this.getPubItemDetails(this.currentPubItemId);
+      } else {
+      }
+    });
   }
 
-  getPubItemById(): void {
-    const id_pubString = this.route.snapshot.paramMap.get('id_pub'); // Retrieve item ID from URL parameter as string
-    if (id_pubString) {
-      const id_pub = +id_pubString; // Convert string to number
-      this.pubitemService.getPubItemById(id_pub)
-        .subscribe(pubItem => {
-          this.pubItem = pubItem; // Assign fetched item data to pubItem variable
-        });
+  getPubItemDetails(id: number): void {
+    this.pubitemService.getPubItemById(id).subscribe(pubItem => {
+      this.pubItem = pubItem;
+      this.getOtherItemsWithSamePrice(pubItem.prix); 
+    });
+  }
+
+  getOtherItemsWithSamePrice(price: number): void {
+    if (this.currentPubItemId !== null) {
+      this.pubitemService.getPubItemsByPrice(price).subscribe(items => {
+        // Filter out the current PubItem from the list of items with the same price
+        this.samePriceItems = items.filter(item => item.id_pub !== this.currentPubItemId);
+      });
     } else {
-      console.error('Item ID is missing.');
+      // Handle case where currentPubItemId is null
     }
   }
-
   addToCart(itemId: number): void {
     const cartId = 1; // Assuming you have a fixed cart ID for now, you can replace it with dynamic logic if needed
     this.cartService.addItemToCart(cartId, itemId).subscribe(

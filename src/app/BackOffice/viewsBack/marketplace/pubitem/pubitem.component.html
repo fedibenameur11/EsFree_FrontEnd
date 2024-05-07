@@ -25,6 +25,7 @@
             <th>Price</th>
             <th>Telephone number</th>
             <th>Condition</th>
+            <th>image</th>
             <th>Date of post</th>
             <th>Update</th>
             <th>Remove</th>
@@ -38,6 +39,7 @@
             <td>{{ item.prix }} Dt</td>
             <td>{{ item.numTelephone }}</td>
             <td>{{ item.etat }}</td>
+            <td> <img [src]="item.image" alt="Product Image" width="60" height="60"> </td>
             <td>{{ item.datePost | date: 'medium' }}</td>
             <td>
                 <span class="table-update">
@@ -72,6 +74,7 @@
       </div>
 
       <div class="modal-body">
+        
         <div class="mb-3">
           <label for="formGroupExampleInput" class="form-label">Name of the product:</label>
           <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name" [(ngModel)]="pubItem.name">
@@ -173,7 +176,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" (click)="updateProduct()"  >Update product</button>
+        <button type="button" class="btn btn-success"  >Update product</button>
       </div>
     </div>
   </div>

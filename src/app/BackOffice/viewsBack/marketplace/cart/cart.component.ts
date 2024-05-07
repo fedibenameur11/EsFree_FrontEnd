@@ -18,6 +18,10 @@ export class CartComponent {
   filteredCarts: Cart[] = [];
   searchQuery: string = ''
   @ViewChild('myModal') modalElement!: ElementRef;
+  public currentPage: number = 1;
+  public itemsPerPage: number = 5; 
+  public totalPages: number = 0;
+  public pages: number[] = [];
   
 
   
@@ -31,6 +35,8 @@ export class CartComponent {
     this.cartService.getAllCartsWithProducts().subscribe(
       (data: Cart[]) => {
         this.carts = data;
+        this.totalPages = Math.ceil(this.carts.length / this.itemsPerPage);
+        this.updatePagination();
         this.applySearchFilter();
       },
       (error) => {
@@ -48,13 +54,28 @@ export class CartComponent {
     } else {
       this.cartService.searchCarts(undefined, undefined, this.searchQuery).subscribe(
         (data: Cart[]) => {
-          this.filteredCarts = data;
+          this.carts = data;
+          this.totalPages = Math.ceil(this.carts.length / this.itemsPerPage);
+          this.updatePagination();
         },
         (error) => {
           console.error('Error searching carts:', error);
         }
       );
     }
+  }
+  updatePagination(): void {
+    this.pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      this.pages.push(i);
+    }
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.filteredCarts = this.carts.slice(startIndex, endIndex);
+  }
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.updatePagination();
   }
 
   deleteCart(cartId: number): void {

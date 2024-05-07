@@ -5,6 +5,7 @@ import { PubItem } from 'src/app/Models/pubitem';
 import { CartService } from 'src/app/Services/cart.service';
 import { tap } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,8 +18,9 @@ export class CartfComponent implements OnInit {
   cartItems: PubItem[] = [];
   userId = 1; 
   handler:any = null;
+  cartId!: number ;
 
-  constructor(private cartService: CartService, private cdr: ChangeDetectorRef, private httpClient:HttpClient) { }
+  constructor(private cartService: CartService, private cdr: ChangeDetectorRef, private httpClient:HttpClient , private router: Router) { }
   ngOnInit(): void {
     this.getCartItemsForUser();
   }
@@ -51,6 +53,7 @@ export class CartfComponent implements OnInit {
         console.error('Error removing item from cart:', error);
       }
     );
+    location.reload();
   }
 
   pay(amount: any) {    
@@ -60,6 +63,7 @@ export class CartfComponent implements OnInit {
       token: (token: any) => {
         // This will be called when the user successfully completes the payment
         this.handleToken(token, amount);
+       
       }
     });
 
@@ -67,7 +71,7 @@ export class CartfComponent implements OnInit {
     handler.open({
       name: 'Stripe payment',
       description: 'enter your card credentials',
-      amount: amount * 100
+      amount: amount * 1000
     });
  
   }
@@ -82,10 +86,27 @@ export class CartfComponent implements OnInit {
           console.log('Payment intent created:', response);
           // Handle success
           alert('Payment Successful!');
+         
         },
         (error: any) => {
           console.error('Failed to create payment intent:', error);
         }
       );
+       this.router.navigate(['/market'])
+       this.deleteCart(this.cartId);
   }
+
+  deleteCart(cartId: number) {
+    this.cartService.deleteCart(cartId).subscribe(
+      () => {
+        console.log('Cart deleted successfully');
+      },
+      (error) => {
+        console.error('Error deleting cart:', error);
+      }
+    );
   }
+
+  }
+
+  

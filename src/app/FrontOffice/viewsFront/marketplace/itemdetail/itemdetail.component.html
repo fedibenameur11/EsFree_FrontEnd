@@ -58,4 +58,25 @@
             </div>
         </div>
 </div>
+
+<div class="container mt-5" style="margin-left:160px;">
+    <h4>Other items with the same price:</h4>
+    <br>
+    <div class="row">
+      <div class="col-md-3 mb-4" *ngFor="let item of samePriceItems">
+        <div class="card custom-card">
+          <img [src]="item.image" class="card-img-top custom-card-img" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">{{ item.description }}</p>
+            <button type="button" class="btn btn-outline-danger" *ngIf="pubItem.id_pub !== undefined"  (click)="addToCart(pubItem.id_pub)" >
+                <i class="ri-shopping-cart-line "></i></button>
+                <button type="button" class="btn btn-outline-success" style="margin-left: 10px;" routerLink="/cartf">
+                    <i class="las la-eye"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
                     <br><br>

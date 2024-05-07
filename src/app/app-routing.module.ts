@@ -10,6 +10,7 @@ import { MarketComponent } from './FrontOffice/viewsFront/marketplace/market/mar
 import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemdetail/itemdetail.component';
 import { MyitemsComponent } from './FrontOffice/viewsFront/marketplace/myitems/myitems.component';
 import { CartfComponent } from './FrontOffice/viewsFront/marketplace/cartf/cartf.component';
+import { ChartpubComponent } from './BackOffice/viewsBack/marketplace/chartpub/chartpub.component';
 
 
 
@@ -36,6 +37,7 @@ const routes: Routes = [
     children:[
       {path:"Pubitem",component:PubitemComponent},
       {path:"Cart",component:CartComponent},
+      {path:"chart",component:ChartpubComponent}
 
 
       // hné l components mta3 l backOffice lkol 

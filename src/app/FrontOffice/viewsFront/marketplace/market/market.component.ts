@@ -20,6 +20,7 @@ export class MarketComponent implements OnInit {
   etats: string[] = ['excellente','bien', 'moyenne', 'mauvaise'];
   selectedEtats: string[] = [];
 
+  
 
 
  
@@ -29,15 +30,27 @@ export class MarketComponent implements OnInit {
 
   ngOnInit(): void {
     this.retrieveAllPubItems();
+    this.createCartForUser(1);
   }
 
   retrieveAllPubItems(): void {
     this.pubItemService.getPubitems().subscribe(pubItems => {
       this.pubItems = pubItems;
-      this.filteredItems = this.pubItems;
+      this.filteredItems = [...this.pubItems];
     });
   }
 
+  
+  createCartForUser(userId: number): void {
+    this.cartService.createCartForUser(userId).subscribe(
+      (cart) => {
+        console.log('Cart created successfully:', cart);
+      },
+      (error) => {
+        console.error('Error creating cart:', error);
+      }
+    );
+  }
   
   searchItems(): void {
     if (this.searchText.trim()) {
@@ -45,19 +58,19 @@ export class MarketComponent implements OnInit {
         this.pubItems = pubItems;
       });
     } else {
-      this.retrieveAllPubItems(); // If search text is empty, retrieve all items
+      this.filteredItems = [...this.pubItems]; // If search text is empty, retrieve all items
     }
   }
 
   sortItemsByPriceDescending(): void {
     this.pubItemService.getPubItemsSortedByPriceDS().subscribe(pubItems => {
-      this.pubItems = pubItems;
+      this.filteredItems = pubItems;
     });
   }
 
   sortItemsByPriceAS(): void {
     this.pubItemService.getPubItemsSortedByPriceAS().subscribe(pubItems => {
-      this.pubItems = pubItems;
+      this.filteredItems = pubItems;
     });
   }
 
@@ -78,8 +91,8 @@ export class MarketComponent implements OnInit {
   
     if (this.selectedEtats.length === 0) {
       // If no filters selected, show all items
-      this.filteredItems = this.pubItems;
-    } else {
+      this.filteredItems = [...this.pubItems];
+        } else {
       // Filter items based on selected Etats
       this.filteredItems = this.pubItems.filter(item => {
         console.log('Item Etat:', item.etat); // Log item etat to check the value

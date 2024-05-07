@@ -59,28 +59,6 @@ export class PubitemComponent implements OnInit {
     );
   }
 
-
- // addProduct() {
-   // const pubItem: PubItem = {
-    //  name: this.pubItem.name,
-      //description: this.pubItem.description,
-      //prix: this.pubItem.prix,
-      //numTelephone: this.pubItem.numTelephone,
-      //image: this.pubItem.image,
-      //etat: this.selectedEtat
-    //};
-
-    //this.pubItemService.addPubitem(pubItem).subscribe(
-      //(response) => {
-        //console.log('Product added successfully:', response);
-        //this.loadPubItems();
-      //},
-      //(error) => {
-        //console.error('Error adding product:', error);
-      //}
-    //);
-  //}
-
   openUpdateModal(pubItem: PubItem) {
     console.log('Selected PubItem:', pubItem);
     this.pubItem = new PubItem(); // Create a new instance
@@ -95,7 +73,7 @@ export class PubitemComponent implements OnInit {
     }
   }
 
-  updateProduct() {
+ updateProduct() {
     this.pubItemService.updatePubItem(this.pubItem).subscribe(
       (response) => {
         console.log('Product updated successfully:', response);
@@ -111,27 +89,24 @@ export class PubitemComponent implements OnInit {
 
   searchProducts() {
     if (this.searchText.trim() !== '') {
-        this.pubItemService.searchPubItems(this.searchText).subscribe(products => {
-            this.pubItems = products;
-        });
+      this.pubItemService.searchPubItems(this.searchText).subscribe(products => {
+        this.pubItems = products;
+        this.totalPages = Math.ceil(this.pubItems.length / this.itemsPerPage); // Update total pages
+        this.updatePagination(); // Update pagination logic
+      });
     } else {
-        // If search text is empty, fetch all products
-        this.pubItemService.getPubitems().subscribe(products => {
-            this.pubItems = products;
-        });
+      this.loadPubItems(); // Reload all products which will also update pagination
     }
-}
+  }
+
 addPubItemm(): void {
   this.pubItem.etat = this.selectedEtat;
   this.pubItemService.addPubItemm(this.pubItem).subscribe(
     (data: PubItem) => {
       console.log('PubItem added successfully:', data);
-      this.productAddedSuccessfully = true;
+
       this.pubItem = new PubItem();
       this.loadPubItems();
-      setTimeout(() => {
-        this.productAddedSuccessfully = false;
-      }, 3000);
       
     },
     (error) => {

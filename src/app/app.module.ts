@@ -23,6 +23,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { CartfComponent } from './FrontOffice/viewsFront/marketplace/cartf/cartf.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ChartpubComponent } from './BackOffice/viewsBack/marketplace/chartpub/chartpub.component';
 
 
 
@@ -42,7 +43,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MarketComponent,
     ItemdetailComponent,
     MyitemsComponent,
-  CartfComponent
+  CartfComponent,
+  ChartpubComponent
 
     
     

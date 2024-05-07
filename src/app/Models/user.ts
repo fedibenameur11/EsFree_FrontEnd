@@ -1,6 +1,13 @@
 export class User {
     id!: number;
+    name!: string;
     email!: string;
-    password!: string;
     role!: string;
+    password!: string;
+    image!: string;
+    phoneNumber!: number;
+
   }
+
+
+ 

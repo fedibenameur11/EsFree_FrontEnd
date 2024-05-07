@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Etat, PubItem } from 'src/app/Models/pubitem';
 import { PubitemService } from 'src/app/Services/pubitem.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -15,10 +16,11 @@ export class MyitemsComponent implements OnInit  {
   etatOptions = Object.values(Etat);
   selectedEtat!: Etat;
   imageFile: File | undefined;
+  
 
 
 
-  constructor(private pubitemService: PubitemService) { }
+  constructor(private pubitemService: PubitemService,  public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getPubItems();
@@ -41,6 +43,7 @@ export class MyitemsComponent implements OnInit  {
         console.error('Error deleting item:', error);
       }
     );
+   this.SsnackBar();
   }
 
 
@@ -58,7 +61,6 @@ export class MyitemsComponent implements OnInit  {
       this.pubItem.etat = newValue;
     }
   }
-
   updateProduct() {
     this.pubitemService.updatePubItem(this.pubItem).subscribe(
       (response) => {
@@ -70,6 +72,7 @@ export class MyitemsComponent implements OnInit  {
         console.error('Error updating product:', error);
       }
     );
+    this.SnackBar();
   }
 
 
@@ -99,13 +102,29 @@ export class MyitemsComponent implements OnInit  {
         console.error('Error adding product:', error);
       }
     );
+    this.openSnackBar();
   }
   
   
   
   
+  openSnackBar() {
+    this.snackBar.open('Item added by you', 'Close', {
+      duration: 3000 // Duration in milliseconds
+    });
+  }
 
+  SnackBar() {
+    this.snackBar.open('Item updated successfully', 'Close', {
+      duration: 3000 // Duration in milliseconds
+    });
+  }
 
+  SsnackBar() {
+    this.snackBar.open('Item deleted successfully', 'Close', {
+      duration: 3000 // Duration in milliseconds
+    });
+  }
   
   
 }

@@ -12,7 +12,7 @@
   </div!-->
 
   <div class="container">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</button>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</button>
 
     <div class="gallery">
       <div class="content" *ngFor="let item of pubItems">
@@ -27,6 +27,8 @@
         </div>
       </div>
     </div>
+
+    
   </div>
 
 
@@ -44,18 +46,18 @@
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label for="formGroupExampleInput" class="form-label">Name of the product:</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name" [(ngModel)]="pubItem.name">
-        </div>
+          <label for="formGroupExampleInput" class="form-label">Name of the product:</label>   
+          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name" [(ngModel)]="pubItem.name" name="name" required #name="ngModel">
 
         <div class="row">
           <div class="col">
-            Price of the product:
-            <input type="text" class="form-control" placeholder="Price" aria-label="First name" [(ngModel)]="pubItem.prix">
+            <label for="priceInput" class="form-label">Price of the product:</label>
+            <input type="number" class="form-control" id="priceInput" placeholder="Price" aria-label="Price" [(ngModel)]="pubItem.prix" name="price" required #price="ngModel" >
           </div>
           <div class="col">
-            Phone number:
-            <input type="text" class="form-control" placeholder="Number of telephone" aria-label="Last name" [(ngModel)]="pubItem.numTelephone">
+            <label for="phoneInput" class="form-label">Phone number:</label>
+            <input type="text" class="form-control" id="phoneInput" placeholder="Number of telephone" aria-label="Phone number" [(ngModel)]="pubItem.numTelephone" name="phoneNumber" pattern="[0-9]{8}" required #phone="ngModel">
+
           </div>
         </div>
 <br>
@@ -64,10 +66,6 @@
           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="pubItem.description"></textarea>
         </div>
         
-        <div class="mb-3">
-          <label for="formGroupExampleInput" class="form-label">image:</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="image" [(ngModel)]="pubItem.image">
-        </div>
         <!--div class="mb-3 custom-file">
           Upload image of the product: 
           <label for="imageUpload" class="form-label">Image of the product</label>
@@ -83,14 +81,14 @@
       </div>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer" style="padding-top: 0;">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" (click)="updateProduct()"  >Update product</button>
+        <button type="button" class="btn btn-success" (click)="updateProduct()">Update product</button>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 
 
 <div class="modal fade" id="addProductModal" [class.show]="" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
@@ -104,8 +102,13 @@
         <!-- Form for adding a new product -->
         <form (ngSubmit)="onSubmit()">
           <div class="mb-3">
-            <label >Name of the product:</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name" [(ngModel)]="pubItem.name">
+            <label for="formGroupExampleInput" class="form-label">Name of the product:</label>   
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name" [(ngModel)]="pubItem.name" name="name" required #name="ngModel">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+              <div *ngIf="name.errors?.['required']">
+                Name is required.
+              </div>
+            </div>
           </div>
 
           <div>
@@ -113,12 +116,20 @@
             <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="pubItem.description" name="description" required>
           </div>
           <div>
-            <label>Price:</label>
-            <input type="number"  class="form-control" id="formGroupExampleInput" [(ngModel)]="pubItem.prix" name="prix" required>
+            <label for="priceInput" class="form-label">Price of the product:</label>
+            <input type="number" class="form-control" id="priceInput" placeholder="Price" aria-label="Price" [(ngModel)]="pubItem.prix" name="price" required #price="ngModel" [min]="0.01">
+            <div *ngIf="price.invalid && (price.dirty || price.touched)" class="text-danger">
+              <div *ngIf="price.errors?.['required']">
+                Price is required.
+              </div>
+              <div *ngIf="price.errors?.['min']">
+                Price must be greater than 0.
+              </div>
+            </div>
           </div>
           <div>
             <label>Telephone Number:</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="pubItem.numTelephone" name="numTelephone">
+            <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="pubItem.numTelephone" name="numTelephone" required pattern="[0-9]{10}">
           </div>
           <div>
             <label>Choose Image:</label> <!-- Updated label -->
@@ -132,7 +143,7 @@
             </select>
           </div>
           <br>
-          <button type="submit">Add Product</button>
+          <button type="submit" class="btn btn-success">Add Product</button>
         </form>
       </div>
     </div>
