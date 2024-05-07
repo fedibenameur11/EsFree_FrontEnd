@@ -20,6 +20,14 @@ import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemde
 import { MyitemsComponent } from './FrontOffice/viewsFront/marketplace/myitems/myitems.component';
 import { CartfComponent } from './FrontOffice/viewsFront/marketplace/cartf/cartf.component';
 import { ChartpubComponent } from './BackOffice/viewsBack/marketplace/chartpub/chartpub.component';
+import { ContratLocationlistComponent } from './BackOffice/viewsBack/contratLocation/contrat-locationlist/contrat-locationlist.component';
+import { MaisonlistComponent } from './FrontOffice/viewsFront/maison/maisonlist/maisonlist.component';
+import { MaisonlistbackComponent } from './BackOffice/viewsBack/maison/maisonlist/maisonlist.component';
+import { MaisondetailComponent } from './FrontOffice/viewsFront/maison/maisondetail/maisondetail.component';
+import { MaisondetailbackComponent } from './BackOffice/viewsBack/maison/maisondetailback/maisondetailback.component';
+
+//import { ContratLocationAddComponent } from './FrontOffice/viewsFront/colocation/contratLocation/contrat-location-add/contrat-location-add.component';
+//import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
 
 
 
@@ -43,7 +51,13 @@ const routes: Routes = [
       {path:"market", component:MarketComponent},
       {path:"itemdetail/:id_pub", component:ItemdetailComponent},
       {path:"myitems", component:MyitemsComponent},
-      {path:"cartf", component: CartfComponent}
+      {path:"cartf", component: CartfComponent},
+      //{path:"collocationList", component:CollocationListComponent},
+      {path:"maisonlist", component:MaisonlistComponent},
+      {path:"contratlocationlist", component:ContratLocationlistComponent},
+      { path: 'afficherMaison/:id', component: MaisondetailComponent }
+     
+      // hné l components mta3 l frontOffice lkol
    
    ]
    },
@@ -60,8 +74,13 @@ const routes: Routes = [
      { path: "statevents", component: StatEventComponent },
       {path:"Pubitem",component:PubitemComponent},
       {path:"Cart",component:CartComponent},
-      {path:"chart",component:ChartpubComponent}
+      {path:"chart",component:ChartpubComponent},
 
+      {path:"maisonlist", component:MaisonlistbackComponent},
+      { path: 'afficherMaison/:id', component: MaisondetailbackComponent },
+      {path:"contrats", component:ContratLocationlistComponent}
+      
+    
 
       // hné l components mta3 l backOffice lkol 
 
@@ -76,4 +95,5 @@ const routes: Routes = [
 })
 export class AppRoutingModule { 
 
+ 
 }

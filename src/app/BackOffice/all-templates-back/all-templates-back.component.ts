@@ -6,4 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./all-templates-back.component.css']
 })
 export class AllTemplatesBackComponent {
+
 }

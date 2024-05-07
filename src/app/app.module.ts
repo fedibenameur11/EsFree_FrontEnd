@@ -17,7 +17,7 @@ import { EventListFrontComponent } from './FrontOffice/viewsFront/event/event-li
 
 import { EventAddFrontComponent } from './FrontOffice/viewsFront/event/event-add-front/event-add-front.component';
 import { EventDetailFrontComponent } from './FrontOffice/viewsFront/event/event-detail-front/event-detail-front.component';
-import { ReactiveFormsModule  } from '@angular/forms';
+
 
 import { EventCalendarComponent } from './FrontOffice/viewsFront/event/event-calendar/event-calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -29,9 +29,7 @@ import { environment } from './environnement/environnement';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { PubitemComponent } from './BackOffice/viewsBack/marketplace/pubitem/pubitem.component';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
 import { MarketComponent } from './FrontOffice/viewsFront/marketplace/market/market.component';
@@ -44,6 +42,16 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ChartpubComponent } from './BackOffice/viewsBack/marketplace/chartpub/chartpub.component';
 
 
+import { MaisonlistComponent } from './FrontOffice/viewsFront/maison/maisonlist/maisonlist.component';
+import { ContratLocationlistComponent } from './BackOffice/viewsBack/contratLocation/contrat-locationlist/contrat-locationlist.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MaisonlistbackComponent } from './BackOffice/viewsBack/maison/maisonlist/maisonlist.component';
+import { MaisondetailComponent } from './FrontOffice/viewsFront/maison/maisondetail/maisondetail.component';
+import { MaisondetailbackComponent } from './BackOffice/viewsBack/maison/maisondetailback/maisondetailback.component';
+import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
 
 
 
@@ -71,9 +79,13 @@ import { ChartpubComponent } from './BackOffice/viewsBack/marketplace/chartpub/c
     ItemdetailComponent,
     MyitemsComponent,
   CartfComponent,
-  ChartpubComponent
-
-    
+  ChartpubComponent,
+ MaisonlistComponent,
+    ContratLocationlistComponent,
+    MaisonlistbackComponent,
+    MaisondetailComponent,
+    MaisondetailbackComponent,
+    ContratLocationlistComponent
     
   ],
   imports: [
@@ -96,6 +108,13 @@ import { ChartpubComponent } from './BackOffice/viewsBack/marketplace/chartpub/c
     MatSnackBarModule,
  
 
+    HttpClientModule,
+    MatDialogModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+      
   ],
   providers: [],
   bootstrap: [AppComponent]
