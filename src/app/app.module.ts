@@ -11,6 +11,12 @@ import { NavbarBackComponent } from './BackOffice/navbar-back/navbar-back.compon
 import { SidebarBackComponent } from './BackOffice/sidebar-back/sidebar-back.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
+import { ItemListComponent } from './BackOffice/viewsBack/lostandfound/item-list/item-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ItemListUsersComponent } from './FrontOffice/viewsFront/lostandfound/item-list-users/item-list-users.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PubDiscussComponent } from './FrontOffice/viewsFront/lostandfound/pub-discuss/pub-discuss.component';
+import { MyitemsComponent } from './FrontOffice/viewsFront/lostandfound/myitems/myitems.component';
 
 
 @NgModule({
@@ -22,13 +28,20 @@ import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/co
     HeaderFrontComponent,
     NavbarBackComponent,
     SidebarBackComponent,
+    ItemListComponent,
+    ItemListUsersComponent,
+    PubDiscussComponent,
+    MyitemsComponent,
     
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
