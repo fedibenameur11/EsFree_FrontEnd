@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Event } from '../Models/event/event';
+import { Event } from '../Models/statistiv/event';
 import { map } from 'rxjs/operators';
 
 @Injectable({

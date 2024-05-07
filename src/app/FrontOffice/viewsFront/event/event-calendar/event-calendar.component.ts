@@ -3,7 +3,7 @@ import { EventService } from 'src/app/Services/event.service';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { Router } from '@angular/router';
-import { Event } from 'src/app/Models/event/event';
+import { Event } from 'src/app/Models/statistiv/event';
 
 @Component({
   selector: 'app-event-calendar',

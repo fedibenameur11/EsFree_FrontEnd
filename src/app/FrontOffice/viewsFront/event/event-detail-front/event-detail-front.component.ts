@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'src/app/Services/event.service';
-import { Event } from 'src/app/Models/event/event';
+import { Event } from 'src/app/Models/statistiv/event';
 import { ParticipationService } from 'src/app/Services/participation.service';
 import Swal from 'sweetalert2';
 import { Participation } from 'src/app/Models/participation/participation.model';
