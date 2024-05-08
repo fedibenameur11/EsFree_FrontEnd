@@ -64,6 +64,9 @@ export class MaisonService {
 
     return this.http.get<Page<Maison>>(`${this.baseUrl}/list_page`, { params });
   }
+  chercherMaison(adresse: string): Observable<Maison[]> {
+    return this.http.get<Maison[]>(`${this.baseUrl}/search/${adresse}`); 
+  }
   
 
   

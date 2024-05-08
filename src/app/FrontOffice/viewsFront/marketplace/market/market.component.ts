@@ -4,7 +4,6 @@ import { Cart } from 'src/app/Models/cart';
 import { PubItem } from 'src/app/Models/pubitem';
 import { CartService } from 'src/app/Services/cart.service';
 import { PubitemService } from 'src/app/Services/pubitem.service';
-import { Modal } from 'bootstrap';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @Component({

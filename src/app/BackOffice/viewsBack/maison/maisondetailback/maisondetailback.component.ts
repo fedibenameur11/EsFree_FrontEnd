@@ -23,11 +23,24 @@ export class MaisondetailbackComponent {
   newMaison: Maison = new Maison();
   Username !: String;
   idM!:number;
+  iduser!:number;
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number ;
+
+  getId(){
+     if(this.userId ){
+     this.id=parseFloat(this.userId)
+  }
+}
   
-  openAddContratDialog(username : String,id:number) {
+  openAddContratDialog(iduser : number,id:number,username: String) {
     this.showAddContratDialog = true;
-    this.Username=username;
+    this.iduser=iduser;
     this.idM=id;
+    this.Username=username
+    console.log(this.Username);
+    console.log(this.idM);
+
   }
   closeAddContratDialog() {
     this.showAddContratDialog = false;
@@ -101,12 +114,12 @@ export class MaisondetailbackComponent {
   }
 
   onSubmitContrat() {
-    this.contratservice.addContratByUserAndMaison(this.newContrat, this.idM, this.maison.id_maison).subscribe(
+    this.contratservice.addContratByUserAndMaison(this.newContrat, this.iduser, this.maison.id_maison).subscribe(
       () => {
         Swal.fire('Success!', 'Contrat de colocation ajouté avec succès', 'success');
   
         // Call the function to remove the user after successfully adding the contract
-        this.refuserDemandeur(this.maison.id_maison, this.idM);
+        this.refuserDemandeur(this.maison.id_maison, this.iduser);
   
         // Decrement the number of available spots
         this.maison.nbrplacedispo--;
@@ -119,7 +132,7 @@ export class MaisondetailbackComponent {
         });*/
   
         this.generatePDF();
-        //window.location.reload();
+        window.location.reload();
       },
       (error) => {
         Swal.fire({

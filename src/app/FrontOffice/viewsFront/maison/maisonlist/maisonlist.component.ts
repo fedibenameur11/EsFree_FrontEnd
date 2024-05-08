@@ -10,6 +10,8 @@ import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
 import { CoordinatesMapService } from 'src/app/Services/coordinates-map.service';
 import 'leaflet-routing-machine'
+import { error } from 'jquery';
+import { UserService } from 'src/app/Service/user.service';
 @Component({
   selector: 'app-maisonlist',
   templateUrl: './maisonlist.component.html',
@@ -33,7 +35,17 @@ export class MaisonlistComponent {
   pageNumber: number = 0;
   pageSize: number = 6; 
   map: any;
-  loc!:string
+  loc!:string;
+  searchTerm: string = '';
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number ;
+  username = localStorage.getItem('name');
+
+  getId(){
+     if(this.userId ){
+     this.id=parseFloat(this.userId)
+  }
+}
 
 
   openAddDialog() {
@@ -49,28 +61,29 @@ export class MaisonlistComponent {
     this.showUpdateDialog = false;
   }
 
-  constructor(private maisonService: MaisonService, private router: Router,private dialog :MatDialog,private http: HttpClient,private MapService:CoordinatesMapService) {
+  constructor(private maisonService: MaisonService, private router: Router,private dialog :MatDialog,private http: HttpClient,private MapService:CoordinatesMapService,private userservice : UserService) {
     this.newMaison.user = {
-      id: 1,
+      id: 3,
       name: 'fedi',
       email: 'fedi.benameur@esprit.tn',
       password: 'fedi',
       image :'',
       phoneNumber : 93661180,
-      role :'colocataire'
+      role :'[USER]'
     };
     this.demandeur ={
-      id: 2,
+      id: 4,
       name: 'fedi2',
       email: 'fedi2.benameur@esprit.tn',
-      password: 'fedi2',
+      password: 'Azertyuiop1',
       image :'',
       phoneNumber : 93661180,
-      role :'colocataire'
+      role :'[USER]'
 
     }
   }
   ngOnInit(){
+    this.getId()
     this.listMaisons(this.pageNumber);
     this.initMap(); 
   }
@@ -102,11 +115,14 @@ export class MaisonlistComponent {
       }
     );
   }
+
+  
   
   onSubmit(): void {
+    this.getId()
     console.log('Nouvelle maison a été ajouté', this.newMaison);
 
-    this.maisonService.addMaisonByUser(this.newMaison,this.newMaison.user.id).subscribe(() => {
+    this.maisonService.addMaisonByUser(this.newMaison,this.id).subscribe(() => {
       console.log('Nouvelle maison a été ajouté', this.newMaison);
       this.showAddDialog = false;
       window.location.reload();
@@ -125,11 +141,13 @@ export class MaisonlistComponent {
   }
 
   reserverMaison(maisonId: number, demandeur: User): void {
+    console.log(demandeur)
     this.maisonService.ajouterDemandeur(maisonId, demandeur)
       .subscribe(() => {
         // Affichez une alerte de succès pour la demande envoyée
         Swal.fire('Success!', 'Demande envoyée avec succès', 'success');
         console.log('Demandeur ajouté avec succès');
+        console.log(demandeur)
       }, (error) => {
         console.error('Erreur dans l\'Envoie de cette demande. : ', error);
         // Affichez une alerte d'erreur en cas d'échec de l'ajout du demandeur
@@ -145,6 +163,44 @@ export class MaisonlistComponent {
     );
       
   }
+  /*reserverMaison(maisonId: number, demandeur_id: number): void {
+    // Récupérer les détails du demandeur par son ID
+    this.userservice.GetUser(demandeur_id).subscribe(
+      demandeur => {
+        // Si le demandeur est trouvé, continuer avec la réservation de la maison
+        if (demandeur) {
+          this.maisonService.ajouterDemandeur(maisonId, demandeur)
+            .subscribe(() => {
+              // Affichez une alerte de succès pour la demande envoyée
+              Swal.fire('Success!', 'Demande envoyée avec succès', 'success');
+              console.log('Demandeur ajouté avec succès');
+            }, (error) => {
+              console.error('Erreur dans l\'Envoie de cette demande. : ', error);
+              // Affichez une alerte d'erreur en cas d'échec de l'ajout du demandeur
+              Swal.fire('Error!', 'Erreur dans l\'Envoie de cette demande.', 'error');
+            });
+          // Envoyer le SMS après avoir ajouté le demandeur à la maison
+          this.http.post<any>('http://localhost:8082/send-sms', {}).subscribe(
+            response => {
+              console.log('SMS envoyé avec succès');
+            },
+            error => {
+              console.error('Erreur lors de l\'envoi du SMS :', error);
+            }
+          );
+        } else {
+          // Si aucun demandeur n'est trouvé avec l'ID spécifié, affichez une alerte d'erreur
+          Swal.fire('Error!', 'Demandeur introuvable.', 'error');
+          console.error('Demandeur introuvable');
+        }
+      },
+      error => {
+        console.error('Erreur lors de la récupération du demandeur :', error);
+        // Affichez une alerte d'erreur en cas d'échec de récupération du demandeur
+        Swal.fire('Error!', 'Erreur lors de la récupération du demandeur.', 'error');
+      }
+    );
+  }*/
 
   onRangeChange(pageNumber: number) {
     this.listMaisons(pageNumber);
@@ -206,4 +262,22 @@ export class MaisonlistComponent {
         console.error('Error fetching coordinates:', error);
       });
   }
+  // Component
+chercherMaison(): void {
+  if (this.searchTerm.trim()) {
+    this.maisonService.chercherMaison(this.searchTerm).subscribe(
+      maisons => {
+        this.maisonsDisponibles = maisons;
+        console.log("houses:",this.maisonsDisponibles)
+      },
+      error => {
+        console.error('Une erreur est survenue lors de la recherche de maisons :', error);
+        // Gérer l'erreur ici, par exemple afficher un message à l'utilisateur
+      }
+    );
+  } else {
+    // Gérer le cas où le terme de recherche est vide
+  }
+}
+
   }

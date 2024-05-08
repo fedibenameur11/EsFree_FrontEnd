@@ -107,7 +107,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { filter } from 'rxjs';
 import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.component';
 
-initializeApp(environments.firebase);
+//initializeApp(environments.firebase);
 
 
 

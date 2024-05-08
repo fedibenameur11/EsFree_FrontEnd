@@ -18,6 +18,16 @@ export class MaisonlistbackComponent {
   showAddDialog: boolean = false;
   showUpdateDialog: boolean = false;
   showAddContratDialog: boolean = false;
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number ;
+  user_name!: string;
+  username = localStorage.getItem('name');
+
+  getId(){
+     if(this.userId ){
+     this.id=parseFloat(this.userId)
+  }
+}
   openAddDialog() {
     this.showAddDialog = true;
   }
@@ -36,17 +46,18 @@ export class MaisonlistbackComponent {
   }
   constructor(private maisonService: MaisonService, private router: Router,private dialog :MatDialog,private MapService:CoordinatesMapService) {
     this.newMaison.user = {
-      id: 1,
+      id: 3,
       name: 'fedi',
       email: 'fedi.benameur@esprit.tn',
-      password: 'fedi',
+      password: 'Azertyuiop1',
       image :'',
       phoneNumber : 93661180,
-      role :'colocataire'
+      role :'[USER]'
     };
   }
   ngOnInit() {
-    this.getMaisonsByUtilisateur(1);
+    this.getId()
+    this.getMaisonsByUtilisateur(this.id);
   }
   getMaisonsByUtilisateur(iduser: number) {
     this.maisonService.getMaisonsByUtilisateur(iduser)
@@ -61,7 +72,7 @@ export class MaisonlistbackComponent {
     );
   }
   onSubmit(): void {
-    this.maisonService.addMaisonByUser(this.newMaison,this.newMaison.user.id).subscribe(() => {
+    this.maisonService.addMaisonByUser(this.newMaison,this.id).subscribe(() => {
       console.log('Nouvelle maison a été ajouté', this.newMaison);
       this.showAddDialog = false;
       
