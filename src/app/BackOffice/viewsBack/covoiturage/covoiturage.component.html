@@ -1,14 +1,17 @@
-
+<div class="search-container mb-4 d-flex align-items-center">
+  <input type="text" [(ngModel)]="searchTerm" (input)="searchCov()" placeholder="Search for your destination ..."  class="form-control col-4"> &nbsp;&nbsp;&nbsp;
+  <button class="btn btn-primary" (click)="loadCovoiturages()"> reset List</button>
+</div>
   <div table-responsive>
   <div class="covoiturage-container" *ngIf="covoiturages.length > 0; else loading">
     <table class="table table-striped table-bordered" id="datatable">
       <thead>
         <tr>
          
-          <th>Nombre Places</th>
-          <th>Lieu de départ</th>
+          <th>Places</th>
+          <th>Departure</th>
           <th>Destination</th>
-          <th>Date de départ</th>
+          <th>departure date</th>
           <th>Description</th>
           
           <th>Action</th>

@@ -56,7 +56,7 @@
                                 <div class="meta-top mr-3">
                                     <ul class="list-unstyled mb-0">
                                         <li class="d-flex align-items-center"><i class="bi bi-clock mr-1"></i> <a><time datetime="2020-01-01">{{type.date_depart}}</time></a></li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-chat-dots mr-1"></i> <a> Comments</a></li>
+                                        <li type="button" class="d-flex align-items-center"><i data-toggle="modal" data-toggle="modal" data-target="#myModal" data-placement="top" title="" data-original-title="Delete" (click)="openDialog(type.id_cov)" class="bi bi-chat-dots mr-1"></i> <a> Comments</a></li>
                                     </ul>
                                 </div>
                                 <div class="post-meta ml-auto">
@@ -136,14 +136,14 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="editCovModalLabel">Edit</h5>
+              <h3 class="modal-title" id="editCovModalLabel">Edit Carpooling</h3>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form (ngSubmit)="editCov()" class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="description" class="form-label">Name</label>
+                    <label for="description" class="form-label">Description</label>
                     <input type="text" [(ngModel)]="selectedCov && selectedCov.description"  name="description" class="form-control" placeholder="description" required>
                   </div>
                   <div class="mb-3">
@@ -154,11 +154,11 @@
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="destination" class="form-label">Organizer</label>
+                    <label for="destination" class="form-label">Destination</label>
                     <input type="text" [(ngModel)]="selectedCov && selectedCov.destination" name="destination" class="form-control" placeholder="destination" required>
                   </div>
                   <div class="mb-3">
-                    <label for="nombre_placecov" class="form-label">Price</label>
+                    <label for="nombre_placecov" class="form-label">Places</label>
                     <input type="number" [(ngModel)]="selectedCov && selectedCov.nombre_placecov" name="nombre_placecov" class="form-control" placeholder="Price" required>
                   </div>
                 </div>
@@ -171,6 +171,40 @@
         </div>
       </div>
       
+  <div class="modal fade" id="myModal" role="dialog" *ngIf="showAddDialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title"> Carpooling {{selectedCovoiturageId}}</h2>
+        </div>
+        <div class="modal-body" *ngIf="listavisCov[selectedCovoiturageId]" >
+          <!-- Assuming selectedCovoiturageId is the id_cov of the selected covoiturage -->
+          <div class="iq-card" *ngFor="let avis of listavisCov[selectedCovoiturageId]">
+            <div class="iq-card-header d-flex justify-content-between">
+               <div class="iq-header-title">
+                  <h4 class="card-title" style="color: red;">Notice {{avis.id_avis}}</h4>
+               </div>
+            </div>
+            <div class="iq-card-body">
+               <div class="about-info m-0 p-0">
+                  <div class="row">
+                    
+                     <div class="col-3">Object :</div>
+                     <div class="col-9">{{avis.objet}}</div>
+                     <div class="col-3">Description</div>
+                     <div class="col-9">{{avis.description}}</div>
+                     <div class="col-3">Date Comment: </div>
+                     <div class="col-9">{{avis.date_avis}}</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
 <!-- Link Bootstrap JS -->

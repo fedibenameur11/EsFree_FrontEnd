@@ -16,7 +16,7 @@ export class CovoiturageComponent implements OnInit {
   showAddDialog: boolean = false;
   selectedCovoiturageId!: number;
   public covoiturages: Array<Covoiturage> =[];
-
+  searchTerm: string = '';
   currentPage: number = 1;
 CovPerPage: number = 4;
 totalCov: number = 0;
@@ -52,7 +52,18 @@ endIndex: number = 0;
   }
 
 
-
+  searchCov(): void {
+    if (this.searchTerm.trim()) {
+      this.covoiturageService.retrieveCovByDest(this.searchTerm).subscribe(covoiturages => {
+        this.covoiturages = covoiturages;
+      });
+    } else {
+      // Si le champ de recherche est vide, rechargez la liste complète des événements approuvés
+      this.covoiturageService.getListCovoiturage().subscribe(covoiturages => {
+        this.covoiturages = covoiturages;
+      });
+    }
+  }
 
 
 

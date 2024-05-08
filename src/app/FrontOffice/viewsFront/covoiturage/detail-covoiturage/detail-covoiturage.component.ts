@@ -23,6 +23,7 @@ export class DetailCovoiturageComponent implements OnInit {
   badWords: string[] = ['shit', 'fuck']; // Define your list of bad words here
   errorMessage: string = 'Your input contains bad words. Please remove them.';
   showModal: boolean = false;
+  id!:number;
  
 
   listavisCov: { [id_cov: string]: Avis[] } = {};
@@ -52,15 +53,19 @@ export class DetailCovoiturageComponent implements OnInit {
     //console.log(this.ratingcontrol.value);
     this.Finalrating= (this.totalrating/this.ratingcount).toFixed(2)
   }
+  
   addAvis(id_cov: number): void {
+    this.getId()
     if (this.containsBadWords(this.avis.objet) || this.containsBadWords(this.avis.description)) {
       this.errorMessage = 'Your input contains bad words. Please remove them.';
       this.showModal = true;
     } else {
       this.showModal = false;
-      this.avisService.addAvis(this.avis, id_cov).subscribe(
+      this.avisService.addAvis(this.avis, id_cov,this.id).subscribe(
         data => {
           console.log('Avis added successfully!', data);
+          window.location.reload()
+          
         },
         error => {
           console.error('Error adding avis:', error);
@@ -103,10 +108,17 @@ export class DetailCovoiturageComponent implements OnInit {
         }
       );
   }
+  userId = localStorage.getItem('angular17TokenUserId');
 
+  getId(){
+     if(this.userId ){
+     this.id=parseFloat(this.userId)
+  }
+}
   //sms
   sendMessage(to: string, message: string,id_cov:any): void {
-    
+    this.getId()
+    console.log(this.id)
     this.covService.sendSms(to, message).subscribe(
       response => {
         Swal.fire({
@@ -117,7 +129,7 @@ export class DetailCovoiturageComponent implements OnInit {
           timer: 1500
         });
 
-        this.covService.Reserve(id_cov,3)
+        //this.covService.Reserve(id_cov,this.id)
         console.log('Message sent successfully:', response);
       },
       error => {
@@ -125,6 +137,21 @@ export class DetailCovoiturageComponent implements OnInit {
       }
     );
   }
+  reserveCov(id_cov: number) {
+    this.getId()
+    this.covService.ReserveCov(id_cov, this.id).subscribe(
+      () => {
+        this.sendMessage('','',id_cov)
+        console.log('Reservation successful');
+        // Handle success
+      },
+      (error) => {
+        console.error('Reservation failed', error);
+        // Handle error
+      }
+    );
+  }
+
   updateNombrePlacecov(covId: number, newNombrePlacecov: number): void {
     this.covService.updateNombrePlacecov(covId, newNombrePlacecov).subscribe(
       response => {
