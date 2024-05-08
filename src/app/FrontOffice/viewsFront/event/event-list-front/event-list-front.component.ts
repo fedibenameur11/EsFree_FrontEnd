@@ -57,11 +57,11 @@ export class EventListFrontComponent implements OnInit  {
   }
 
   navigateToEventDetail(idEvent: number) {
-    this.router.navigate(['/eventdetail', idEvent]);
+    this.router.navigate(['/user/eventdetail', idEvent]);
   }
 
   addevent(): void {
-    this.router.navigateByUrl('/addevent');
+    this.router.navigate(['/user/addevent']);
   }
 
 }

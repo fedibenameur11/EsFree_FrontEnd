@@ -30,22 +30,15 @@ export class EventListUserComponent implements OnInit{
   ngOnInit(): void {
     this.getId();
     console.log(this.id);
-    
-    // Récupérer les événements de l'utilisateur actuel lors de l'initialisation du composant
-    //this.getEventsByUser(this.id);
     this.getEventsByUser(this.id);
     
   }
-  userId = localStorage.getItem('angular17TokenUserId');
-     id!: number ;
-  getId(){
- 
-  
-  if(this.userId ){
-    this.id=parseFloat(this.userId)
-   
-    
 
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number ;
+  getId(){
+     if(this.userId ){
+     this.id=parseFloat(this.userId)
   }
 }
  

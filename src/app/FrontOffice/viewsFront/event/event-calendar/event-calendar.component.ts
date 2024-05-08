@@ -15,7 +15,7 @@ export class EventCalendarComponent implements AfterViewInit {
   constructor(private eventService: EventService, private router: Router) {}
 
   addevent(): void {
-    this.router.navigateByUrl('/addevent');
+    this.router.navigate(['/user/addevent']);
   }
   
   ngAfterViewInit(): void {
@@ -73,7 +73,7 @@ export class EventCalendarComponent implements AfterViewInit {
   // Gestionnaire d'événements de clic sur un événement
   handleEventClick(info:any): void {
     const idEvent = info.event.id; // Récupérer l'ID de l'événement
-    this.router.navigate(['/eventdetail', idEvent]); // Rediriger vers la page des détails de l'événement
+    this.router.navigate(['/user/eventdetail', idEvent]); // Rediriger vers la page des détails de l'événement
   }
 
 }

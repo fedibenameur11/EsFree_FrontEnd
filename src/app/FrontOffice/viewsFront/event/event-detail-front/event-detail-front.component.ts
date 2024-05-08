@@ -38,11 +38,22 @@ export class EventDetailFrontComponent implements OnInit {
     $('#participationModal').modal('show');
   }
 
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number ;
+  getId(){
+     if(this.userId ){
+     this.id=parseFloat(this.userId)
+  }
+}
+
   participation: Participation = {} as Participation;
+ 
   submitParticipationForm(): void {
-    const id = 1; // Assurez-vous d'obtenir le nom d'utilisateur correctement
-    if (this.idEvent && id) {
-      this.participationService.addParticipation(this.participation, this.idEvent, id)
+    this.getId()
+    console.log(this.id)
+   // const id = 1; // Assurez-vous d'obtenir le nom d'utilisateur correctement
+    if (this.idEvent && this.id) {
+      this.participationService.addParticipation(this.participation, this.idEvent, this.id)
         .subscribe(response => {
           // Gérer la réponse de la requête
           console.log('Participation added successfully:', response);
