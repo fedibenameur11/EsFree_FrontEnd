@@ -38,12 +38,33 @@ import { ItemListComponent } from './BackOffice/viewsBack/lostandfound/item-list
 import { ItemListUsersComponent } from './FrontOffice/viewsFront/lostandfound/item-list-users/item-list-users.component';
 import { PubDiscussComponent } from './FrontOffice/viewsFront/lostandfound/pub-discuss/pub-discuss.component';
 import { MyitemsComponent } from './FrontOffice/viewsFront/lostandfound/myitems/myitems.component';
+import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
+import { CollocationAddComponent } from './FrontOffice/viewsFront/colocation/collocation-add/collocation-add.component';
+import { LoginComponent } from './Login/login/login.component';
+
+import { GUserComponent } from './BackOffice/viewsBack/user/g-user/g-user.component';
+import { SignuppComponent } from './Login/signupp/signupp.component';
+import { ProfileComponent } from './Login/profile/profile.component';
+import { authGuard } from './Service/auth.guard';
+import { ForgetpwdComponent } from './Login/forgetpwd/forgetpwd.component';
 
 
 const routes: Routes = [
-   {
-    path:"",
-    component : AllTemplatesFrontComponent,
+  
+      {path:"",
+      component:LoginComponent
+      },
+      {path:"signup",
+      component:SignuppComponent
+      },
+      {path:"forgetpwd",
+      component:ForgetpwdComponent
+      },
+  
+  
+      {
+    path:"user",
+    component : AllTemplatesFrontComponent,canActivate:[authGuard],
     children:[
 
    
@@ -70,6 +91,7 @@ const routes: Routes = [
       {path:"maisonlist", component:MaisonlistComponent},
       {path:"contratlocationlist", component:ContratLocationlistComponent},
       { path: 'afficherMaison/:id', component: MaisondetailComponent },
+      {path:"profile",  component:ProfileComponent ,  canActivate:[authGuard]},
      
       // hné l components mta3 l frontOffice lkol
    
@@ -85,7 +107,7 @@ const routes: Routes = [
   
    {
     path:"admin",
-    component : AllTemplatesBackComponent,
+    component : AllTemplatesBackComponent ,canActivate:[authGuard],
     children:[
 
       // hné l components mta3 l backOffice lkol 
@@ -100,6 +122,10 @@ const routes: Routes = [
       {path:"maisonlist", component:MaisonlistbackComponent},
       { path: 'afficherMaison/:id', component: MaisondetailbackComponent },
       {path:"contrats", component:ContratLocationlistComponent},
+      {path:"users", component:GUserComponent,  canActivate:[authGuard]},
+      {path:"profile",
+      component:ProfileComponent,  canActivate:[authGuard]
+      },
       
     
 

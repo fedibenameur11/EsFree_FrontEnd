@@ -21,19 +21,34 @@ export class EventListUserComponent implements OnInit{
   constructor(private eventService: EventService, private router: Router, private fireStorage:AngularFireStorage) { }
 
   navigateToEventDetail(idEvent: number) {
-    this.router.navigate(['/eventdetail', idEvent]); // Redirige vers la page event-detail avec l'ID de l'événement en tant que paramètre
+    this.router.navigate(['/user/eventdetail', idEvent]); // Redirige vers la page event-detail avec l'ID de l'événement en tant que paramètre
   }
   addevent(): void {
-    this.router.navigateByUrl('/addevent');
+    this.router.navigate(['/user/addevent']);
   }
 
   ngOnInit(): void {
+    this.getId();
+    console.log(this.id);
+    
     // Récupérer les événements de l'utilisateur actuel lors de l'initialisation du composant
     //this.getEventsByUser(this.id);
-    this.getEventsByUser(1);
+    this.getEventsByUser(this.id);
     
   }
+  userId = localStorage.getItem('angular17TokenUserId');
+     id!: number ;
+  getId(){
+ 
+  
+  if(this.userId ){
+    this.id=parseFloat(this.userId)
+   
+    
 
+  }
+}
+ 
   
   getEventsByUser(id: number): void {
     this.eventService.getEventsByUser(id).subscribe(

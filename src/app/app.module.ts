@@ -37,15 +37,14 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { PubitemComponent } from './BackOffice/viewsBack/marketplace/pubitem/pubitem.component';
 
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { CartComponent } from './BackOffice/viewsBack/marketplace/cart/cart.component';
 import { MarketComponent } from './FrontOffice/viewsFront/marketplace/market/market.component';
 import { ItemdetailComponent } from './FrontOffice/viewsFront/marketplace/itemdetail/itemdetail.component';
 import { MyitemspComponent } from './FrontOffice/viewsFront/marketplace/myitems/myitemp.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { CartfComponent } from './FrontOffice/viewsFront/marketplace/cartf/cartf.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 import { ChartpubComponent } from './BackOffice/viewsBack/marketplace/chartpub/chartpub.component';
 
 
@@ -54,7 +53,7 @@ import { ContratLocationlistComponent } from './BackOffice/viewsBack/contratLoca
 
 
 
-import { CommonModule } from '@angular/common';
+
 import { MaisonlistbackComponent } from './BackOffice/viewsBack/maison/maisonlist/maisonlist.component';
 import { MaisondetailComponent } from './FrontOffice/viewsFront/maison/maisondetail/maisondetail.component';
 import { MaisondetailbackComponent } from './BackOffice/viewsBack/maison/maisondetailback/maisondetailback.component';
@@ -62,17 +61,42 @@ import { NgxBootstrapSliderModule } from 'ngx-bootstrap-slider';
 
 
 
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+
+
 import { CovoiturageComponent } from './BackOffice/viewsBack/covoiturage/covoiturage.component';
 import { AddCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/add-covoiturage/add-covoiturage.component';
 import { ListCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/list-covoiturage/list-covoiturage.component';
 import { AvisComponent } from './BackOffice/viewsBack/avis/avis.component'; 
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+
 import { MapComponent } from './FrontOffice/viewsFront/covoiturage/map/map.component';
 import { DetailCovoiturageComponent } from './FrontOffice/viewsFront/covoiturage/detail-covoiturage/detail-covoiturage.component';  
 import { ReactiveFormsModule } from '@angular/forms';
 import { MyCovoituragesComponent } from './FrontOffice/viewsFront/covoiturage/my-covoiturages/my-covoiturages.component'; 
+import { CollocationListComponent } from './FrontOffice/viewsFront/colocation/collocation-list/collocation-list.component';
+import { LoginComponent } from './Login/login/login.component';
+import { JwtModule } from "@auth0/angular-jwt";
+import { CommonModule } from '@angular/common';
+
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
+import { CustomInterceptor } from './Service/custom.interceptor';
+import { GUserComponent } from './BackOffice/viewsBack/user/g-user/g-user.component';
+import { SignuppComponent } from './Login/signupp/signupp.component';
+
+
+import { ProfileComponent } from './Login/profile/profile.component';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ForgetpwdComponent } from './Login/forgetpwd/forgetpwd.component';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -118,6 +142,12 @@ import { MyCovoituragesComponent } from './FrontOffice/viewsFront/covoiturage/my
     PubDiscussComponent,
     MyitemsComponent,
     
+    LoginComponent,
+    GUserComponent,
+    SignuppComponent,
+    ProfileComponent,
+    ForgetpwdComponent,
+   
     
   ],
   imports: [
