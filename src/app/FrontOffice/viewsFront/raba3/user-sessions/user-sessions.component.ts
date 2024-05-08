@@ -12,24 +12,35 @@ declare var $: any;
   styleUrls: ['./user-sessions.component.css']
 })
 export class UserSessionsComponent implements OnInit {
-  name: string = "rechpa";
+ // name: string = "rechpa";
   sessions: Raba3[] = [];
   newSession: Raba3 = new Raba3();
   showUpdateDialog: boolean = false;
   selectedGameId!: number;
   selectedGame: Raba3 | undefined;
+  username!: string;
+  name = localStorage.getItem('name');
+  getName(){
+    if(this.name)
+    this.username=this.name
+
+  }
 
   constructor(private act: ActivatedRoute, private raba3Service: Raba3Service, private router: Router) { }
 
   ngOnInit(): void {
-    this.act.paramMap.subscribe(params => {
-      this.name = params.get('name') || "rechpa";
+    this.getName()
+    console.log(this.username)
+    this.act.params.subscribe(params => {
+      this.username = this.act.snapshot.params['name']
     });
     this.retrieveGameSessions();
   }
 
   retrieveGameSessions(): void {
-    this.raba3Service.retrieveUserGameSession(this.name).subscribe(
+    this.getName()
+    console.log(this.username)
+    this.raba3Service.retrieveUserGameSession(this.username).subscribe(
       (sessions: Raba3[]) => {
         this.sessions = sessions;
       },
@@ -41,6 +52,7 @@ export class UserSessionsComponent implements OnInit {
   closeUpdateDialog(): void {
     this.showUpdateDialog = false;
     window.location.reload();
+
   }
 
 
@@ -49,7 +61,7 @@ export class UserSessionsComponent implements OnInit {
     this.selectedGame = this.sessions.find(session => session.idRaba3 == idRaba3)
     $('#myModalUpdate').modal('show');
     this.showUpdateDialog = true;
-    this.raba3Service.retieveGameSessionSpecificUser(idRaba3).subscribe(
+    this.raba3Service.retieveGameSessionSpecificUser(idRaba3, this.username).subscribe(
       (session: Raba3) => {
         this.newSession = session;
       },

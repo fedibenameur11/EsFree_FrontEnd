@@ -23,7 +23,16 @@ export class SessionListComponent implements OnInit{
   message:any = null;
   disableJoinButton: boolean = false; // Flag to disable the join button
   disableJoinButton2: boolean = true; // Flag to disable the join button
+  name = localStorage.getItem('name');
 
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number ;
+
+  getId(){
+     if(this.userId ){
+     this.id=parseFloat(this.userId)
+  }
+}
 
 
   openAddDialog() {
@@ -46,6 +55,7 @@ export class SessionListComponent implements OnInit{
     this.getListSessions(this.idJeux);
     this.requestPermission();
     this.listen();
+    console.log(this.name)
   }
 
 
@@ -71,9 +81,10 @@ export class SessionListComponent implements OnInit{
     
 
     addGameSessionAndAssignToGame(): void {
-      const staticUserId = 1; // Static user ID value
-
-      this.raba3Service.addGameSessionAndAssignToGameAndUser(this.newSession, this.idJeux, staticUserId)
+      //const staticUserId = 1; // Static user ID value
+this.getId()
+console.log(this.id)
+      this.raba3Service.addGameSessionAndAssignToGameAndUser(this.newSession, this.idJeux, this.id)
         .subscribe(response => {
           Swal.fire({
             position: 'center',
@@ -137,8 +148,8 @@ export class SessionListComponent implements OnInit{
     join(idRaba3: number): void {
       this.disableJoinButton = true;
       this.disableJoinButton2 = false;
-
-      this.raba3Service.addUserToSession(idRaba3).subscribe(() => {
+this.getId()
+      this.raba3Service.addUserToSession(idRaba3, this.id).subscribe(() => {
         console.log('User added to session successfully.');
          // Update the number of players attribute in the session object
     const session = this.sessions.find(s => s.idRaba3 === idRaba3);
@@ -181,8 +192,8 @@ export class SessionListComponent implements OnInit{
 
     leave(idRaba3: number): void {
       this.disableJoinButton2 = false;
-
-      this.raba3Service.removeUserFromSession(idRaba3).subscribe(() => {
+this.getId()
+      this.raba3Service.removeUserFromSession(idRaba3, this.id).subscribe(() => {
         console.log('User removed successfully.');
         const session = this.sessions.find(s => s.idRaba3 === idRaba3);
         if (session) {
@@ -218,7 +229,7 @@ export class SessionListComponent implements OnInit{
           no-repeat
         `
       });
-      this.getListSessions(this.idJeux);
+      this.getListSessions(this.idJeux); 
       window.location.reload();
 
     }

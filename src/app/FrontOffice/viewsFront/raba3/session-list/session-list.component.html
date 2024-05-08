@@ -19,7 +19,7 @@
             <p>
               Playing Card Games with university friends can be a delightful blend of camaraderie, strategy, and friendly competition. As the cards are dealt and the game begins, the air is often filled with laughter, banter, and the occasional groan of frustration or cheer of triumph.
             </p>
-            <a class="btn btn-primary" [routerLink]="['/userSessions/rechpa']">My Game Sessions</a>
+            <a class="btn btn-primary" routerLink="/user/userSessions/{{name}}">My Game Sessions</a>
           </div>
         
 
@@ -94,10 +94,6 @@
             <button class="btn btn-outline-danger rounded-pill " data-toggle="modal" data-toggle="modal" data-target="#myModalshowContrat" 
                     (click)="leave(session.idRaba3)" [disabled]="disableJoinButton2" style="margin-left: 10px;">Leave
             </button>
-            <button class="btn btn-outline-danger rounded-pill " data-toggle="modal" data-toggle="modal" data-target="#myModalshowContrat" 
-                    (click)="sendNotification()"  style="margin-left: 10px;">Leave
-            </button>
-    
             
                   
                   </div>
@@ -162,8 +158,10 @@
                 <input type="number" [(ngModel)]="newSession.nombrePlaces" name="nombrePlaces" class="form-control" id="exampleInputNumber1" value="2">
                 <div *ngIf="taskForm.controls['nombrePlaces'].invalid && (taskForm.controls['nombrePlaces'].dirty || taskForm.controls['nombrePlaces'].touched)">
                   <div class="text-danger" *ngIf="taskForm.controls['nombrePlaces'].errors?.['required']">Please insert value</div>
+                  <div class="text-danger" *ngIf="taskForm.controls['nombrePlaces'].errors?.['max']">Number should be less than 4</div>
+                </div>
               </div>
-             </div>
+              
           <br>
           <div class="form-group">
             <label for="exampleInputdatetime">Start Date :</label>

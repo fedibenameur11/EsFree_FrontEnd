@@ -55,6 +55,8 @@ import { GameAddComponent } from './BackOffice/viewsBack/raba3/game-add/game-add
 import { GameListBComponent } from './BackOffice/viewsBack/raba3/game-list-b/game-list-b.component';
 import { GameEditComponent } from './BackOffice/viewsBack/raba3/game-edit/game-edit.component';
 import { SessionListBComponent } from './BackOffice/viewsBack/raba3/session-list-b/session-list-b.component';
+import { HomeComponent } from './FrontOffice/viewsFront/home/home/home.component';
+import { HomebComponent } from './BackOffice/viewsBack/homeb/homeb.component';
 
 
 const routes: Routes = [
@@ -111,6 +113,8 @@ const routes: Routes = [
       {path:"sessionList/:idJeux", component:SessionListComponent},
       {path:"userSessions/:name", component:UserSessionsComponent},
       {path:"stats", component:StatsComponent},
+      {path:"home", component:HomeComponent}
+
 
       // hné l components mta3 l frontOffice lkol
    ]
@@ -142,6 +146,9 @@ const routes: Routes = [
       {path:"gameListB", component:GameListBComponent},
       {path:"gameEdit", component:GameEditComponent},
       {path:"sessionListB", component:SessionListBComponent},
+      {path:"homeB", component:HomebComponent},
+
+
       
     
 
@@ -162,3 +169,4 @@ export class AppRoutingModule {
 
  
 }
+

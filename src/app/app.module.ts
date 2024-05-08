@@ -87,27 +87,37 @@ import { SignuppComponent } from './Login/signupp/signupp.component';
 
 import { ProfileComponent } from './Login/profile/profile.component';
 
-import { MatDialogModule } from '@angular/material/dialog';
+
 import { MatPaginatorModule } from '@angular/material/paginator';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
+
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ForgetpwdComponent } from './Login/forgetpwd/forgetpwd.component';
+
+import { environments } from 'src/environements/environement';
+
 import { SessionAddComponent } from './FrontOffice/viewsFront/raba3/session-add/session-add.component';
 import { GameListComponent } from './FrontOffice/viewsFront/raba3/game-list/game-list.component';
 import { SessionListComponent } from './FrontOffice/viewsFront/raba3/session-list/session-list.component';
+
 import { GameAddComponent } from './BackOffice/viewsBack/raba3/game-add/game-add.component';
 import { GameEditComponent } from './BackOffice/viewsBack/raba3/game-edit/game-edit.component';
 import { GameListBComponent } from './BackOffice/viewsBack/raba3/game-list-b/game-list-b.component';
+
 import { SessionListBComponent } from './BackOffice/viewsBack/raba3/session-list-b/session-list-b.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { UserSessionsComponent } from './FrontOffice/viewsFront/raba3/user-sessions/user-sessions.component';
-import { environments } from 'src/environements/environement';
+
 import {initializeApp} from 'firebase/app';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { filter } from 'rxjs';
 import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.component';
 
 
+import { HomeComponent } from './FrontOffice/viewsFront/home/home/home.component';
+import { HomebComponent } from './BackOffice/viewsBack/homeb/homeb.component';
 
 
 
@@ -151,6 +161,11 @@ import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.compo
           MapComponent,
           DetailCovoiturageComponent,
           MyCovoituragesComponent,
+    ListCovoiturageComponent,   
+    AvisComponent,
+    MapComponent,
+    DetailCovoiturageComponent,
+    MyCovoituragesComponent,
     ItemListComponent,
     ItemListUsersComponent,
     PubDiscussComponent,
@@ -170,6 +185,8 @@ import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.compo
     SessionListBComponent,
     UserSessionsComponent,
     StatsComponent,
+    HomeComponent,
+    HomebComponent,
    
     
   ],
@@ -205,6 +222,10 @@ import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.compo
     ReactiveFormsModule,
     
    
+    CommonModule,      
+    FormsModule,
+    MatDialogModule,
+    ReactiveFormsModule, 
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule
