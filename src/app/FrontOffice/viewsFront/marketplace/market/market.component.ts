@@ -6,6 +6,7 @@ import { CartService } from 'src/app/Services/cart.service';
 import { PubitemService } from 'src/app/Services/pubitem.service';
 import { Modal } from 'bootstrap';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { cA } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-market',
@@ -22,7 +23,14 @@ export class MarketComponent implements OnInit {
 
   
 
+  userId= localStorage.getItem('angular17TokenUserId');
+  id!: number ;
 
+  getId(){
+  if(this.userId ){
+    this.id=parseInt(this.userId)
+  }
+}
  
 
   constructor(private pubItemService: PubitemService, private cartService: CartService , public snackBar: MatSnackBar) { }
@@ -30,7 +38,8 @@ export class MarketComponent implements OnInit {
 
   ngOnInit(): void {
     this.retrieveAllPubItems();
-    this.createCartForUser(1);
+    this.getId();
+    this.createCartForUser(this.id);
   }
 
   retrieveAllPubItems(): void {
@@ -43,8 +52,13 @@ export class MarketComponent implements OnInit {
   
   createCartForUser(userId: number): void {
     this.cartService.createCartForUser(userId).subscribe(
-      (cart) => {
+      (cart: Cart) => {
         console.log('Cart created successfully:', cart);
+        
+        // Save only the cart id in local storage
+      this.cartid=cart.id ;
+      console.log("this cart is ", this.cartid);
+      
       },
       (error) => {
         console.error('Error creating cart:', error);
@@ -104,11 +118,12 @@ export class MarketComponent implements OnInit {
   getEtatItemCount(etat: string): number {
     return this.pubItems.filter(item => item.etat === etat).length;
   }
+cartid !: number;
 
+    // Assuming you have a fixed cart ID for now, you can replace it with dynamic logic if needed
 
   addToCart(itemId: number): void {
-    const cartId = 1; // Assuming you have a fixed cart ID for now, you can replace it with dynamic logic if needed
-    this.cartService.addItemToCart(cartId, itemId).subscribe(
+    this.cartService.addItemToCart(this.cartid, itemId).subscribe(
       response => {
         console.log(response);
         

@@ -30,6 +30,9 @@ export class ChartpubComponent implements OnInit {
   renderChart(labels: string[], data: number[]): void {
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
+
+    canvas.width = 50; // Adjust as needed
+    canvas.height = 50; 
   
     // Check if ctx is null before creating the chart
     if (ctx) {

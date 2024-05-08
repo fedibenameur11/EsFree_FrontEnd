@@ -16,17 +16,28 @@ import { Router } from '@angular/router';
 export class CartfComponent implements OnInit {
 
   cartItems: PubItem[] = [];
-  userId = 1; 
   handler:any = null;
   cartId!: number ;
 
+  userId= localStorage.getItem('angular17TokenUserId');
+  id!: number ;
+
+  getId(){
+  if(this.userId ){
+    this.id=parseInt(this.userId)
+  }
+}
+
   constructor(private cartService: CartService, private cdr: ChangeDetectorRef, private httpClient:HttpClient , private router: Router) { }
   ngOnInit(): void {
+    this.getId();
+
     this.getCartItemsForUser();
   }
 
   getCartItemsForUser(): void {
-    this.cartService.getPubItemsInCartByUserId(this.userId).subscribe(
+    console.log("test",this.id)
+    this.cartService.getPubItemsInCartByUserId(this.id).subscribe(
       (pubItems: PubItem[]) => {
         this.cartItems = pubItems;
         console.log('Cart items retrieved:', this.cartItems);
@@ -42,8 +53,8 @@ export class CartfComponent implements OnInit {
   }
 
   removeItemFromCart(itemId: number): void {
-    this.cartService.removeItemFromCart(this.userId, itemId).pipe(
-      switchMap(() => this.cartService.getPubItemsInCartByUserId(this.userId))
+    this.cartService.removeItemFromCart(this.id, itemId).pipe(
+      switchMap(() => this.cartService.getPubItemsInCartByUserId(this.id))
     ).subscribe(
       (pubItems: PubItem[]) => {
         this.cartItems = pubItems;
@@ -92,7 +103,7 @@ export class CartfComponent implements OnInit {
           console.error('Failed to create payment intent:', error);
         }
       );
-       this.router.navigate(['/market'])
+       this.router.navigate(['/user/market'])
        this.deleteCart(this.cartId);
   }
 
