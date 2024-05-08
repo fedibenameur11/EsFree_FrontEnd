@@ -14,8 +14,8 @@
       return this.httpClient.get<Covoiturage[]>(this.baseUrl +'/retreiveCovoiturages')
         
     }
-    addCovoiturage(covoiturage: Covoiturage ): Observable<Covoiturage> {
-      const url = `${this.baseUrl}/AddCovoiturage`;
+    addCovoiturage(covoiturage: Covoiturage,iduser:number ): Observable<Covoiturage> {
+      const url = `${this.baseUrl}/AddCovoiturage/${iduser}`;
       return this.httpClient.post<Covoiturage>(url, covoiturage);
     }
     deleteCovoiturage(id_cov: any): Observable<any> {
@@ -41,10 +41,9 @@
       const url = `${this.baseUrl}/searchCovByDest/${destination}`;
       return this.httpClient.get<Covoiturage[]>(url);
     }
-    Reserve(id_cov: number,idUser: number ): Observable<any> {
+    ReserveCov(id_cov: number, idUser: number): Observable<any> {
       const url = `${this.baseUrl}/ReserveCov/${id_cov}/${idUser}`;
-
-      return this.httpClient.post<any>(url,{});
+      return this.httpClient.post<any>(url, {});
     }
     updateCov(id_cov:number,updatedCov:Covoiturage): Observable<Covoiturage>
     { 

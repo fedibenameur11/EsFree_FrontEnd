@@ -55,7 +55,7 @@ export class ListCovoiturageComponent implements OnInit{
     this.updateCovPerPage();
   }
 
-
+/*
   submitAvis() {
     if (!this.avis.description) {
       // Show error message if description is empty
@@ -78,9 +78,9 @@ export class ListCovoiturageComponent implements OnInit{
         }
       );
   }
-
+*/
     ajouterCovoiturage() {
-      this.router.navigateByUrl('/addCovoiturage');
+      this.router.navigate(['/user/addCovoiturage']);
     
     }
     getListCovoiturage()
@@ -144,9 +144,9 @@ export class ListCovoiturageComponent implements OnInit{
 
  
   navigateToCovDetail(id_cov:number) {
-    this.router.navigate(['/DetailCov',id_cov]); // Redirige vers la page event-detail avec l'ID de l'événement en tant que paramètre
+    this.router.navigate(['/user/DetailCov',id_cov]); // Redirige vers la page event-detail avec l'ID de l'événement en tant que paramètre
   }
-  searchEvents(): void {
+  searchCov(): void {
     if (this.searchTerm.trim()) {
       this.covoiturageService.retrieveCovByDest(this.searchTerm).subscribe(covoiturages => {
         this.covoiturages = covoiturages;

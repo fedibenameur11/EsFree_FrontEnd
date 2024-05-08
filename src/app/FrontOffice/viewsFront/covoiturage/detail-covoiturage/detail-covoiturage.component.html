@@ -22,7 +22,6 @@
 
             <h2 class="title">from {{covoiturage.lieu_depart}} to {{covoiturage.destination}}</h2>
             <h2 class="title">Places : {{covoiturage.nombre_placecov}} remaining </h2>
-            <p>{{ tarif }}</p>
 
             <div class="meta-top">
               <ul>
@@ -41,7 +40,7 @@
            
                 <div class="row justify-content-center">
                   <div class="col-md-6 mb-3">
-                    <button style="margin-left:400px; width: 30%;" (click) =" sendMessage('+21658404108','',covoiturage.id_cov)"  class="btn btn-primary" type="submit">Reserve </button>
+                    <button style="margin-left:400px; width: 30%;"  (click)="reserveCov(id_cov)"  class="btn btn-primary" type="submit">Reserve </button>  <!--(click) =" sendMessage('+21658404108','',covoiturage.id_cov)"-->
                   </div>
                 </div>
 

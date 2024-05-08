@@ -14,12 +14,45 @@ export class MyCovoituragesComponent implements OnInit{
   ListCov: Covoiturage[] = [];
   covoiturage: Covoiturage = new Covoiturage();
   public avisList: Array<Avis>=[];
+  selectedCovoiturageId!: number;
+
   selectedCovId!: number;
+  showAddDialog: boolean = false;
+
+  listavisCov: { [id_cov: string]: Avis[] } = {};
+
   selectedCov: Covoiturage | undefined;
+  tunisianCities: string[] = [
+    "Tunis",
+    "Sfax",
+    "Sousse",
+    "Kairouan",
+    "Bizerte",
+    "Gabès",
+    "Ariana",
+    "Gafsa",
+    "Manouba",
+    "Medenine",
+    "Monastir",
+    "Nabeul",
+    "Tataouine",
+    "Tozeur",
+    "Zaghouan",
+    "Beja",
+    "BenArous",
+    "Kasserine",
+    "Kef",
+    "Mahdia",
+    "Manouba",
+    "SidiBouzid",
+    "Siliana",
+    "Zarzis",
+    "Kébili"
+  ];
 constructor(private covoiturageService:CovoiturageService , private avisService: AvisService){}
 ngOnInit(): void {
-    this.retrieveCovoituragesByUser(3)
-    this.retrieveAllAvisByUser(3)
+    this.retrieveCovoituragesByUser(this.id)
+    this.retrieveAllAvisByUser(this.id)
 }
 
 openEditCovModal(idCov: number): void {
@@ -40,11 +73,20 @@ editCov() {
     console.error('Selected ID or covoiturage not found');
   }
 }
+userId = localStorage.getItem('angular17TokenUserId');
+  id!: number ;
 
+  getId(){
+     if(this.userId ){
+     this.id=parseFloat(this.userId)
+  }
+}
 
 
   retrieveCovoituragesByUser(userId: number): void {
-    this.covoiturageService.retrieveAllCovByUser(userId).subscribe(
+    this.getId()
+    console.log(this.id)
+    this.covoiturageService.retrieveAllCovByUser(this.id).subscribe(
       (d) => {
         d.forEach((type:Covoiturage) =>
          {
@@ -55,8 +97,8 @@ editCov() {
            console.log(type.date_depart);
            console.log(type.description);
            this.ListCov = d ;
-           
-           
+           this.getListAvis(type.id_cov);
+           console.log(this.id)
   
          })
        },
@@ -73,7 +115,7 @@ editCov() {
     this.covoiturageService.deleteCovoiturage(id_cov).subscribe(
       response => {
         console.log('Covoiturage deleted successfully:', response);
-
+        window.location.reload()
      
       },
       (error) => {
@@ -83,7 +125,7 @@ editCov() {
     );
   }
   retrieveAllAvisByUser(id:number) {
-    this.avisService.retrieveAllAvisByUser(id)
+    this.avisService.retrieveAllAvisByUser(this.id)
       .subscribe(avisList => {
         this.avisList = avisList;
       });
@@ -94,7 +136,7 @@ deleteavis(id_avis:number)
   this.avisService.deleteAvis(id_avis).subscribe(
     response => {
       console.log('avis deleted successfully:', response);
-
+window.location.reload()
    
     },
     (error) => {
@@ -103,4 +145,21 @@ deleteavis(id_avis:number)
     }
   );
 }  
+getListAvis(id_cov:any)
+    { 
+      this.avisService.getAvisByCov(id_cov)
+      .subscribe(
+        (avisList: Avis[]) => {
+          this.listavisCov[id_cov] = avisList;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }  
+  openDialog(id_cov:number): void {
+    this.showAddDialog = true;
+    this.selectedCovoiturageId = id_cov;
+    
+  }
 }

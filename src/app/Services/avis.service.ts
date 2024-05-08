@@ -16,9 +16,9 @@ export class AvisService {
     return this.httpClient.get<Avis[]>(this.baseUrl +'/retreiveAvis')
       
   }
-  addAvis(avis: Avis,id_cov:any): Observable<Avis> {
+  addAvis(avis: Avis,id_cov:any,id:number): Observable<Avis> {
     
-    return this.httpClient.post<Avis>(this.baseUrl +'/AddAvis'+'/'+id_cov, avis);
+    return this.httpClient.post<Avis>(this.baseUrl +'/AddAvis'+'/'+id_cov+'/'+id, avis);
   }
   getAvisByCov(id_cov:any)
   {
