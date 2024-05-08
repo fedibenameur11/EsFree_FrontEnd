@@ -20,6 +20,7 @@ export class EventAddFrontComponent implements OnInit {
 
   constructor(private eventService: EventService, private fireStorage:AngularFireStorage, private router:Router, private formBuilder: FormBuilder) {} // Injection du service EventService
   ngOnInit(): void {
+    console.log('test')
     this.eventForm = this.formBuilder.group({
       nomEvent: ['', Validators.required],
       organisateurEvent: ['', Validators.required],
@@ -75,12 +76,23 @@ export class EventAddFrontComponent implements OnInit {
     });
   }
 
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number ;
+  getId(){
+     if(this.userId ){
+     this.id=parseFloat(this.userId)
+  }
+}
+
   submitEvent() {
+    this.getId()
+    console.log(this.id);
+
     if (this.eventForm.valid) {
       const formData = this.eventForm.value;
       formData.imageEvent = this.imageURL; // Utilisez l'URL de l'image dans les données du formulaire
       
-      this.eventService.addEvent(formData, 1).subscribe(
+      this.eventService.addEvent(formData, this.id).subscribe(
         () => {
           Swal.fire({
             position: 'center',
@@ -89,7 +101,7 @@ export class EventAddFrontComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          this.router.navigate(['/myevents']);
+          this.router.navigate(['/user/myevents']);
         },
         (error: HttpErrorResponse) => {
           console.error('Error adding event:', error);

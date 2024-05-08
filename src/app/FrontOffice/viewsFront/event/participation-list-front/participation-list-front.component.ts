@@ -21,8 +21,18 @@ export class ParticipationListFrontComponent implements OnInit{
 
   ngOnInit(): void {
    // this.getParticipationsByUser(this.id); 
-    this.getParticipationsByUser(1); // Remplacez 'id' par l'id du user
+   this.getId()
+   console.log(this.id)
+    this.getParticipationsByUser(this.id); // Remplacez 'id' par l'id du user
   }
+
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number ;
+  getId(){
+     if(this.userId ){
+     this.id=parseFloat(this.userId)
+  }
+}
 
   getParticipationsByUser(id: number): void {
     this.participationService.getParticipationsByUser(id)
