@@ -29,8 +29,10 @@ import {initializeApp} from 'firebase/app';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { filter } from 'rxjs';
 import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.component';
+import { HomeComponent } from './FrontOffice/viewsFront/home/home/home.component';
+import { HomebComponent } from './BackOffice/viewsBack/homeb/homeb.component';
 
-initializeApp(environment.firebase);
+
 
 @NgModule({
   declarations: [
@@ -41,6 +43,45 @@ initializeApp(environment.firebase);
     HeaderFrontComponent,
     NavbarBackComponent,
     SidebarBackComponent,
+    EventListComponent,
+    EventListFrontComponent,
+    EventAddFrontComponent,
+    EventDetailFrontComponent,
+    EventCalendarComponent,
+    ParticipationListFrontComponent,
+    ParticipationListComponent,
+    EventListUserComponent,
+    StatEventComponent,
+    PubitemComponent,
+    CartComponent,
+    MarketComponent,
+    ItemdetailComponent,
+    MyitemspComponent,
+  CartfComponent,
+  ChartpubComponent,
+ MaisonlistComponent,
+    ContratLocationlistComponent,
+    MaisonlistbackComponent,
+    MaisondetailComponent,
+    MaisondetailbackComponent,
+    ContratLocationlistComponent,
+    CovoiturageComponent,
+    AddCovoiturageComponent,
+    ListCovoiturageComponent,   
+    AvisComponent,
+    MapComponent,
+    DetailCovoiturageComponent,
+    MyCovoituragesComponent,
+    ItemListComponent,
+    ItemListUsersComponent,
+    PubDiscussComponent,
+    MyitemsComponent,
+    
+    LoginComponent,
+    GUserComponent,
+    SignuppComponent,
+    ProfileComponent,
+    ForgetpwdComponent,
     SessionAddComponent,
     GameListComponent,
     SessionListComponent,
@@ -50,6 +91,9 @@ initializeApp(environment.firebase);
     SessionListBComponent,
     UserSessionsComponent,
     StatsComponent,
+    HomeComponent,
+    HomebComponent,
+   
     
   ],
   imports: [
@@ -57,16 +101,33 @@ initializeApp(environment.firebase);
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    FullCalendarModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatPaginatorModule,
+    NgbModule,
+    MatSliderModule,
+    BrowserAnimationsModule, // Add BrowserAnimationsModule to imports
+    MatSnackBarModule,
+    HttpClientModule,
+    MatDialogModule,
+    NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule,      
+    FormsModule,
     MatDialogModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    CommonModule,
+    ReactiveFormsModule, 
+    FormsModule,
+    ReactiveFormsModule,
     Ng2SearchPipeModule
 
   ],
-
   providers: [],
   bootstrap: [AppComponent]
 })

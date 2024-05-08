@@ -47,8 +47,7 @@ export class Raba3Service {
     return this.httpClient.get<Raba3>(`${this.baseUrl}/retrieveGameSession/${idRaba3}`);
   }
 
-  retieveGameSessionSpecificUser(idRaba3: number): Observable<Raba3> {
-    const name = "rechpa"; // Static user ID
+  retieveGameSessionSpecificUser(idRaba3: number, name: string): Observable<Raba3> {
 
     return this.httpClient.get<Raba3>(`${this.baseUrl}/retieveGameSessionSpecificUser/${idRaba3},${name}`);
   }
@@ -57,14 +56,14 @@ export class Raba3Service {
     return this.httpClient.post<any>(`${this.baseUrl}/addGameSessionAndAssignToGameAndUser/${idJeux}/${id}`, raba3);
   }
 
-  addUserToSession(idRaba3: number): Observable<void> {
-    const id = 1; // Static user ID
+  addUserToSession(idRaba3: number, id:number): Observable<void> {
+    //const id = 1; // Static user ID
 
     return this.httpClient.post<void>(`${this.baseUrl}/addUserToSession/${idRaba3}/${id}`, {});
   }
 
-  removeUserFromSession(idRaba3: number): Observable<Raba3> {
-    const id = 1; // Static user ID
+  removeUserFromSession(idRaba3: number, id:number): Observable<Raba3> {
+    //const id = 1; // Static user ID
 
     return this.httpClient.delete<Raba3>(`${this.baseUrl}/removeUserFromSession/${idRaba3}/${id}`);
   }
