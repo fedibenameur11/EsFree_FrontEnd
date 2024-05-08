@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { PubItem } from '../Models/pubitem';
 
 @Injectable({
@@ -9,7 +9,6 @@ import { PubItem } from '../Models/pubitem';
 export class PubitemService {
   private baseUrl : String ="http://localhost:8082/pubitem/";
   private staticUserId = 1;
-  static staticUserId: number = 1;
   constructor(private httpClient : HttpClient) { }
 
   getPubitems(): Observable<PubItem[]> 
@@ -49,12 +48,24 @@ export class PubitemService {
     }
 
 
-
     getPubItemsByCurrentUser(): Observable<PubItem[]> {
-      // Use the static user ID in the HTTP request
-      return this.httpClient.get<PubItem[]>(`${this.baseUrl}user/${PubitemService.staticUserId}`);
+      // Retrieve the user ID from local storage
+      const userId = localStorage.getItem('angular17TokenUserId');
+      
+      // Check if userId exists and is a valid number
+      if (!userId || isNaN(parseInt(userId))) {
+        console.error('Invalid user ID found in local storage');
+        // Return an observable with an empty array or handle the error as needed
+        return of([]);
+      }
+    
+      // Parse the userId to ensure it's a number
+      const parsedUserId = parseInt(userId);
+    
+      // Use the parsed user ID in the HTTP request
+      return this.httpClient.get<PubItem[]>(`${this.baseUrl}user/${parsedUserId}`);
     }
-
+    
     getPubItemsSortedByPriceDS(): Observable<PubItem[]> {
       return this.httpClient.get<PubItem[]>(`${this.baseUrl}sorted-by-priceds`);
     }

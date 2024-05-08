@@ -18,12 +18,23 @@ export class MyitemspComponent implements OnInit  {
   imageFile: File | undefined;
   
 
+  userId= localStorage.getItem('angular17TokenUserId');
+  id!: number ;
+  getId(){
+  if(this.userId ){
+    this.id=parseInt(this.userId)
+  }
+}
 
+ 
 
   constructor(private pubitemService: PubitemService,  public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getPubItems();
+    this. getId();
+    console.log(this.id);
+    
   }
 
   getPubItems(): void {
@@ -89,7 +100,7 @@ export class MyitemspComponent implements OnInit  {
     if (this.imageFile) {
       formData.append('image', this.imageFile, this.imageFile.name);
     }
-    formData.append('id', '1'); // Assuming staticUserId is always 1
+    formData.append('id', this.id.toString() ); // Assuming staticUserId is always 1
   
     this.pubitemService.addPubItem(formData).subscribe(
       response => {
