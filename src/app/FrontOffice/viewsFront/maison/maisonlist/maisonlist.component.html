@@ -10,7 +10,12 @@
 <br>
 <br>
 <br>
-
+<div class="col-lg-8">
+  <div class="search-container mb-4 d-flex align-items-center">
+    <input type="text" [(ngModel)]="searchTerm" (input)="chercherMaison()" placeholder="Chercher l'adresse ..."  class="form-control col-4"> &nbsp;&nbsp;&nbsp;
+    <button class="btn btn-primary" (click)="loadMaisons(0)"> reset List</button>
+  </div>
+  </div>
 <div class="container">
   <button class="btn btn-primary " (click)="openAddDialog();" data-toggle="modal" data-toggle="modal" data-target="#myModal">
       <i class="bi bi-plus"></i> Ajouter une maison
@@ -63,13 +68,13 @@
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let maison of maisonsDisponibles">
           <div class="card mb-3">
-            <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcdyHdWn4oCIwCtIrHpBdEKDim4YO1S0T5FHV-_DTrJg&s" alt="Image de la maison">
+            <img class="card-img-top" [src]="maison.images[0]" alt="Image de la maison">
             <div class="card-body">
               <h5 class="card-title">{{ maison.adresse }}</h5>
               <p class="card-text">Prix : {{ maison.prix }} TND</p>
               <p class="card-text">{{ maison.description }}</p>
               <div class="img-cap">
-                <a [routerLink]="['/afficherMaison', maison.id_maison]" class=""> Détails !!<i class="ti-arrow-right"></i></a>
+                <a [routerLink]="['/user/afficherMaison', maison.id_maison]" class=""> Détails !!<i class="ti-arrow-right"></i></a>
                 <button class="btn btn-primary" (click)="reserverMaison(maison.id_maison, demandeur)">
                   <i class="bi bi-plus"></i> Réserver
                 </button>
@@ -149,7 +154,7 @@
             <br>
             <div class="form-group">
               <label for="name">Nom :</label>
-              <input type="text" id="name" [(ngModel)]="newMaison.user.name" name="name" class="form-control" required readonly >
+              <input type="text" id="name" [(ngModel)]="username" name="name" class="form-control" required readonly >
           </div>
           <!-- Conteneur pour la carte Leaflet -->
           <br>            

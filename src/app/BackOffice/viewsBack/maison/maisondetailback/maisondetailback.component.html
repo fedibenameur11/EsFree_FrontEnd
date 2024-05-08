@@ -41,7 +41,7 @@
               <td>{{ demandeur.phoneNumber }}</td>
               <td>
                   <div class="btn-group" role="group" aria-label="Actions">
-                      <button type="button" class="btn btn-success" (click)="openAddContratDialog(demandeur.name,maison.id_maison);" data-toggle="modal" data-toggle="modal" data-target="#Modaladdcontrat">Accepter</button>
+                      <button type="button" class="btn btn-success" (click)="openAddContratDialog(demandeur.id,maison.id_maison,demandeur.name);" data-toggle="modal" data-toggle="modal" data-target="#Modaladdcontrat">Accepter</button>
                       <button type="button" class="btn btn-danger" (click)="refuserDemandeur(maison.id_maison, demandeur.id)">Refuser</button>
                   </div>
               </td>

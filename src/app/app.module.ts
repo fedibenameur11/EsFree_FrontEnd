@@ -118,6 +118,7 @@ import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.compo
 
 import { HomeComponent } from './FrontOffice/viewsFront/home/home/home.component';
 import { HomebComponent } from './BackOffice/viewsBack/homeb/homeb.component';
+//initializeApp(environments.firebase);
 
 
 
