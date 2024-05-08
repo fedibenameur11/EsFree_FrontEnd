@@ -47,6 +47,14 @@ import { SignuppComponent } from './Login/signupp/signupp.component';
 import { ProfileComponent } from './Login/profile/profile.component';
 import { authGuard } from './Service/auth.guard';
 import { ForgetpwdComponent } from './Login/forgetpwd/forgetpwd.component';
+import { GameListComponent } from './FrontOffice/viewsFront/raba3/game-list/game-list.component';
+import { SessionListComponent } from './FrontOffice/viewsFront/raba3/session-list/session-list.component';
+import { UserSessionsComponent } from './FrontOffice/viewsFront/raba3/user-sessions/user-sessions.component';
+import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.component';
+import { GameAddComponent } from './BackOffice/viewsBack/raba3/game-add/game-add.component';
+import { GameListBComponent } from './BackOffice/viewsBack/raba3/game-list-b/game-list-b.component';
+import { GameEditComponent } from './BackOffice/viewsBack/raba3/game-edit/game-edit.component';
+import { SessionListBComponent } from './BackOffice/viewsBack/raba3/session-list-b/session-list-b.component';
 
 
 const routes: Routes = [
@@ -98,7 +106,11 @@ const routes: Routes = [
     
       {path:"itemList", component:ItemListUsersComponent},
       {path:"itemList/PubDiscuss/:id", component:PubDiscussComponent},
-      {path:"myitems/:id", component:MyitemsComponent}
+      {path:"myitems/:id", component:MyitemsComponent},
+      {path:"raba3", component:GameListComponent},
+      {path:"sessionList/:idJeux", component:SessionListComponent},
+      {path:"userSessions/:name", component:UserSessionsComponent},
+      {path:"stats", component:StatsComponent},
 
       // hné l components mta3 l frontOffice lkol
    ]
@@ -126,6 +138,10 @@ const routes: Routes = [
       {path:"profile",
       component:ProfileComponent,  canActivate:[authGuard]
       },
+      {path:"gameAdd", component:GameAddComponent},
+      {path:"gameListB", component:GameListBComponent},
+      {path:"gameEdit", component:GameEditComponent},
+      {path:"sessionListB", component:SessionListBComponent},
       
     
 

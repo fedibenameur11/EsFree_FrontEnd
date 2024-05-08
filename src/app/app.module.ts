@@ -93,7 +93,21 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import BrowserAnimationsModule
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ForgetpwdComponent } from './Login/forgetpwd/forgetpwd.component';
+import { SessionAddComponent } from './FrontOffice/viewsFront/raba3/session-add/session-add.component';
+import { GameListComponent } from './FrontOffice/viewsFront/raba3/game-list/game-list.component';
+import { SessionListComponent } from './FrontOffice/viewsFront/raba3/session-list/session-list.component';
+import { GameAddComponent } from './BackOffice/viewsBack/raba3/game-add/game-add.component';
+import { GameEditComponent } from './BackOffice/viewsBack/raba3/game-edit/game-edit.component';
+import { GameListBComponent } from './BackOffice/viewsBack/raba3/game-list-b/game-list-b.component';
+import { SessionListBComponent } from './BackOffice/viewsBack/raba3/session-list-b/session-list-b.component';
+import { UserSessionsComponent } from './FrontOffice/viewsFront/raba3/user-sessions/user-sessions.component';
+import { environments } from 'src/environements/environement';
+import {initializeApp} from 'firebase/app';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { filter } from 'rxjs';
+import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.component';
 
+initializeApp(environments.firebase);
 
 
 
@@ -147,6 +161,15 @@ import { ForgetpwdComponent } from './Login/forgetpwd/forgetpwd.component';
     SignuppComponent,
     ProfileComponent,
     ForgetpwdComponent,
+    SessionAddComponent,
+    GameListComponent,
+    SessionListComponent,
+    GameAddComponent,
+    GameEditComponent,
+    GameListBComponent,
+    SessionListBComponent,
+    UserSessionsComponent,
+    StatsComponent,
    
     
   ],
@@ -183,7 +206,9 @@ import { ForgetpwdComponent } from './Login/forgetpwd/forgetpwd.component';
     
    
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
