@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./myitems.component.css']
 })
 export class MyitemsComponent implements OnInit {
+  searchText:any;
 onSubmit() {
   this.lostandfoundservice.updateItem(this.lostandfound).subscribe(
     (response) => {

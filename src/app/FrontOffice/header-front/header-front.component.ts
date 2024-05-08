@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 
 @Component({
@@ -6,9 +6,21 @@ import { Route, Router } from '@angular/router';
   templateUrl: './header-front.component.html',
   styleUrls: ['./header-front.component.css']
 })
-export class HeaderFrontComponent {
+export class HeaderFrontComponent implements OnInit {
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number
   constructor(private router :Router ){}
+  ngOnInit(): void {
+    
+      if(this.userId ){
+      this.id=parseFloat(this.userId)
+      console.log("userId",this.id)
+   }
+    
+  }
   
+  
+
 
 logOut() {
  

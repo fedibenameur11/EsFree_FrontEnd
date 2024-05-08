@@ -4,11 +4,21 @@ import { lostandfound } from 'src/app/Modules/LostandFound';
 import { LostandfoundService } from 'src/app/Services/lostandfound.service';
 
 @Component({
+  
   selector: 'app-item-list-users',
   templateUrl: './item-list-users.component.html',
   styleUrls: ['./item-list-users.component.css']
 })
 export class ItemListUsersComponent implements OnInit  {
+getFound() {
+throw new Error('Method not implemented.');
+}
+getLost() {
+throw new Error('Method not implemented.');
+}
+  searchText:any
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number
   @ViewChild('taskForm') taskForm!: NgForm;
   file! : File;
   onFileSelected($event: Event) {
@@ -34,6 +44,10 @@ export class ItemListUsersComponent implements OnInit  {
   constructor(private lostandfoundservice:LostandfoundService){ }
   ngOnInit(): void {
     this.getListItem();
+    if(this.userId ){
+      this.id=parseFloat(this.userId)
+      console.log("userId",this.id)
+   }
   }
   
   getListItem(){
@@ -47,6 +61,7 @@ export class ItemListUsersComponent implements OnInit  {
           console.log("image:",type.image);
           console.log(type.datePub);
           console.log(type.description);
+          console.log(type.iduser.email)
           this.items = d ;
         })
       },
@@ -60,7 +75,7 @@ export class ItemListUsersComponent implements OnInit  {
     if (this.taskForm && this.taskForm.valid) {
     console.log('Nouvelle maison a été ajouté', this.newItem );
 
-    this.lostandfoundservice.addItem(this.newItem,this.file ).subscribe(() => {
+    this.lostandfoundservice.addItem(this.newItem,this.file, this.id ).subscribe(() => {
       console.log('Nouvelle maison a été ajouté', this.newItem);
       this.showAddDialog = false;
       window.location.reload();

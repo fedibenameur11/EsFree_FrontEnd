@@ -1,3 +1,5 @@
+import { User } from "../Models/user";
+
 export class lostandfound{
      [x: string]: any;
      idPub!:number;
@@ -8,4 +10,5 @@ export class lostandfound{
      image!:string;
      datePub!:string;
      num_tel!:number;
+     iduser!:User
 }

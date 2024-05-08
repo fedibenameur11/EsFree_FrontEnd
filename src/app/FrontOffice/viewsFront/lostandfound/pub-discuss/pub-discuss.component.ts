@@ -16,7 +16,8 @@ export class PubDiscussComponent implements OnInit {
   newmessage: message = new message(); 
 
   id_cov!: number;
-  
+  userId = localStorage.getItem('angular17TokenUserId');
+  id!: number
   lostandfound: lostandfound = new lostandfound();
   //public message: Array<message> =[];
   message : {[id_cov:number]:message[]}={}
@@ -28,7 +29,10 @@ export class PubDiscussComponent implements OnInit {
       this.getmessage(this.id_cov)
     });
   
-  
+    if(this.userId ){
+      this.id=parseFloat(this.userId)
+      console.log("userId",this.id)
+   }
   }
 
 
@@ -44,6 +48,8 @@ export class PubDiscussComponent implements OnInit {
     this.messageservice.getListmessage(id_cov).subscribe((messagelis: message[]) => {
       this.message [id_cov] = messagelis;
       console.  log(this.message)
+      console.log()
+
       // Appel pour récupérer le lien du QR code
      
     });
@@ -55,7 +61,7 @@ export class PubDiscussComponent implements OnInit {
       (response) => {
         if (!response['is-bad']) {
           // Message is clean, proceed to send it
-          this.messageservice.addMessage(this.newmessage, id_cov).subscribe(
+          this.messageservice.addMessage(this.newmessage, id_cov, this.id ).subscribe(
             (data) => {
               console.log("Message sent successfully", data);
               this.getmessage(id_cov);

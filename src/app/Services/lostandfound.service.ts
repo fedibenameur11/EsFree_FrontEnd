@@ -25,8 +25,8 @@ export class LostandfoundService {
     return this.httpClient.get<lostandfound[]>(this.baseUrl +'/retrievebyUser'+'/'+id)
   }
 
-  addItem(lostandfound: lostandfound , file: File ): Observable<lostandfound> {
-    const url = `${this.baseUrl}/addPub`;
+  addItem(lostandfound: lostandfound , file: File , id : number ): Observable<lostandfound> {
+    const url = `${this.baseUrl}/addPub/${id}`;
 
     // Create a FormData object
     let formData: FormData = new FormData();

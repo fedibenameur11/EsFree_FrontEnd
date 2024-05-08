@@ -38,8 +38,20 @@
     <div class="container" data-aos="fade-up" data-aos-delay="100">
 
       <div class="row gy-4 posts-list">
+        <div class="row justify-content-between">
+          <div class="col-sm-12 col-md-6">
+              <div id="user_list_datatable_info" class="dataTables_filter">
+                  <form class="mr-3 position-relative">
+                      <div class="form-group mb-0">
+                          <input type="text"  [(ngModel)]="searchText" class="form-control" name="searchText" id="exampleInputSearch" placeholder="Search" aria-controls="user-list-table">
 
-        <div class="col-xl-4 col-lg-6" *ngFor="let type of items" >
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+      
+        <div class="col-xl-4 col-lg-6" *ngFor="let type of items | filter:searchText" >
           <article class="zoom-on-hover">
 
             <div class="post-img">

@@ -15,8 +15,8 @@ export class MessagesService {
     return this.httpClient.get<message[]>(this.baseUrl +'/retrievebyitem'+'/'+id)
       
   }
-  addMessage(message: message , id:any ): Observable<message>{
-    return this.httpClient.post<message>(this.baseUrl +'/addMessage'+'/'+id , message)
+  addMessage(message: message , id:any , iduser:any): Observable<message>{
+    return this.httpClient.post<message>(this.baseUrl +'/addMessage'+'/'+id+'/'+iduser , message)
 
   }
 

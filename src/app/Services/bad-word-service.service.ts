@@ -7,7 +7,7 @@ import axios from 'axios';
   providedIn: 'root'
 })
 export class BadWordService {
-  private readonly API_KEY = '93cef6edffmsh2751f29bb1dfe4fp15f8d2jsn737a6305b7f0';
+  private readonly API_KEY = '441a525190mshdee5af2c4e9be5dp1b3830jsn1d1b21108fec';
   constructor() { }
 
   checkForBadWord(content: string): Observable<any> {
