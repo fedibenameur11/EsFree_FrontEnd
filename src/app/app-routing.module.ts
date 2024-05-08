@@ -14,6 +14,7 @@ import { GameAddComponent } from './BackOffice/viewsBack/raba3/game-add/game-add
 import { GameListBComponent } from './BackOffice/viewsBack/raba3/game-list-b/game-list-b.component';
 import { SessionListBComponent } from './BackOffice/viewsBack/raba3/session-list-b/session-list-b.component';
 import { UserSessionsComponent } from './FrontOffice/viewsFront/raba3/user-sessions/user-sessions.component';
+import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.component';
 
 
 
@@ -28,6 +29,8 @@ const routes: Routes = [
       {path:"raba3", component:GameListComponent},
       {path:"sessionList/:idJeux", component:SessionListComponent},
       {path:"userSessions/:name", component:UserSessionsComponent},
+      {path:"stats", component:StatsComponent},
+
 
 
       // hné l components mta3 l frontOffice lkol

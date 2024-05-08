@@ -6,6 +6,9 @@ export enum TypeJeux {
   }
   
   export class Jeux {
+    forEach(arg0: (type: Jeux) => void) {
+      throw new Error('Method not implemented.');
+    }
     idJeux!: number;
     nom!: string;
     typeJeux!: TypeJeux;

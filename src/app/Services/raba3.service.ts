@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Raba3 } from '../Models/raba3';
 import { Jeux } from '../Models/Jeux';
@@ -9,6 +9,8 @@ import { Jeux } from '../Models/Jeux';
 })
 export class Raba3Service {
   private baseUrl:string= "http://localhost:8082/SessionJeux";
+  private fcmUrl = 'https://fcm.googleapis.com/fcm/send';
+  private serverKey = 'AAAAVhaWNgw:APA91bFggg2WnoXuzUZP5SyCgYF3G8xi4j455wRoz5-rPOulMWDTonUiJAMsnyvDHFAJlyt376rm59HBbudITMBtMYm7_OWec8gf2lXnbbuRBHRxscA53XB7MJN_NiZp3mmOolQbrjzF';
 
   constructor(private httpClient : HttpClient) { }
 
@@ -45,14 +47,36 @@ export class Raba3Service {
     return this.httpClient.get<Raba3>(`${this.baseUrl}/retrieveGameSession/${idRaba3}`);
   }
 
-  retieveGameSessionSpecificUser(idRaba3: number, name: String): Observable<Raba3> {
+  retieveGameSessionSpecificUser(idRaba3: number): Observable<Raba3> {
+    const name = "rechpa"; // Static user ID
+
     return this.httpClient.get<Raba3>(`${this.baseUrl}/retieveGameSessionSpecificUser/${idRaba3},${name}`);
   }
 
   addGameSessionAndAssignToGameAndUser(raba3: Raba3, idJeux: number, id: number): Observable<any> {
     return this.httpClient.post<any>(`${this.baseUrl}/addGameSessionAndAssignToGameAndUser/${idJeux}/${id}`, raba3);
   }
+
+  addUserToSession(idRaba3: number): Observable<void> {
+    const id = 1; // Static user ID
+
+    return this.httpClient.post<void>(`${this.baseUrl}/addUserToSession/${idRaba3}/${id}`, {});
+  }
+
+  removeUserFromSession(idRaba3: number): Observable<Raba3> {
+    const id = 1; // Static user ID
+
+    return this.httpClient.delete<Raba3>(`${this.baseUrl}/removeUserFromSession/${idRaba3}/${id}`);
+  }
   
+  sendNotification(notificationData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'key=' + this.serverKey
+    });
+
+    return this.httpClient.post<any>(this.fcmUrl, notificationData, { headers });
+  }
   
 
 }

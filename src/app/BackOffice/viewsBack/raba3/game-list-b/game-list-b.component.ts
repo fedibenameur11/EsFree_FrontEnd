@@ -23,6 +23,8 @@ export class GameListBComponent implements OnInit{
   newGame: Jeux = new Jeux(); 
   showUpdateDialog: boolean = false;
   searchText:any;
+  searchDate: string = '';
+
 
   openUpdateDialog() {
     this.showUpdateDialog = true;

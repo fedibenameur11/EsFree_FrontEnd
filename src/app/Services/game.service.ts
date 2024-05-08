@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Jeux } from '../Models/Jeux';
+import { Jeux, TypeJeux } from '../Models/Jeux';
 import { Observable } from 'rxjs';
 
 
@@ -42,7 +42,8 @@ export class GameService {
     return this.httpClient.delete<Jeux>(`${this.baseUrl}/removeGame/${idJeux}`);
   }
 
-
-
+  retrieveGameByType(typeJeux: string): Observable<Jeux[]> {
+    return this.httpClient.get<Jeux[]>(`${this.baseUrl}/retrieveGameByType/${typeJeux}`);
+  }
 
 }

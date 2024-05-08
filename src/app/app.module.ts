@@ -28,7 +28,7 @@ import { environment } from 'src/environements/environement';
 import {initializeApp} from 'firebase/app';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { filter } from 'rxjs';
-
+import { StatsComponent } from './FrontOffice/viewsFront/raba3/stats/stats.component';
 
 initializeApp(environment.firebase);
 
@@ -49,8 +49,7 @@ initializeApp(environment.firebase);
     GameListBComponent,
     SessionListBComponent,
     UserSessionsComponent,
-    
-    
+    StatsComponent,
     
   ],
   imports: [
