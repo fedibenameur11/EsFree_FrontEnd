@@ -150,6 +150,7 @@ export class SessionListComponent implements OnInit{
           console.log('Session updated:', updatedSession);
           // Refresh the session list after successful update
           this.getListSessions(this.idJeux);
+          this.sendNotification();
         },
         error => {
           console.error('Failed to update session:', error);
@@ -219,6 +220,7 @@ export class SessionListComponent implements OnInit{
       });
       this.getListSessions(this.idJeux);
       window.location.reload();
+
     }
 
     sendNotification(): void {
