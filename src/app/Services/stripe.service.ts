@@ -13,7 +13,7 @@ export class StripeService {
 
   async makePayment(amount: number, currency: string) {
     try {
-      const response = await fetch('http://localhost:8082/payments/create-payment-intent?amount=${totalAmount}&currency=${currency}`', {
+      const response = await fetch('http://10.0.175.170:8082/payments/create-payment-intent?amount=${totalAmount}&currency=${currency}`', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EventService {
-  private baseUrl : String ="http://localhost:8082/Evenement";
+  private baseUrl : String ="http://10.0.175.170:8082/Evenement";
   constructor(private httpClient : HttpClient) {}
 
   getApprovedListEvents(): Observable<Event[]> 

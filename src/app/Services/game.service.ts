@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 
 export class GameService {
-  private baseUrl: String= "http://localhost:8082/Jeux";
+  private baseUrl: String= "http://10.0.175.170:8082/Jeux";
 
   constructor(private httpClient : HttpClient) { }
   

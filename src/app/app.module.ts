@@ -32,7 +32,7 @@ import { ParticipationListFrontComponent } from './FrontOffice/viewsFront/event/
 import { ParticipationListComponent } from './BackOffice/viewsBack/event/participation-list/participation-list.component';
 import { EventListUserComponent } from './FrontOffice/viewsFront/event/event-list-user/event-list-user.component';
 import { StatEventComponent } from './BackOffice/viewsBack/event/stat-event/stat-event.component';
-import { environment } from './environnement/environnement';
+import { environments } from 'src/environements/environement';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { PubitemComponent } from './BackOffice/viewsBack/marketplace/pubitem/pubitem.component';
@@ -94,7 +94,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ForgetpwdComponent } from './Login/forgetpwd/forgetpwd.component';
 
-import { environments } from 'src/environements/environement';
 
 import { SessionAddComponent } from './FrontOffice/viewsFront/raba3/session-add/session-add.component';
 import { GameListComponent } from './FrontOffice/viewsFront/raba3/game-list/game-list.component';
@@ -199,7 +198,7 @@ import { HomebComponent } from './BackOffice/viewsBack/homeb/homeb.component';
     ReactiveFormsModule,
     FormsModule,
     FullCalendarModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environments.firebaseConfig),
     AngularFireStorageModule,
     FormsModule,
     BrowserAnimationsModule,

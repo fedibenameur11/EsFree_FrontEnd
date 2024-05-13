@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ParticipationService {
-  private baseUrl : String ="http://localhost:8082/Participation";
+  private baseUrl : String ="http://10.0.175.170:8082/Participation";
   constructor(private httpClient : HttpClient) {}
 
   addParticipation(participation: Participation, idEvent:number, id: number): Observable<any> {

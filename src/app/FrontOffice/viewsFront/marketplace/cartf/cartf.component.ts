@@ -88,7 +88,7 @@ export class CartfComponent implements OnInit {
   }
   handleToken(token: any, amount: any) {
     // Construct the URL with query parameters
-    const url = `http://localhost:8082/payments/create-payment-intent?amount=${amount}&currency=usd`;
+    const url = `http://lbackend-service:8082/payments/create-payment-intent?amount=${amount}&currency=usd`;
   
     // Make the HTTP POST request to the backend server
     this.httpClient.post(url, null)

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ContratlocationService {
 
-  private baseUrl : string = 'http://localhost:8082/contratlocation';
+  private baseUrl : string = 'http://10.0.175.170:8082/contratlocation';
 
   constructor(private http: HttpClient) { }
   findAllContratlocations(): Observable<Contratlocation[]>{

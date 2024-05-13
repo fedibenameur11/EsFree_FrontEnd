@@ -125,7 +125,7 @@ console.log(this.id)
     requestPermission() {
       const messaging = getMessaging();
       getToken(messaging, 
-       { vapidKey: environments.firebase.vpaidKey}).then(
+       { vapidKey: environments.firebaseConfig.apiKey}).then(
          (currentToken) => {
            if (currentToken) {
              console.log("Hurraaa!!! we got the token.....");

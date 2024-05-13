@@ -19,7 +19,7 @@ this.requestPersmission(); }
 
   requestPersmission(){
     const messaging = getMessaging();
-    getToken(messaging,{vapidKey:environments.firebase.vpaidKey}).then(
+    getToken(messaging,{vapidKey:environments.firebaseConfig.apiKey}).then(
       (currentToken)=>{
         if(currentToken){
           console.log("yeah");
