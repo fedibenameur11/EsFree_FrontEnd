@@ -140,7 +140,7 @@ export class MaisonlistComponent {
     window.location.reload();
   }
 
-  reserverMaison(maisonId: number, demandeur: User): void {
+  /*reserverMaison(maisonId: number, demandeur: User): void {
     console.log(demandeur)
     this.maisonService.ajouterDemandeur(maisonId, demandeur)
       .subscribe(() => {
@@ -153,7 +153,7 @@ export class MaisonlistComponent {
         // Affichez une alerte d'erreur en cas d'échec de l'ajout du demandeur
         Swal.fire('Error!', 'Erreur dans l\'Envoie de cette demande.', 'error');
       });
-      this.http.post<any>('http://localhost:8082/send-sms', {}).subscribe(
+      this.http.post<any>('http://10.0.175.170:8082/send-sms', {}).subscribe( 
       response => {
         console.log('SMS envoyé avec succès');
       },
@@ -162,7 +162,30 @@ export class MaisonlistComponent {
       }
     );
       
-  }
+  }*/
+    reserverMaison(maisonId: number, demandeurid: number): void {
+      console.log("le demandeur id : ",demandeurid)
+      this.maisonService.ajouterDemandeur(maisonId, demandeurid)
+        .subscribe(() => {
+          // Affichez une alerte de succès pour la demande envoyée
+          Swal.fire('Success!', 'Demande envoyée avec succès', 'success');
+          console.log('Demandeur ajouté avec succès');
+          console.log(demandeurid)
+        }, (error) => {
+          console.error('Erreur dans l\'Envoie de cette demande. : ', error);
+          // Affichez une alerte d'erreur en cas d'échec de l'ajout du demandeur
+          Swal.fire('Error!', 'Erreur dans l\'Envoie de cette demande.', 'error');
+        });
+        this.http.post<any>('http://10.0.175.170:8082/send-sms', {}).subscribe(
+        response => {
+          console.log('SMS envoyé avec succès');
+        },
+        error => {
+          console.error('Erreur lors de l\'envoi du SMS :', error);
+        }
+      );
+        
+    }
   /*reserverMaison(maisonId: number, demandeur_id: number): void {
     // Récupérer les détails du demandeur par son ID
     this.userservice.GetUser(demandeur_id).subscribe(

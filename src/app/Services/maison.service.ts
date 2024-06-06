@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Maison } from '../Models/maison';
@@ -50,9 +50,13 @@ export class MaisonService {
     return this.http.get<Maison[]>(`${this.baseUrl}/utilisateurs/${id}/maisons`);
   }
 
-  ajouterDemandeur(maisonId: number, demandeur: User): Observable<Maison> {
+  /*ajouterDemandeur(maisonId: number, demandeur: User): Observable<Maison> {
     return this.http.post<Maison>(`${this.baseUrl}/${maisonId}/demandeur`, demandeur);
-  }
+  }*/
+    ajouterDemandeur(maisonId: number, demandeurId: number): Observable<Maison> {
+      const url = `${this.baseUrl}/${maisonId}/demandeur/${demandeurId}`;
+      return this.http.post<Maison>(url, {}, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+    }
   supprimerDemandeur(maisonId: number, id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${maisonId}/demandeurs/${id}`);
   }
